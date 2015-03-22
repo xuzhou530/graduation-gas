@@ -5,26 +5,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>广元市燃气远程监控系统登录界面</title>
-<link rel="stylesheet" type="text/css" href="../css/login.css">
-<script type="text/javascript" src="../js/login.js"></script>
+<link rel="stylesheet" type="text/css" href="/gas-webapp/css/login.css"/>
+<script type="text/javascript" src="/gas-webapp/js/login.js"></script>
 </head>
 <body>
 <div id="bgk">
 <div id="header">
-<div id="headerleft">广元市燃气远程监控系统&nbsp;&nbsp;&nbsp;</div>
-<div id="headerright"></div>
+	<div id="headerleft">广元市燃气远程监控系统&nbsp;&nbsp;&nbsp;</div>
+	<div id="headerright"></div>
 </div>
 <div id="content">
 	<div>
 		<span>欢迎进入系统</span>
-		<form id="login" method="post" action="login"  onsubmit="checkForm()">
+		<form id="login" method="post" action="login" onsubmit="checkForm()">
 			<table>
-				<tr><td class="label">用户名：</td><td><input type="text" name="username"></td></tr>
-				<tr><td class="label">用户密码：</td><td><input type="text" name="userpwd"></td></tr>
-				<tr><td>&nbsp;</td><td><input id="submit" type="submit" value="登录">
-										<input id="reset" type="reset" value="重置"></td></tr>
+				<tr>
+					<td class="label">用户名：</td>
+					<td><input type="text" name="name"/></td>
+				</tr>
+				<tr>
+					<td class="label">密码：</td>
+					<td><input type="password" name="password"/></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>
+						<input id="submit" type="submit" value="登录"/>
+						<input id="reset" type="reset" value="重置"/>
+					</td>
+				</tr>
 			</table>
-			
 		</form>
 	</div>
 </div>

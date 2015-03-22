@@ -17,7 +17,7 @@
 	<div class="wp">
 		<div id="menu" class="left">
 			<ul>
-				<li><a class="shine" href="/gas-webapp/pages/index.jsp">首页</a></li>
+				<li><a class="shine" href="/gas-webapp/index">首页</a></li>
 				<li><font style="color:#dddddd">最新数据</font>
 					<ul>
 						<li><a id="d1" href="/gas-webapp/viewgas/1" onclick="return forbid()">利州区</a></li>
@@ -60,7 +60,7 @@
 						<li><a href="/gas-webapp/viewpay/<%=menuUserGrade%>">缴费记录</a></li>
 					</ul>
 				</li>
-				<li><a href="login.jsp">退出系统</a></li>
+				<li><a href="/gas-webapp/logout">退出系统</a></li>
 			</ul>
 		</div>
 	</div>

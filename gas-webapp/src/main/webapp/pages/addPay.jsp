@@ -16,7 +16,6 @@
 	int userGrade=user.getUserGrade();
 %>
 <%@include file="menu.jsp" %>
-
 <div id="content" class="wp">
 	<p id="status">当前位置：<span>缴费管理&nbsp;&gt;</span><span>&nbsp;用户缴费&nbsp;</span></p>
 	<div id="data">
@@ -51,7 +50,7 @@
 				<tr><td class="title">楼层:&nbsp;&nbsp;</td><td><input type="text" name="addressLayer"/></td></tr>
 				<tr><td class="title">房号:&nbsp;&nbsp;</td><td><input type="text" name="addressRoom"/></td></tr>
 				<tr><td class="title">用户名:&nbsp;&nbsp;</td><td><input type="text" name="name"/></td></tr>
-				<tr><td class="title">缴费金额:&nbsp;&nbsp;</td><td><input type="text" name="pay"/></td></tr>
+				<tr><td class="title">金额:&nbsp;&nbsp;</td><td><input type="text" name="pay"/></td></tr>
 				<tr><td class="title">&nbsp;</td>
 					<td><input class="buttonsave" type="submit" value="提交"/>&nbsp;&nbsp;
 						<input class="buttonreset" type="reset" value="重置"/>

@@ -9,16 +9,8 @@
 <script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
 </head>
 <body>
-<%	
-	User user=new User();
-	user.setUserName("vyoung");
-	user.setUserPwd("vyoung");
-	user.setUserGrade(1);
-	session.setAttribute("user",user);
 
-%>
 <%@include file="menu.jsp" %>
-
 <div id="content" class="wp">
 	<p id="status">当前位置：<span>首页&nbsp;</span></p>	
 	<div id="data">

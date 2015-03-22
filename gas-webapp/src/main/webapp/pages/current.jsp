@@ -16,7 +16,6 @@
 	int userGrade=user.getUserGrade();
 %>
 <%@include file="menu.jsp" %>
-
 <div id="content" class="wp">
 	<p id="status">当前位置：<span>最新数据&nbsp;</span></p>	
 	<div id="datalist">
