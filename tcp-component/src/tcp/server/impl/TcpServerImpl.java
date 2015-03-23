@@ -290,8 +290,7 @@ public class TcpServerImpl implements TcpServer, Runnable {
 				ByteBuffer buffer = ByteBuffer.wrap(bytes);
 				while (buffer.hasRemaining()) {
 					ci.socketChannel.write(buffer);
-				}
-				
+				}	
 				dataHandler.onSendMsg(ci.connectId, bytes, bytes.length);
 			}
 		}
@@ -304,7 +303,6 @@ public class TcpServerImpl implements TcpServer, Runnable {
 		synchronized (connectMap) {
 			connectMap.remove(ci.connectId);
 		}
-
 		dataHandler.onDisconnect(ci.connectId, ci.ip, ci.port);		
 	}
 	

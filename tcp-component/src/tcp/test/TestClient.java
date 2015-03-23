@@ -6,7 +6,6 @@ import tcp.client.TcpClient;
 import tcp.client.TcpClientDataHandler;
 import tcp.client.impl.TcpClientImpl;
 
-
 public class TestClient implements TcpClientDataHandler {
 	
 	private TcpClient tcpClient;
@@ -92,9 +91,7 @@ public class TestClient implements TcpClientDataHandler {
 		Random rd = new Random();
 		int iCount = 0;//发送了多少户人家
 		int iSend = 0;
-		send[iSend++] = (byte)255;//连续三个255构成一次开始的标志位
-		send[iSend++] = (byte)255;
-		send[iSend++] = (byte)255;
+		send[iSend++] = (byte)127;//开始标志位
 		send[iSend++] = 1;//1号区县
 		send[iSend++] = 1;//1号小区
 		for(int building = 1; building <= buildingcount; building++){
@@ -114,6 +111,8 @@ public class TestClient implements TcpClientDataHandler {
 		iCount *= 6;
 		send[iSend++] = (byte)((iCount >> 8) & 0xff); //高字节
 		send[iSend] = (byte)(iCount & 0xff); //低字节
+		
+		//发送
 		tcpClient.send(send, 0, iSend+1);
 		
 		try {
