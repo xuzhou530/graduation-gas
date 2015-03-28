@@ -1,6 +1,5 @@
 package com.young.gas.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +17,7 @@ import com.young.gas.beans.Money;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.MoneyService;
+import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class MoneyController {
@@ -40,6 +40,7 @@ public class MoneyController {
 			@RequestParam("pay") String pay,
 			HttpServletRequest request,
 			HttpServletResponse response){
+		areaName = EncodingTool.encodeStr(areaName);
 		String district = DISTRICTS[districtId];
 		CustomerService customerService = new CustomerService();
 		Customer customer = customerService.searchCustomerByRoom(district, areaName, 

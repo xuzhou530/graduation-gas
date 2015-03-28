@@ -10,7 +10,6 @@ public class Gas {
 	private Timestamp collectTime;
 	private int gasValue;
 	private int previousValue;
-	private int gasMoney;
 	private int flag;
 	private int customerId;
 	public int getGasId() {
@@ -37,12 +36,6 @@ public class Gas {
 	public void setPreviousValue(int previousValue) {
 		this.previousValue = previousValue;
 	}
-	public int getGasMoney() {
-		return gasMoney;
-	}
-	public void setGasMoney(int gasMoney) {
-		this.gasMoney = gasMoney;
-	}
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -65,7 +58,7 @@ public class Gas {
 	public String toString() {
 		return "Gas [gasId=" + gasId + ", collectTime=" + collectTime
 				+ ", gasValue=" + gasValue + ", previousValue=" + previousValue
-				+ ", gasMoney=" + gasMoney + ", customerId=" + customerId + "]";
+				 + ", customerId=" + customerId + "]";
 	}
 
 }

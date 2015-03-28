@@ -10,6 +10,14 @@
 <title>燃气远程监控系统告警</title>
 <link rel="stylesheet" type="text/css" href="/gas-webapp/css/current.css"/>
 <script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
+<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".div2").click(function(){ 
+		$(this).next("div").slideToggle("slow").siblings(".div3:visible").slideUp("slow");
+	});
+});
+</script>
 </head>
 <body>
 <%
@@ -18,7 +26,9 @@
 	int userGrade=user.getUserGrade();
 %>
 <%@include file="menu.jsp" %>
-<div id="content" class="wp">
+<%@include file="leftmenu.html" %>
+
+<div id="content" style="float:left;">
 	<p id="status">当前位置：<span>告警数据&nbsp;</span></p>
 	<div id="datalist">
 	<span>
@@ -43,22 +53,24 @@
 		<td width="4%"  class="tablehead">序号</td>
 		<td width="8%" class="tablehead">用户名</td>
 		<td width="8%" class="tablehead">房号</td>		
-		<td width="8%" class="tablehead">燃气用量</td>
-		<td width="8%" class="tablehead">账户余额</td>
+		<td width="8%" class="tablehead">当前燃气值(m<SUP>3</SUP>)</td>
+		<td width="8%" class="tablehead">账户余额(元)</td>
 		<td width="7%" class="tablehead">联系方式</td>
 		<td width="12%" class="tablehead">采集时间</td>
-		<td width="7%" class="tablehead">历史记录</td>
+		<td width="6%" class="tablehead">燃气表状态</td>	
+		<td width="7%" class="tablehead">燃气表控制</td>
 	  </tr>
   	  <c:forEach items="${gases}" var="item" varStatus="status">  
 		  <tr class="tablerow">
 			<td class="tablecontent">${status.count}</td>
 			<td class="tablecontent">${item.customer.customerName}</td>
-			<td class="tablecontent">${item.customer.addressBuilding}楼${item.customer.addressLayer}室</td>
+			<td class="tablecontent">${item.customer.addressLayer}0${item.customer.addressLayer}室</td>
 			<td class="tablecontent">${item.gasValue}</td>
-			<td class="tablecontent"><font color="red">${item.gasMoney}</font></td>
+			<td class="tablecontent"><font color="red">${item.customer.money}</font></td>
 			<td class="tablecontent">${item.customer.customerPhone}</td>
  			<td class="tablecontent">${item.collectTime}</td>
-			<td class="tablecontent"><a href="/gas-webapp/viewdetailgas/${item.customer.customerId}">查看</a></td>
+ 			<td class="tablecontent">正常</td>	
+			<td class="tablecontent"><input type="button" value="关闭" onclick="if(this.value=='打开') this.value='关闭'; else this.value='打开'"  style="width:40px;font-size:12px;"/></td>
 		  </tr> 
 	  </c:forEach>
 	  </table>
@@ -138,21 +150,10 @@
 	</table>			
 	</div>
 </div>
-<div id="footer" class="wp">
-	<hr width="1000px" size="1"/>
-	<div class="left">
-		Powered by :<font color="#0066FF">veyoung</font><br/>
-		@Southwest jiaotong university 2014
-	</div>
-	<div class="right">
-		<div id="time"></div>
-			<font color="#0066FF">联系站长</font>&nbsp;|&nbsp;广元市燃气远程监控系统&nbsp;<br>
-	</div>
-	<p>&nbsp;</p>
-</div>
-</body>
+
 </body>
 </html>
+
 <script type="text/javascript">
 setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString();",5);
 

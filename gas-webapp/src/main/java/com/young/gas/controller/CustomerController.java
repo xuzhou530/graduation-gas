@@ -16,6 +16,8 @@ import com.young.gas.beans.Address;
 import com.young.gas.beans.Customer;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
+import com.young.gas.service.MoneyService;
+import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class CustomerController {
@@ -73,6 +75,7 @@ public class CustomerController {
 		for(Address address : addresses){
 			areaStr += address.getAddressArea()+",";
 		}
+		areaName = EncodingTool.encodeStr(areaName);
 		return viewCustomerData(district, areaName, building, page, areaStr);
 	}	
 	
@@ -115,11 +118,15 @@ public class CustomerController {
 	
 		//获取燃气表数据
 		CustomerService customerService = new CustomerService();
+		MoneyService moneyService = new MoneyService();
 		
 		//某区某小区某栋楼的住户数
 		int countCustomers = customerService.getCountWithSearchBuilding(district, areaName, building);
 		//某区某小区某栋楼的住户集合
 		List<Customer> customers = customerService.searchCustomersByBuilding(district, areaName, building, page, PERPAGE);
+		for(Customer customer : customers){
+			customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
+		}
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("currentDistrict", district);

@@ -1,6 +1,7 @@
 package com.young.gas.beans;
 
 public class Customer {
+	private int money;
 	
 	private int customerId;
 	private String customerName;//姓名
@@ -67,5 +68,11 @@ public class Customer {
 				+ addressArea + ", addressBuilding=" + addressBuilding
 				+ ", addressLayer=" + addressLayer + ", addressRoom="
 				+ addressRoom + "]";
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
 	}
 }

@@ -9,6 +9,14 @@
 <title>燃气远程监控系统小区</title>
 <link href="/gas-webapp/css/current.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
+<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".div2").click(function(){ 
+		$(this).next("div").slideToggle("slow").siblings(".div3:visible").slideUp("slow");
+	});
+});
+</script>
 </head>
 <body>
 <%
@@ -17,7 +25,9 @@
 	int userGrade=user.getUserGrade();
 %>
 <%@include file="menu.jsp" %>
-<div id="content" class="wp">
+<%@include file="leftmenu.html" %>
+
+<div id="content" style="float:left;">
 	<p id="status">当前位置：<span>住户管理&nbsp;></span><span>&nbsp;所有住户&nbsp;</p>
 	<div id="datalist">
 		<span>
@@ -43,7 +53,8 @@
 			<td width="3%"  class="tablehead">序号</td>
 			<td width="7%" class="tablehead">用户名</td>
 			<td width="10%" class="tablehead">联系方式</td>
-			<td width="10%" class="tablehead">房号</td>
+			<td width="7%" class="tablehead">房号</td>
+			<td width="7%" class="tablehead">账户余额(元)</td>
 			<td width="6%" class="tablehead">燃气表状态</td>					
 			<td width="7%" class="tablehead">燃气表控制</td>
 		  </tr>
@@ -52,12 +63,12 @@
 			<td class="tablecontent">${status.count}</td>
 			<td class="tablecontent">${item.customerName}</td>
 			<td class="tablecontent">${item.customerPhone}</td>
-			<td class="tablecontent">${item.addressLayer}层${item.addressRoom}室</td>
+			<td class="tablecontent">${item.addressLayer}0${item.addressRoom}室</td>
+			<td class="tablecontent">${item.money}</td>
 			<td class="tablecontent">正常</td>						
 			<td class="tablecontent"><input type="button" value="关闭" onclick="if(this.value=='打开') this.value='关闭'; else this.value='打开'"  style="width:40px;font-size:12px;"/></td>
 		  </tr> 
-		  </c:forEach>		  
-		  
+		  </c:forEach>		  	  
 		 </table>	
 		<table width=980px align="center" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
@@ -133,18 +144,6 @@
 		  </tr>
 		</table>
 	</div>
-</div>
-<div id="footer" class="wp">
-	<hr width="1000px" size="1"/>
-	<div class="left">
-		Powered by :<font color="#0066FF">veyoung</font><br/>
-		@Southwest jiaotong university 2014
-	</div>
-	<div class="right">
-		<div id="time"></div>
-			<font color="#0066FF">联系站长</font>&nbsp;|&nbsp;广元市燃气远程监控系统&nbsp;<br>
-	</div>
-	<p>&nbsp;</p>
 </div>
 </body>
 </html>

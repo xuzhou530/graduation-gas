@@ -6,10 +6,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>燃气远程监控系统小区</title>
 <link rel="stylesheet" type="text/css" href="../css/current.css"/>
 <script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".div2").click(function(){ 
+		$(this).next("div").slideToggle("slow").siblings(".div3:visible").slideUp("slow");
+	});
+});
+</script>
 </head>
 <body>
 <%
@@ -18,7 +26,9 @@
 	int userGrade=user.getUserGrade();
 %>
 <%@include file="menu.jsp" %>
-<div id="content" class="wp">
+<%@include file="leftmenu.html" %>
+
+<div id="content" style="float:left;">
 	<p id="status">当前位置：<span>数据管理&nbsp;></span><span>&nbsp;用量详情&nbsp;</p>
 	<div id="datalist">
 		<span>
@@ -43,7 +53,7 @@
 		  <tr class="tablerow">
 			<td class="tablecontent">${status.count}</td>
 			<td class="tablecontent">${customer.customerName}</td>	
-			<td class="tablecontent">${customer.addressLayer}楼${customer.addressRoom}室</td>
+			<td class="tablecontent">${customer.addressLayer}0${customer.addressRoom}室</td>
 			<td class="tablecontent">${item.gasValue}</td>
 			<td class="tablecontent">${item.gasMoney}</td>	
 			<td class="tablecontent">${customer.customerPhone}</td>
@@ -53,18 +63,6 @@
 
 		 </table>	
 	</div>
-</div>
-<div id="footer" class="wp">
-	<hr width="1000px" size="1"/>
-	<div class="left">
-		Powered by :<font color="#0066FF">veyoung</font><br/>
-		@Southwest jiaotong university 2014
-	</div>
-	<div class="right">
-		<div id="time"></div>
-			<font color="#0066FF">联系站长</font>&nbsp;|&nbsp;广元市燃气远程监控系统&nbsp;<br>
-	</div>
-	<p>&nbsp;</p>
 </div>
 </body>
 </html>

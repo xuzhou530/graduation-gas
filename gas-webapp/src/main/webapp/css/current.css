@@ -2,9 +2,11 @@
 body{
 margin:0;
 height:100%;
+width:100%;
+overflow-x:hidden;
 }
 .wp{
-width:1000px;
+width:1100px;
 margin-top:0;
 margin-bottom:0;
 margin-left:auto;
@@ -19,6 +21,7 @@ float:right;
 #header{
 height:50px;
 background-color:#367bb2;
+width:100%;
 }
 #logo{
 font-family:"����";
@@ -56,18 +59,21 @@ color:#FFFFFF;
 }
 #welcome font{
 color:#CCFF33;
+margin-right:30px;
 }
 
-/**************���˵�**********/
 #navigation{
 height:38px;
+width:100%;
 background-color:#286496;
 }
 
 #menu{
-width:850px;
+width:1000px;
 margin:0;
 padding:0;
+float:left;
+margin-left:1100px;
 }
 #menu ul {
 margin: 0;
@@ -113,7 +119,6 @@ font-weight:bold;
 }
 
 
-/**�����˵�**/
 #customerpage ul{
 list-style:none;
 margin:0;
@@ -127,8 +132,6 @@ background-color:#2a639a;
 border-top:1px solid #ffffff;
 }
 
-/**************ҳ��������************/
-/***������ǩ**/
 #status{
 font-size:13px;
 font-family:"����";
@@ -138,18 +141,23 @@ text-indent:4px;
 #status span{
 color:#0066CC;
 }
+#content{
+margin-left:20px;
+}
 #data{
 height:auto;
 width:1000px;
 border-radius:0 0 5px 5px;
 border:1px solid #dedede;
 }
+
 #datalist{
 height:600px;
 width:1000px;
 border-radius:0 0 5px 5px;
 border:1px solid #dedede;
 }
+
 #datalist>span{
 color:#3278aa;
 display:block;
@@ -204,12 +212,14 @@ margin-top:10px;
 border-collapse:collapse;
 }
 
-#maintable tr.t1 td {background-color:#fff;}/* ��һ�еı���ɫ */
-#maintable tr.t2 td {background-color:#eee;}/* �ڶ��еı���ɫ */
-#maintable tr.t3 td {background-color:#ccc;}/* ��꾭��ʱ�ı���ɫ */
+#maintable tr.t1 td {background-color:#fff;}
+#maintable tr.t2 td {background-color:#eee;}
+#maintable tr.t3 td {background-color:#ccc;}
 
 #map{
-margin:5px 5px 5px 5px;
+width:100%;
+margin-left: 200px;
+height:695px;
 }
 
 /****************************/
@@ -226,14 +236,16 @@ color:#000000;
 font-size: 12;
 }
 a:link,a:visited {
-font-size: 12px;
+font-size: 14px;
+font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 color: #06482a;
 text-decoration: none;
 }
 a:hover,a:active {
-font-size: 12px;
-color: #FF0000;
-text-decoration: underline;
+font-size: 14px;
+font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
+color: #06482a;
+text-decoration: none;
 }
 td.tablehead{
 font-size: 14px;
@@ -338,3 +350,35 @@ font-size:14px;
 margin-bottom:40px;
 margin-top:30px;
 }
+
+/******left menu page*****/
+.leftmenu{
+width:200px;
+height:695px;
+border-right:1px solid #CCCCCC ;#FFFFFF;
+color:#000000;
+font-size:14px;
+text-align:center;
+float:left;
+background-color:#F2F2F2;
+}
+.div1{text-align:center;width:200px;padding-top:10px;}
+.div2{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;}
+.div0{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;}
+.home {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/home.png);}
+.warning {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/1.png);}
+.current {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/2.png);}
+.datamanagement {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/4.png);}
+.customermanagement {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/8.png);}
+.payment {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/4.png);}
+.system {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/8.png);}
+.div3{display:none;font-size:13px;}
+.div3 ul{margin:0;padding:0;}
+.div3 li{height:30px;line-height:30px;list-style:none;border-bottom:#ccc 1px dotted;text-align:center;}
+
+
+.bottomtip{ overflow:hidden; height:30px;width:100%;position:fixed; bottom:0;background-color:#eeeeee;}
+.bottomtip .tip {/*width:99999999px;*/width:8000%; height:30px;}
+.bottomtip .tip div{ float:left;}
+.bottomtip .tip ul{float:left; height:30px; overflow:hidden; zoom:1; }
+.bottomtip .tip ul li{float:left; line-height:15px; list-style:none;color:red;}

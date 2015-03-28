@@ -10,14 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.young.gas.beans.Address;
 import com.young.gas.beans.Customer;
 import com.young.gas.beans.Gas;
+import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.GasService;
+import com.young.gas.service.MoneyService;
+import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class GasCurrrentController {
@@ -37,6 +42,12 @@ public class GasCurrrentController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");
+		if(loginUser == null){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		String district = DISTRICTS[districtId];
 		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
@@ -50,6 +61,7 @@ public class GasCurrrentController {
 		//获取燃气表数据
 		if(areas.size() > 0){
 			CustomerService customerService = new CustomerService();
+			MoneyService moneyService = new MoneyService();
 			//第一页住户
 			List<Customer> customers = customerService.searchCustomersByBuilding(district, areas.get(0), 1, 0, PERPAGE);
 			//某区某小区某栋楼的住户数
@@ -58,6 +70,7 @@ public class GasCurrrentController {
 			List<Gas> gases = new ArrayList<Gas>();
 			GasService gasService = new GasService();
 			for(Customer customer : customers){
+				customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
 				Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());
 				if(gas != null){
 					gas.setCustomer(customer);
@@ -96,6 +109,14 @@ public class GasCurrrentController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
+		areaName = EncodingTool.encodeStr(areaName);
+		
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");
+		if(loginUser == null){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		String district = DISTRICTS[districtId];
 		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
@@ -116,7 +137,9 @@ public class GasCurrrentController {
 		//某区某小区某栋楼的燃气值
 		List<Gas> gases = new ArrayList<Gas>();
 		GasService gasService = new GasService();
+		MoneyService moneyService = new MoneyService();
 		for(Customer customer : customers){
+			customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
 			Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());
 			if(gas != null){
 				gas.setCustomer(customer);
@@ -149,6 +172,12 @@ public class GasCurrrentController {
 			@PathVariable("customerId") int customerId,
 			HttpServletRequest request,
 			HttpServletResponse response){
+		
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");
+		if(loginUser == null){
+			return new ModelAndView("redirect:/home");
+		}
 		
 		CustomerService customerService = new CustomerService();
 		Customer customer = customerService.searchCustomerById(customerId);
@@ -183,6 +212,12 @@ public class GasCurrrentController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");
+		if(loginUser == null){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		String district = DISTRICTS[districtId];
 		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
@@ -192,6 +227,7 @@ public class GasCurrrentController {
 		}
 	
 		CustomerService customerService = new CustomerService();
+		MoneyService moneyService = new MoneyService();
 		//第一页住户
 		List<Customer> customers = customerService.searchCustomersByBuilding(district, areaName, Integer.parseInt(buildingName), 0, PERPAGE);
 		//某区某小区某栋楼的住户数
@@ -200,6 +236,7 @@ public class GasCurrrentController {
 		List<Gas> gases = new ArrayList<Gas>();
 		GasService gasService = new GasService();
 		for(Customer customer : customers){
+			customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
 			Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());
 			if(gas != null){
 				gas.setCustomer(customer);

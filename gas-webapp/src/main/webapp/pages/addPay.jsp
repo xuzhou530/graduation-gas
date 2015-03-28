@@ -8,6 +8,14 @@
 <title>燃气远程监控系统小区</title>
 <link href="/gas-webapp/css/current.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
+<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".div2").click(function(){ 
+		$(this).next("div").slideToggle("slow").siblings(".div3:visible").slideUp("slow");
+	});
+});
+</script>
 </head>
 <body>
 <%
@@ -16,7 +24,9 @@
 	int userGrade=user.getUserGrade();
 %>
 <%@include file="menu.jsp" %>
-<div id="content" class="wp">
+<%@include file="leftmenu.html" %>
+
+<div id="content" style="float:left;">
 	<p id="status">当前位置：<span>缴费管理&nbsp;&gt;</span><span>&nbsp;用户缴费&nbsp;</span></p>
 	<div id="data">
 		<span>
@@ -59,18 +69,6 @@
 			</table>
 		</form>
 	</div>
-</div>
-<div id="footer" class="wp">
-	<hr width="1000px" size="1"/>
-	<div class="left">
-		Powered by :<font color="#0066FF">veyoung</font><br/>
-		@Southwest jiaotong university 2014
-	</div>
-	<div class="right">
-		<div id="time"></div>
-			<font color="#0066FF">联系站长</font>&nbsp;|&nbsp;广元市燃气远程监控系统&nbsp;<br>
-	</div>
-	<p>&nbsp;</p>
 </div>
 </body>
 </html>

@@ -7,33 +7,60 @@
 <title>广元市燃气远程监控系统首页</title>
 <link href="/gas-webapp/css/current.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
+<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".div2").click(function(){ 
+		$(this).next("div").slideToggle("slow").siblings(".div3:visible").slideUp("slow");
+	});
+});
+</script>
 </head>
 <body>
 
 <%@include file="menu.jsp" %>
-<div id="content" class="wp">
-	<p id="status">当前位置：<span>首页&nbsp;</span></p>	
-	<div id="data">
-		<span>
-			<image src="/gas-webapp/images/map.png" width=25px height=25px />&nbsp;地图
-		</span>
-		<div id="map">
-			<iframe width=988px height=750px frameborder=0 scrolling=auto ></iframe>
-		</div>	
-	</div>
+<%@include file="leftmenu.html" %>
+<div id="map">
+	<img id="mappic" src="/gas-webapp/images/guangy.jpg" onclick="clickme()"/>
 </div>
-<div id="footer" class="wp">
-	<hr width="1000px" size="1"/>
-	<div class="left">
-		Powered by :<font color="#0066FF">veyoung</font><br/>
-		@Southwest jiaotong university 2014
-	</div>
-	<div class="right">
-		<div id="time"></div>
-			<font color="#0066FF">联系站长</font>&nbsp;|&nbsp;广元市燃气远程监控系统&nbsp;<br>
-	</div>
-	<p>&nbsp;</p>
+
+<div id="demo" class="bottomtip">
+  <div class="tip">
+    <div id="demo1">
+      <ul>
+		<li>提示：利州区和苑小区有10户用气量异常！利州区常发豪郡有20户费用不足！</li>
+      </ul>
+    </div>
+    <div id="demo2"></div>
+  </div>
 </div>
+
 </body>
 </html>
+<script type="text/javascript">
 
+var demo = document.getElementById("demo");
+var demo1 = document.getElementById("demo1");
+var demo2 = document.getElementById("demo2");
+demo2.innerHTML=document.getElementById("demo1").innerHTML;
+
+function Marquee(){
+	if(demo.scrollLeft-demo2.offsetWidth>=0){
+		demo.scrollLeft-=demo1.offsetWidth;
+	}
+	else{
+		demo.scrollLeft++;
+	}
+}
+
+var myvar=setInterval(Marquee,30);
+demo.onmouseout=function (){myvar=setInterval(Marquee,30);}
+demo.onmouseover=function(){clearInterval(myvar);}
+
+function clickme(){
+	document.getElementById("mappic").src = "/gas-webapp/images/lizhou.png";
+	document.getElementById("mappic").onclick = function(){
+		window.location.href="/gas-webapp/viewwarning/1"
+	}
+}
+</script>
