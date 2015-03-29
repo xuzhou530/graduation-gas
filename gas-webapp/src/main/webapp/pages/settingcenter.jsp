@@ -45,11 +45,18 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td class="title">采集开始时间:&nbsp;&nbsp;</td>
+			<td class="title">采集开始:&nbsp;&nbsp;</td>
 			<td><input type="text" name="day" style="width:40px;" value="1"/><span class="describe">日</span>
 				<input type="text" name="day" style="width:35px;" value="12"/><span class="describe">时：</span>
 				<input type="text" name="day" style="width:35px;" value="00"/><span class="describe">分：</span>
 				<input type="text" name="day" style="width:35px;" value="00"/><span class="describe">秒</span></td>
+		</tr>
+		<tr>
+			<td class="title">采集指令:&nbsp;&nbsp;</td>
+			<td>
+				<input type="radio" name="start" value="0" checked="checked" style="width:50px;"/><span class="describe">不采集</span>
+				<input type="radio" name="start" value="1" style="width:50px;"/><span class="describe">采集</span>
+			</td>
 		</tr>
 		<tr><td class="title">&nbsp;</td>
 			<td>
