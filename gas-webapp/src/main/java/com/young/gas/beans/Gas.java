@@ -10,6 +10,7 @@ public class Gas {
 	private Timestamp collectTime;
 	private int gasValue;
 	private int previousValue;
+	private int gasMoney;
 	private int flag;
 	private int customerId;
 	public int getGasId() {
@@ -59,6 +60,12 @@ public class Gas {
 		return "Gas [gasId=" + gasId + ", collectTime=" + collectTime
 				+ ", gasValue=" + gasValue + ", previousValue=" + previousValue
 				 + ", customerId=" + customerId + "]";
+	}
+	public int getGasMoney() {
+		return gasMoney;
+	}
+	public void setGasMoney(int gasMoney) {
+		this.gasMoney = gasMoney;
 	}
 
 }

@@ -128,9 +128,10 @@ public class GasDao {
 			gas.setGasId(rs.getInt(1));
 			gas.setCollectTime(rs.getTimestamp(2));
 			gas.setGasValue(rs.getInt(3));
-			gas.setPreviousValue(rs.getInt(4));
-			gas.setFlag(rs.getInt(5));
-			gas.setCustomerId(rs.getInt(6));
+			gas.setPreviousValue(rs.getInt(4));			
+			gas.setGasMoney(rs.getInt(5));
+			gas.setFlag(rs.getInt(6));
+			gas.setCustomerId(rs.getInt(7));
 			gases.add(gas);			
 		}		
 		return gases;

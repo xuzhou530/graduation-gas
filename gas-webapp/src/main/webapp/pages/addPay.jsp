@@ -25,50 +25,42 @@ $(document).ready(function(){
 %>
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
-
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>缴费管理&nbsp;&gt;</span><span>&nbsp;用户缴费&nbsp;</span></p>
-	<div id="data">
-		<span>
-			<div id="image">
-				<image src="/gas-webapp/images/money.png" width=25px height=25px/>
-			</div>用户缴费
-		</span>
-		<form action="/gas-webapp/addpay/<%=userGrade%>" method="get">
-			<table width="40%" border="0" cellpadding="0" cellspacing="0" align="center" bordercolor="#CCCCCC">
-				<tr><td class="title">区县:&nbsp;&nbsp;</td>
-					<td>
-						<select name="districtName" style="width: 203px; height:30px;" onchange="cascade(this.value)" >
-							<option value =-1>-请选择-</option>
-							<option value =0>利州区</option>
-							<option value =1>昭化区</option>
-							<option value=2>朝天区</option>
-							<option value=3>旺苍县</option>
-							<option value=4>青川县</option>
-							<option value=5>剑阁县</option>	
-							<option value=6>苍溪县</option>	
-						</select>
-					</td>
-				</tr>
-				<tr><td class="title">小区:&nbsp;&nbsp;</td><td>	
-					<select id="areaName000" name="areaName000" style="width:203px; height:30px;">
-						<option value =0>-请选择-</option>
-					</select></td>
-				</tr>
-				<tr><td class="title">小区:&nbsp;&nbsp;</td><td><input type="text" name="areaName"/></td></tr>
-				<tr><td class="title">楼号:&nbsp;&nbsp;</td><td><input type="text" name="addressBuilding"/></td></tr>
-				<tr><td class="title">楼层:&nbsp;&nbsp;</td><td><input type="text" name="addressLayer"/></td></tr>
-				<tr><td class="title">房号:&nbsp;&nbsp;</td><td><input type="text" name="addressRoom"/></td></tr>
-				<tr><td class="title">用户名:&nbsp;&nbsp;</td><td><input type="text" name="name"/></td></tr>
-				<tr><td class="title">金额:&nbsp;&nbsp;</td><td><input type="text" name="pay"/></td></tr>
-				<tr><td class="title">&nbsp;</td>
-					<td><input class="buttonsave" type="submit" value="提交"/>&nbsp;&nbsp;
-						<input class="buttonreset" type="reset" value="重置"/>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
+<div id="content" class="rightcontent">
+	<h4 class="addtitle">用户缴费</h4>		
+	<form action="/gas-webapp/addpay/<%=userGrade%>" method="get">
+		<table width="40%" border="0" cellpadding="0" cellspacing="0" align="left" bordercolor="#CCCCCC">
+			<tr><td class="title">区县:&nbsp;&nbsp;</td>
+				<td>
+					<select name="districtName" style="width: 203px; height:30px;" onchange="cascade(this.value)" >
+						<option value =-1>-请选择-</option>
+						<option value =0>利州区</option>
+						<option value =1>昭化区</option>
+						<option value=2>朝天区</option>
+						<option value=3>旺苍县</option>
+						<option value=4>青川县</option>
+						<option value=5>剑阁县</option>	
+						<option value=6>苍溪县</option>	
+					</select>
+				</td>
+			</tr>
+			<tr><td class="title">小区:&nbsp;&nbsp;</td><td>	
+				<select id="areaName000" name="areaName000" style="width:203px; height:30px;">
+					<option value =0>-请选择-</option>
+				</select></td>
+			</tr>
+			<tr><td class="title">小区:&nbsp;&nbsp;</td><td><input type="text" name="areaName"/></td></tr>
+			<tr><td class="title">楼号:&nbsp;&nbsp;</td><td><input type="text" name="addressBuilding"/></td></tr>
+			<tr><td class="title">楼层:&nbsp;&nbsp;</td><td><input type="text" name="addressLayer"/></td></tr>
+			<tr><td class="title">房号:&nbsp;&nbsp;</td><td><input type="text" name="addressRoom"/></td></tr>
+			<tr><td class="title">用户名:&nbsp;&nbsp;</td><td><input type="text" name="name"/></td></tr>
+			<tr><td class="title">金额:&nbsp;&nbsp;</td><td><input type="text" name="pay"/></td></tr>
+			<tr><td class="title">&nbsp;</td>
+				<td><input class="buttonsave" type="submit" value="缴费"/>&nbsp;&nbsp;
+					<input class="buttonreset" type="reset" value="重置"/>
+				</td>
+			</tr>
+		</table>
+	</form>		
 </div>
 </body>
 </html>

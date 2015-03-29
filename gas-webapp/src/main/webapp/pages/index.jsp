@@ -20,8 +20,8 @@ $(document).ready(function(){
 
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
-<div id="map">
-	<img id="mappic" src="/gas-webapp/images/guangy.jpg" onclick="clickme()"/>
+<div id="map" class="rightcontent">
+	<img id="mappic" src="/gas-webapp/images/gy.jpg" onclick="clickme()"/>
 </div>
 
 <div id="demo" class="bottomtip">

@@ -150,7 +150,7 @@ public class GasCurrrentController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("currentDistrict", district);
 		mav.addObject("currentArea", areas.get(0));
-		mav.addObject("currentBuilding", 1);
+		mav.addObject("currentBuilding", building);
 		mav.addObject("areaStr", areaStr);
 		mav.addObject("gases", gases);
 		mav.addObject("countCustomers", countCustomers);
@@ -180,7 +180,9 @@ public class GasCurrrentController {
 		}
 		
 		CustomerService customerService = new CustomerService();
+		MoneyService moneyService = new MoneyService();
 		Customer customer = customerService.searchCustomerById(customerId);
+		customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
 		
 		GasService gasService = new GasService();
 		List<Gas> gases = gasService.searchAllGasByCustomerId(customerId);	
@@ -251,7 +253,7 @@ public class GasCurrrentController {
 		mav.addObject("areaStr", areaStr);
 		mav.addObject("gases", gases);
 		mav.addObject("countCustomers", countCustomers);
-		mav.addObject("pages", countCustomers/PERPAGE);
+		mav.addObject("pages", countCustomers/PERPAGE+1);
 		mav.addObject("currentPage", 1);
 		mav.setViewName("current");
 		return mav;

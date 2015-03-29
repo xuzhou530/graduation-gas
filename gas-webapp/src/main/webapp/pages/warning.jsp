@@ -38,7 +38,7 @@ $(document).ready(function(){
 		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}栋
 		<div id="search">
 			<form id="searchform" action="/gas-webapp/searchwarning/<%=userGrade%>" method="post" onsubmit="return checkform()">
-				小区：<select id="areaName" name="areaName" style="width:82px; height:25px;">
+				小区：<select id="areaName" name="areaName" style="width:95px; height:25px;">
 					<option value =0>-请选择-</option>
 				</select>&nbsp;
 				楼号：<input type="text" id="buildingName" name="buildingName" style="width:35px; height:15px;"/>
