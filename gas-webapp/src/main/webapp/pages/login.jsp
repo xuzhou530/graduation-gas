@@ -5,8 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>广元市燃气远程监控系统登录界面</title>
-<link rel="stylesheet" type="text/css" href="/gas-webapp/css/login.css"/>
-<script type="text/javascript" src="/gas-webapp/js/login.js"></script>
+<link rel="stylesheet" type="text/css" href="/gas/css/login.css"/>
+<script type="text/javascript" src="/gas/js/login.js"></script>
 </head>
 <body>
 <div id="bgk">
@@ -17,7 +17,7 @@
 <div id="content">
 	<div>
 		<span>欢迎进入系统</span>
-		<form id="login" method="post" action="login" onsubmit="checkForm()">
+		<form id="login" method="post" action="/gas/login" onsubmit="checkForm()">
 			<table>
 				<tr>
 					<td class="label">用户名：</td>

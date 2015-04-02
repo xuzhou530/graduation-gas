@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.util.List;
 
 import young.database.ConnectionPool;
-import com.young.gas.dao.UserDao;
+
 import com.young.gas.beans.User;
+import com.young.gas.dao.UserDao;
 
 public class UserService {
 	private UserDao dao = new UserDao();	

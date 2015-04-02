@@ -29,11 +29,11 @@
 			<ul>
 				<li><font style="color:#dddddd;">用户中心</font>
 					<ul>
-						<li><a href="/gas-webapp/pages/addPay.jsp">系统设置</a></li>
-						<li><a href="/gas-webapp/viewpay/<%=menuUserGrade%>">集中器设置</a></li>
+						<li><a href="/gas/pages/addPay.jsp">系统设置</a></li>
+						<li><a href="/gas/viewpay/<%=menuUserGrade%>">集中器设置</a></li>
 					</ul>
 				</li>
-				<li><a href="/gas-webapp/logout">退出系统</a></li>
+				<li><a href="/gas/logout">退出系统</a></li>
 			</ul>
 		</div>
 </div>

@@ -6,9 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>广元市燃气远程监控系统首页</title>
-<link href="/gas-webapp/css/current.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
-<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<link href="/gas/css/current.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gas/js/menu.js"></script>
+<script type="text/javascript" src="/gas/js/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".div2").click(function(){ 
@@ -50,13 +50,13 @@ $(document).ready(function(){
 	<div id="datalist">
 	<span>
 		<div id="image">
-			<image src="/gas-webapp/images/money.png" width=25px height=25px/>
+			<image src="/gas/images/money.png" width=25px height=25px/>
 		</div>
 		${currentDistrict}利州区&nbsp;
 		<font class="STYLE1">&gt;</font>&nbsp;${currentArea}黄金小区&nbsp;
 		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}1栋
 		<div id="search">
-			<form id="searchform" action="/gas-webapp/searchpay/<%=userGrade%>" method="post" onsubmit="return checkform()">
+			<form id="searchform" action="/gas/searchpay/<%=userGrade%>" method="post" onsubmit="return checkform()">
 				小区：<select id="areaName" name="areaName" style="width:95px; height:25px;">
 					<option value =0>-请选择-</option>
 				</select>&nbsp;

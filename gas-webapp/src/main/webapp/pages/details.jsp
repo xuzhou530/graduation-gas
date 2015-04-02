@@ -10,7 +10,7 @@
 <title>燃气远程监控系统小区</title>
 <link rel="stylesheet" type="text/css" href="../css/current.css"/>
 <script type="text/javascript" src="../js/menu.js"></script>
-<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<script type="text/javascript" src="/gas/js/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".div2").click(function(){ 
@@ -33,7 +33,7 @@ $(document).ready(function(){
 	<div id="datalist">
 		<span>
 			<div id="image">
-				<image src="/gas-webapp/images/list.png" width=20px height=20px/>
+				<image src="/gas/images/list.png" width=20px height=20px/>
 			</div>
 			${currentDistrict}&nbsp;
 			<font class="STYLE1">&gt;</font>&nbsp;${currentArea}&nbsp;

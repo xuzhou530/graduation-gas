@@ -90,7 +90,7 @@
   </dependencies>
   
   <build>
-  	   <finalName>gas-webapp</finalName> 
+  	   <finalName>gas</finalName> 
        <plugins>
            <plugin>
                <groupId>org.apache.maven.plugins</groupId>

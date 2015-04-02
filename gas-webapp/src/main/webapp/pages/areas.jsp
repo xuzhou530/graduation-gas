@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>燃气远程监控系统小区</title>
-<link href="/gas-webapp/css/current.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
-<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<link href="/gas/css/current.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gas/js/menu.js"></script>
+<script type="text/javascript" src="/gas/js/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".div2").click(function(){ 
@@ -32,7 +32,7 @@ $(document).ready(function(){
 	<div id="datalist">
 		<span>
 			<div id="image">
-				<image src="/gas-webapp/images/text.png" width=20px height=20px/>
+				<image src="/gas/images/text.png" width=20px height=20px/>
 			</div>
 			小区列表&nbsp;
 		</span>

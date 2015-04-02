@@ -6,9 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>城市燃气远程监控系统首页</title>
-<link href="/gas-webapp/css/current.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="/gas-webapp/js/menu.js"></script>
-<script type="text/javascript" src="/gas-webapp/js/jquery.js"></script>
+<link href="/gas/css/current.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gas/js/menu.js"></script>
+<script type="text/javascript" src="/gas/js/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".div2").click(function(){ 
@@ -31,13 +31,13 @@ $(document).ready(function(){
 	<div id="datalist">
 	<span>
 		<div id="image">
-			<image src="/gas-webapp/images/311.gif"/>
+			<image src="/gas/images/311.gif"/>
 		</div>
 		${currentDistrict}&nbsp;
 		<font class="STYLE1">&gt;</font>&nbsp;${currentArea}&nbsp;
 		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}栋
 		<div id="search">
-			<form id="searchform" action="/gas-webapp/searchgas/<%=userGrade%>" method="post" onsubmit="return checkform()">
+			<form id="searchform" action="/gas/searchgas/<%=userGrade%>" method="post" onsubmit="return checkform()">
 				小区：<select id="areaName" name="areaName" style="width:95px; height:25px;">
 					<option value =0>-请选择-</option>
 				</select>&nbsp;
@@ -70,7 +70,7 @@ $(document).ready(function(){
 			<td class="tablecontent">${item.customer.money}.00</td>		
 			<td class="tablecontent">${item.customer.customerPhone}</td>
 			<td class="tablecontent">${item.collectTime}</td>
-			<td class="tablecontent"><a href="/gas-webapp/viewdetailgas/${item.customer.customerId}">查看</a></td>
+			<td class="tablecontent"><a href="/gas/viewdetailgas/${item.customer.customerId}">查看</a></td>
 		  </tr> 
 	 </c:forEach>
 	 </table>
@@ -87,58 +87,58 @@ $(document).ready(function(){
 			  	 <c:choose>
 				    <c:when test="${currentPage == 1 && currentPage == pages}">
 					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/first.gif"width="37" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/first.gif"width="37" height="15" /></div>
 					  </td>
 					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/back.gif" width="43" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/back.gif" width="43" height="15" /></div>
 					  </td>
 					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/next.gif" width="43" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/next.gif" width="43" height="15" /></div>
 					  </td>
 					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/last.gif" width="37" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/last.gif" width="37" height="15" /></div>
 					  </td>
 				    </c:when>
 				    <c:when test="${currentPage == 1 && currentPage != pages}">
 					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/first.gif"width="37" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/first.gif"width="37" height="15" /></div>
 					  </td>
 					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/back.gif" width="43" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/back.gif" width="43" height="15" /></div>
 					  </td>
 					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage}"><img class="imagebutton" src="/gas-webapp//images/next.gif" width="43" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage}"><img class="imagebutton" src="/gas//images/next.gif" width="43" height="15" /></a></div>
 					  </td>
 					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${pages-1}"><img class="imagebutton" src="/gas-webapp//images/last.gif" width="37" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${pages-1}"><img class="imagebutton" src="/gas//images/last.gif" width="37" height="15" /></a></div>
 					  </td>
 				    </c:when>
 				    <c:when test="${currentPage > 1 && currentPage < pages}">
 					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/0"><img class="imagebutton" src="/gas-webapp//images/first.gif"width="37" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/0"><img class="imagebutton" src="/gas//images/first.gif"width="37" height="15" /></a></div>
 					  </td>
 					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage-2}"><img class="imagebutton" src="/gas-webapp/images/back.gif" width="43" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage-2}"><img class="imagebutton" src="/gas/images/back.gif" width="43" height="15" /></a></div>
 					  </td>
 					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage}"><img class="imagebutton" src="/gas-webapp//images/next.gif" width="43" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage}"><img class="imagebutton" src="/gas//images/next.gif" width="43" height="15" /></a></div>
 					  </td>
 					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${pages-1}"><img class="imagebutton" src="/gas-webapp//images/last.gif" width="37" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${pages-1}"><img class="imagebutton" src="/gas//images/last.gif" width="37" height="15" /></a></div>
 					  </td>
 				    </c:when>
 				    <c:otherwise>
 					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/0"/><img class="imagebutton" src="/gas-webapp//images/first.gif" width="43" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/0"/><img class="imagebutton" src="/gas//images/first.gif" width="43" height="15" /></a></div>
 					  </td>
 					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<a href="/gas-webapp/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage-2}"><img class="imagebutton" src="/gas-webapp//images/back.gif" width="43" height="15" /></a></div>
+					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage-2}"><img class="imagebutton" src="/gas//images/back.gif" width="43" height="15" /></a></div>
 					  </td>
 					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/next.gif" width="43" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/next.gif" width="43" height="15" /></div>
 					  </td>
 					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas-webapp//images/last.gif" width="37" height="15" /></div>
+					  		<img class="imagebuttonhide" src="/gas//images/last.gif" width="37" height="15" /></div>
 					  </td>
 				    </c:otherwise>
 				 </c:choose>

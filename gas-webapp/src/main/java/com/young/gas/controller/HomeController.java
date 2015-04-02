@@ -16,7 +16,7 @@ public class HomeController {
 	/**
 	 * 隐藏主页面
 	 */
-	@RequestMapping ( "home") 
+	@RequestMapping ("home") 
 	public ModelAndView homeJump(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login");
@@ -30,7 +30,7 @@ public class HomeController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping ( "login") 
+	@RequestMapping ("login") 
 	public ModelAndView login(
 			@RequestParam("name") String name,
 			@RequestParam("password") String password
@@ -51,14 +51,14 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping ( "logout") 
+	@RequestMapping ("logout") 
 	public ModelAndView logout(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login");
 		return mav;
 	}
 	
-	@RequestMapping ( "index") 
+	@RequestMapping ("index") 
 	public ModelAndView index(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
