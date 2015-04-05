@@ -45,7 +45,7 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td class="title">采集开始:&nbsp;&nbsp;</td>
+			<td class="title">采集时间:&nbsp;&nbsp;</td>
 			<td><input type="text" name="day" style="width:40px;" value="1"/><span class="describe">日</span>
 				<input type="text" name="day" style="width:35px;" value="12"/><span class="describe">时：</span>
 				<input type="text" name="day" style="width:35px;" value="00"/><span class="describe">分：</span>

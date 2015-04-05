@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>广元市燃气远程监控系统首页</title>
+<title>城市燃气远程监控系统首页</title>
 <link href="/gas/css/current.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/gas/js/menu.js"></script>
 <script type="text/javascript" src="/gas/js/jquery.js"></script>
@@ -58,7 +58,7 @@ demo.onmouseout=function (){myvar=setInterval(Marquee,30);}
 demo.onmouseover=function(){clearInterval(myvar);}
 
 function clickme(){
-	document.getElementById("mappic").src = "/gas/images/lizhou.png";
+	document.getElementById("mappic").src = "/gas/images/lzhou.png";
 	document.getElementById("mappic").onclick = function(){
 		window.location.href="/gas/viewwarning/1"
 	}

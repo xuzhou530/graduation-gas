@@ -30,7 +30,7 @@ $(document).ready(function(){
 	<h4 class="addtitle">系统设置</h4>		
 	<form method="post" action="AddressServlet">
 	<table width="100%" border="0" cellpadding="0" cellspacing="0" align="left" bordercolor="#CCCCCC">
-		<tr><td class="title">阀门关断:&nbsp;&nbsp;</td>
+		<tr><td class="title">阀门关断方式:&nbsp;&nbsp;</td>
 			<td style="width:280px;">
 			<select name="open" style="width: 280px; height:30px;" >
 					<option value =0>人工关闭</option>
@@ -38,6 +38,18 @@ $(document).ready(function(){
 				</select>
 				</td>
 			<td class="describe">*当住户燃气余额不足时，供气阀门关断方式选择</td>
+		</tr>
+		<tr><td class="title">余额报警值:&nbsp;&nbsp;</td>
+			<td>
+				<input type="text" name="moneyGuard" value="5.00"/><span class="describe">元</span>
+				</td>
+			<td class="describe">*设定余额报警阀值</td>
+		</tr>
+		<tr><td class="title">用气量异常值:&nbsp;&nbsp;</td>
+			<td>
+				<input type="text" name="gasGuard" value="100.00"/><span class="describe">立方</span>
+				</td>
+			<td class="describe">*燃气表用气量超高，提醒工作人员检修</td>
 		</tr>
 		<tr><td class="title">&nbsp;</td>
 			<td>
