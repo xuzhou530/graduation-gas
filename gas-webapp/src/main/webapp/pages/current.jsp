@@ -26,8 +26,8 @@ $(document).ready(function(){
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
 
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>最新数据&nbsp;</span></p>	
+<div id="content" class="rightcontent">
+	<div class="addtitle">最新数据</div>	
 	<div id="datalist">
 	<span>
 		<div id="image">

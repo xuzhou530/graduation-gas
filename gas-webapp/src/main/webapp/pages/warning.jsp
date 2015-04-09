@@ -28,8 +28,8 @@ $(document).ready(function(){
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
 
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>告警数据&nbsp;</span></p>
+<div id="content" class="rightcontent">
+	<div class="addtitle">告警数据</div>	
 	<div id="datalist">
 	<span>
 		<div id="image"><image src="/gas/images/warning.png"/></div>
@@ -66,7 +66,7 @@ $(document).ready(function(){
 			<td class="tablecontent">${item.customer.customerName}</td>
 			<td class="tablecontent">${item.customer.addressLayer}0${item.customer.addressLayer}室</td>
 			<td class="tablecontent">${item.gasValue}</td>
-			<td class="tablecontent"><font color="red">${item.customer.money}</font></td>
+			<td class="tablecontent"><font color="red">${item.gasMoney}</font></td>
 			<td class="tablecontent">${item.customer.customerPhone}</td>
  			<td class="tablecontent">${item.collectTime}</td>
  			<td class="tablecontent">正常</td>	

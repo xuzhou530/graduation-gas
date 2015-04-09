@@ -46,9 +46,9 @@ $(document).ready(function(){
 			<tr><td class="title">小区:&nbsp;&nbsp;</td><td>	
 				<select id="areaName000" name="areaName000" style="width:203px; height:30px;">
 					<option value =0>-请选择-</option>
+					<option value =0>黄金小区</option>
 				</select></td>
 			</tr>
-			<tr><td class="title">小区:&nbsp;&nbsp;</td><td><input type="text" name="areaName"/></td></tr>
 			<tr><td class="title">楼号:&nbsp;&nbsp;</td><td><input type="text" name="addressBuilding"/></td></tr>
 			<tr><td class="title">楼层:&nbsp;&nbsp;</td><td><input type="text" name="addressLayer"/></td></tr>
 			<tr><td class="title">房号:&nbsp;&nbsp;</td><td><input type="text" name="addressRoom"/></td></tr>

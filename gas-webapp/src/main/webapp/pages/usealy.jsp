@@ -45,8 +45,8 @@ $(document).ready(function(){
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
 
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>运营管理&nbsp;&gt;用气量统计</span></p>	
+<div id="content" class="rightcontent">	
+	<div class="addtitle">运营管理——用气量统计</div>
 	<div id="datalist">
 	<span>
 		<div id="image">
@@ -54,7 +54,8 @@ $(document).ready(function(){
 		</div>
 		${currentDistrict}利州区&nbsp;
 		<font class="STYLE1">&gt;</font>&nbsp;${currentArea}黄金小区&nbsp;
-		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}1栋
+		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}1栋&nbsp;
+		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}101室&nbsp;
 		<div id="search">
 			<form id="searchform" action="/gas/searchpay/<%=userGrade%>" method="post" onsubmit="return checkform()">
 				小区：<select id="areaName" name="areaName" style="width:95px; height:25px;">
@@ -71,7 +72,7 @@ $(document).ready(function(){
 	
 	<table style="display:none">
 	  <caption>
-	  住户用气量统计
+	  住户用气量统计(单位：立方)
 	  </caption>
 	  <thead>
 	    <tr>

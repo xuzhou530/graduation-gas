@@ -28,7 +28,7 @@ $(document).ready(function(){
   <div class="tip">
     <div id="demo1">
       <ul>
-		<li>提示：利州区和苑小区有10户用气量异常！利州区常发豪郡有20户费用不足！</li>
+		<li>提示：利州区和苑小区2栋有10户用气量异常！利州区黄金小区1栋有4户费用不足！</li>
       </ul>
     </div>
     <div id="demo2"></div>

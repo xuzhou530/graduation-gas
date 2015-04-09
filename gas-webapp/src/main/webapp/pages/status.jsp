@@ -45,8 +45,8 @@ $(document).ready(function(){
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
 
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>运营管理&nbsp;&gt;抄表统计</span></p>	
+<div id="content" class="rightcontent">
+	<div class="addtitle">运营管理——抄表统计</div>	
 	<div id="datalist">
 	<span>
 		<div id="image">
@@ -92,6 +92,13 @@ $(document).ready(function(){
 	    </tr>
 	   	<tr>
 	      <th scope="row">世纪之城</th>
+	      <td>23</td>
+	      <td>34</td>
+	      <td>23</td>
+	      <td>34</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">皇家花园</th>
 	      <td>23</td>
 	      <td>34</td>
 	      <td>23</td>

@@ -45,8 +45,8 @@ $(document).ready(function(){
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
 
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>运营管理&nbsp;&gt;缴费统计</span></p>	
+<div id="content" class="rightcontent">
+	<div class="addtitle">运营管理——缴费统计</div>
 	<div id="datalist">
 	<span>
 		<div id="image">
@@ -54,8 +54,10 @@ $(document).ready(function(){
 		</div>
 		${currentDistrict}利州区&nbsp;
 		<font class="STYLE1">&gt;</font>&nbsp;${currentArea}黄金小区&nbsp;
-		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}1栋
+		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}1栋&nbsp;
+		<font class="STYLE1">&gt;&nbsp;</font>${currentBuilding}101室&nbsp;
 		<div id="search">
+		
 			<form id="searchform" action="/gas/searchpay/<%=userGrade%>" method="post" onsubmit="return checkform()">
 				小区：<select id="areaName" name="areaName" style="width:82px; height:25px;">
 					<option value =0>-请选择-</option>
@@ -68,31 +70,39 @@ $(document).ready(function(){
 			</form>
 		</div>
 	</span>
-	
+	<div class="describe"></div>
 	<table style="display:none">
 	  <caption>
-	  住户缴费统计
+	  住户缴费统计(单位：元)
 	  </caption>
 	  <thead>
 	    <tr>
 	      <td></td>
-	      <th scope="col">food</th>
-	      <th scope="col">food</th>
-	      <th scope="col">food</th>
-	      <th scope="col">food</th>
-	      <th scope="col">food</th>
-	      <th scope="col">bath</th>
+	      <th scope="col">2014.11.1</th>
+	      <th scope="col">2014.11.10</th>
+	      <th scope="col">2014.12.1</th>
+	      <th scope="col">2014.12.10</th>
+	      <th scope="col">2015.1.1</th>
+	      <th scope="col">2015.1.10</th>
+	      <th scope="col">2015.2.1</th>
+	      <th scope="col">2015.2.10</th>
+	      <th scope="col">2015.3.10</th>
+	      <th scope="col">2015.4.1</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr>
-	      <th scope="row">Mary</th>
-	      <td>8</td>
-	      <td>45</td>
-	      <td>2</td>
-	      <td>8</td>
-	      <td>1</td>
-	      <td>9</td>
+	      <th scope="row">余扬</th>
+	      <td>100</td>
+	      <td>100</td>
+	      <td>150</td>
+	      <td>200</td>
+	      <td>100</td>
+	      <td>200</td>
+	      <td>100</td>
+	      <td>100</td>
+	      <td>150</td>
+	      <td>200</td>
 	    </tr>
 	  </tbody>
 	</table>

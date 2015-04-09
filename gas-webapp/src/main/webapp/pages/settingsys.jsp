@@ -9,6 +9,8 @@
 <link href="/gas/css/current.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="/gas/js/menu.js"></script>
 <script type="text/javascript" src="/gas/js/jquery.js"></script>
+<script type="text/javascript" src="/gas/js/script.js" ></script>
+<link href="/gas/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".div2").click(function(){ 
@@ -27,39 +29,155 @@ $(document).ready(function(){
 <%@include file="leftmenu.html" %>
 
 <div id="content" class="rightcontent">
-	<h4 class="addtitle">系统设置</h4>		
-	<form method="post" action="AddressServlet">
-	<table width="100%" border="0" cellpadding="0" cellspacing="0" align="left" bordercolor="#CCCCCC">
-		<tr><td class="title">阀门关断方式:&nbsp;&nbsp;</td>
-			<td style="width:280px;">
-			<select name="open" style="width: 280px; height:30px;" >
-					<option value =0>人工关闭</option>
-					<option value =1>自动关闭</option>
-				</select>
-				</td>
-			<td class="describe">*当住户燃气余额不足时，供气阀门关断方式选择</td>
-		</tr>
-		<tr><td class="title">余额报警值:&nbsp;&nbsp;</td>
-			<td>
-				<input type="text" name="moneyGuard" value="5.00"/><span class="describe">元</span>
-				</td>
-			<td class="describe">*设定余额报警阀值</td>
-		</tr>
-		<tr><td class="title">用气量异常值:&nbsp;&nbsp;</td>
-			<td>
-				<input type="text" name="gasGuard" value="100.00"/><span class="describe">立方</span>
-				</td>
-			<td class="describe">*燃气表用气量超高，提醒工作人员检修</td>
-		</tr>
-		<tr><td class="title">&nbsp;</td>
-			<td>
-				<input class="buttonsave" type="submit" value="保存"/>&nbsp;&nbsp;
-				<input class="buttonreset" type="reset" value="重置"/>
-				<input type="hidden" name="method" value="add"/>
-			</td>
-		</tr>
+	<div class="addtitle">设置</div>	
+	<div>
+		<table class="tabTitlesContainer">
+			<tr id="tabTitles">
+				<td class="tabTitleSelected" onclick="tabPageControl(0)">系统设置</td>
+				<td class="tabTitleUnSelected" onclick="tabPageControl(1)">集中器设置</td>
+				<td class="tabTitleUnSelected" onclick="tabPageControl(2)">采集器设置</td>
+			</tr>
 		</table>
-	</form>			
+		<table id="tabPagesContainer">
+			<tbody class="tabPageSelected">
+				<tr class="tabPage">
+				<td>
+					<table width="890px" border="0" cellpadding="0" cellspacing="0" align="left" bordercolor="#CCCCCC" style="margin-left:auto;margin-right:auto;">
+						<tr><td class="title">阀门关断方式:&nbsp;&nbsp;</td>
+							<td >
+							<select name="open" style="height:30px;" >
+									<option value =0>人工关闭</option>
+									<option value =1>自动关闭</option>
+								</select>
+								</td>
+						</tr>
+						<tr><td class="title">余额报警值:&nbsp;&nbsp;</td>
+							<td>
+								<input type="text" name="moneyGuard" value="5.00"/><span class="describe">元</span>
+								</td>
+						</tr>
+						<tr><td class="title">用气量异常值:&nbsp;&nbsp;</td>
+							<td>
+								<input type="text" name="gasGuard" value="100.00"/><span class="describe">立方</span>
+								</td>
+						</tr>
+						<tr><td class="title">当前燃气单价:&nbsp;&nbsp;</td>
+							<td>
+								<input type="text" name="gasGuard" value="100.00"/><span class="describe">元/立方</span>
+								</td>
+						</tr>
+						
+						<tr><td class="title">&nbsp;</td>
+							<td>
+								<input class="buttonsave" type="submit" value="保存"/>&nbsp;&nbsp;
+								<input class="buttonreset" type="reset" value="重置"/>
+								<input type="hidden" name="method" value="add"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				</tr>
+			</tbody>
+			<tbody class="tabPageUnSelected">
+				<tr class="tabPage">
+				<td><br/><br/><br/><br/>
+					<table width="890px" border="0" cellpadding="0" cellspacing="0" align="left" bordercolor="#CCCCCC" style="margin-left:auto;margin-right:auto;">
+						<tr><td class="title">集中器编号:&nbsp;&nbsp;</td>
+						<td><input type="text" name="areaName" value="01010101"/></td>
+						</tr>
+						<tr>
+							<td class="title">采集周期:&nbsp;&nbsp;</td>
+							<td>
+								<select name="period" style="width: 280px; height:30px;" >
+									<option value =0>每月一次</option>
+									<option value =1>半月一次</option>
+									<option value =2>每天一次</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="title">采集时间:&nbsp;&nbsp;</td>
+							<td><input type="text" name="day" style="width:40px;" value="1"/><span class="describe">日</span>
+								<input type="text" name="day" style="width:35px;" value="12"/><span class="describe">时：</span>
+								<input type="text" name="day" style="width:35px;" value="00"/><span class="describe">分：</span>
+								<input type="text" name="day" style="width:35px;" value="00"/><span class="describe">秒</span></td>
+						</tr>
+						<tr>
+							<td class="title">采集指令:&nbsp;&nbsp;</td>
+							<td>
+								<input type="radio" name="start" value="0" checked="checked" style="width:50px;"/><span class="describe">不采集</span>
+								<input type="radio" name="start" value="1" style="width:50px;"/><span class="describe">采集</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="title">校时:&nbsp;&nbsp;</td>
+							<td>
+								<input type="radio" name="time" value="0" checked="checked" style="width:50px;"/><span class="describe">不校准</span>
+								<input type="radio" name="time" value="1" style="width:50px;"/><span class="describe">校准</span>
+							</td>
+						</tr>
+						<tr><td class="title">&nbsp;</td>
+							<td>
+								<input class="buttonsave" type="submit" value="保存"/>&nbsp;&nbsp;
+								<input class="buttonreset" type="reset" value="重置"/>
+								<input type="hidden" name="method" value="add"/>
+							</td>
+						</tr>
+					</table>				
+				</td>
+				</tr>
+			</tbody>
+			<tbody class="tabPageUnSelected">
+				<tr class="tabPage">
+								<td><br/><br/><br/><br/>
+					<table width="890px" border="0" cellpadding="0" cellspacing="0" align="left" bordercolor="#CCCCCC" style="margin-left:auto;margin-right:auto;">
+						<tr><td class="title">采集器编号:&nbsp;&nbsp;</td>
+						<td><input type="text" name="areaName" value="01010101"/></td>
+						</tr>
+						<tr>
+							<td class="title">采集周期:&nbsp;&nbsp;</td>
+							<td>
+								<select name="period" style="width: 280px; height:30px;" >
+									<option value =0>每月一次</option>
+									<option value =1>半月一次</option>
+									<option value =2>每天一次</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="title">采集时间:&nbsp;&nbsp;</td>
+							<td><input type="text" name="day" style="width:40px;" value="1"/><span class="describe">日</span>
+								<input type="text" name="day" style="width:35px;" value="12"/><span class="describe">时：</span>
+								<input type="text" name="day" style="width:35px;" value="00"/><span class="describe">分：</span>
+								<input type="text" name="day" style="width:35px;" value="00"/><span class="describe">秒</span></td>
+						</tr>
+						<tr>
+							<td class="title">采集指令:&nbsp;&nbsp;</td>
+							<td>
+								<input type="radio" name="start" value="0" checked="checked" style="width:50px;"/><span class="describe">不采集</span>
+								<input type="radio" name="start" value="1" style="width:50px;"/><span class="describe">采集</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="title">校时:&nbsp;&nbsp;</td>
+							<td>
+								<input type="radio" name="time" value="0" checked="checked" style="width:50px;"/><span class="describe">不校准</span>
+								<input type="radio" name="time" value="1" style="width:50px;"/><span class="describe">校准</span>
+							</td>
+						</tr>
+						<tr><td class="title">&nbsp;</td>
+							<td>
+								<input class="buttonsave" type="submit" value="保存"/>&nbsp;&nbsp;
+								<input class="buttonreset" type="reset" value="重置"/>
+								<input type="hidden" name="method" value="add"/>
+							</td>
+						</tr>
+					</table>				
+				</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
 </div>
 </body>
 </html>

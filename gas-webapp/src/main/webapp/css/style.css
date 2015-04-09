@@ -1,0 +1,17 @@
+#main{width:900px;height:auto; margin-top:50px;margin-left:auto;margin-right:auto;}
+.tabTitlesContainer{text-align:center;font-size:small;cursor:pointer;width:900px;height:40px;border-width:thin;border-spacing:0;}
+.tabTitleUnSelected{border-bottom:1px solid #cccccc;width:100px;font: 14px/1.5 "Lantinghei SC","Hiragino Sans GB","Microsoft Yahei",STHeiti,Verdana,Arial,sans-serif;color:#666;}
+.tabTitleUnSelected:hover{}
+.tabTitleSelected{
+border-top:3px solid #1677c7;
+border-left:1px solid #cccccc;
+border-right:1px solid #cccccc; 
+width:100px;
+margin:0;
+font: 14px/1.5 "Lantinghei SC","Hiragino Sans GB","Microsoft Yahei",STHeiti,Verdana,Arial,sans-serif;
+color:#666;}
+
+#tabPagesContainer{text-align:left;font-size:small;width:900px;height:400px;border-bottom:1px solid #cccccc;border-left:1px solid #cccccc;border-right:1px solid #cccccc;}
+.tabPageUnSelected{display: none;}
+.tabPageSelected{display:block;}
+.tabPage{height:400px;}
