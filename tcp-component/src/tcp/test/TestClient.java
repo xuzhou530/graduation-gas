@@ -68,7 +68,7 @@ public class TestClient implements TcpClientDataHandler {
 	
 	public void test() {
 		tcpClient = new TcpClientImpl();
-		tcpClient.setServerIp("127.0.0.1");
+		tcpClient.setServerIp("192.168.1.119");
 		tcpClient.setServerPort(9902);
 		tcpClient.setDataHandler(this);
 		tcpClient.connect();

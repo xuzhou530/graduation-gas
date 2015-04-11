@@ -95,7 +95,7 @@ public class TestServer implements TcpServerDataHandler {
 	 */
 	public void write2File(HashMap<String, Long> gasMap){
 		try {
-			File file = new File("d:/filename.txt");
+			File file = new File("d:/recvfile.txt");
 			
 			if (!file.exists()) {
 				file.createNewFile();
@@ -122,7 +122,7 @@ public class TestServer implements TcpServerDataHandler {
 	
 	public static void main(String[] args) {
 		TcpServer server = new TcpServerImpl();
-		server.setServerIp("127.0.0.1");
+		server.setServerIp("192.168.1.119");
 		server.setServerPort(9902);
 		
 		TestServer testServer = new TestServer();

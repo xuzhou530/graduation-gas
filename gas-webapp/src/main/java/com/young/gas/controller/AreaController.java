@@ -6,9 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
+import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 
 
@@ -21,6 +25,11 @@ public class AreaController {
 			@PathVariable("districtId") int districtId,
 			HttpServletRequest request,
 			HttpServletResponse response){
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");
+		if(loginUser == null){
+			return new ModelAndView("redirect:/home");
+		}
 		
 		AddressService addressService = new AddressService();
 		ModelAndView mav = new ModelAndView();

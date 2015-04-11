@@ -69,7 +69,7 @@ $(document).ready(function(){
 			<td class="tablecontent"><font color="red">${item.gasMoney}</font></td>
 			<td class="tablecontent">${item.customer.customerPhone}</td>
  			<td class="tablecontent">${item.collectTime}</td>
- 			<td class="tablecontent">正常</td>	
+ 			<td class="tablecontent">阀门断开</td>	
 			<td class="tablecontent"><input type="button" value="关闭" onclick="if(this.value=='打开') this.value='关闭'; else this.value='打开'"  style="width:40px;font-size:12px;"/></td>
 		  </tr> 
 	  </c:forEach>

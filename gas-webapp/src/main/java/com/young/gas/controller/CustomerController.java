@@ -10,10 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.young.gas.beans.Address;
 import com.young.gas.beans.Customer;
+import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.MoneyService;
@@ -36,6 +39,13 @@ public class CustomerController {
 			@PathVariable("districtId") int districtId,
 			HttpServletRequest request,
 			HttpServletResponse response){
+		
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");
+		if(loginUser == null){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		String district = DISTRICTS[districtId];
 		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);

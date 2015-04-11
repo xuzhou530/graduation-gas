@@ -27,8 +27,8 @@ $(document).ready(function(){
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
 
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>住户管理&nbsp;></span><span>&nbsp;所属小区&nbsp;></p>
+<div id="content" class="rightcontent">
+	<div class="addtitle">住户管理——所有小区</div>	
 	<div id="datalist">
 		<span>
 			<div id="image">

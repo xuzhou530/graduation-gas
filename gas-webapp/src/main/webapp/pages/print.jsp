@@ -8,7 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>燃气远程监控系统小区</title>
 <link href="/gas/css/current.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="/gas/js/menu.js"></script>
 <script type="text/javascript" src="/gas/js/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -27,8 +26,8 @@ $(document).ready(function(){
 <%@include file="menu.jsp" %>
 <%@include file="leftmenu.html" %>
 
-<div id="content" style="float:left;">
-	<p id="status">当前位置：<span>住户管理&nbsp;></span><span>&nbsp;所有住户&nbsp;></p>
+<div id="content" class="rightcontent">
+	<div class="addtitle">报表</div>	
 	<div id="data">
 		<span>
 			<div id="image">
@@ -36,7 +35,8 @@ $(document).ready(function(){
 			</div>
 			报表:&nbsp;利州区
 		</span>
-		<table id="maintable" width=980px border="1" align="center" bordercolor="#dddddd" cellpadding="0" cellspacing="0" onmouseover="changeto()"  onmouseout="changeback()">
+		
+		<table id="maintable" width="980px" border="1" align="center" bordercolor="#dddddd" cellpadding="0" cellspacing="0" >
 		  <tr>
 			<td width="5%"  class="tablehead">序号</td>
 			<td width="10%" class="tablehead">小区名</td>
@@ -77,40 +77,8 @@ $(document).ready(function(){
 			<td class="tablecontent">200户</td>
 			<td class="tablecontent">查看</td>
 		  </tr> 
-		  <tr class="tablerow">
-			<td class="tablecontent">1</td>
-			<td class="tablecontent">和苑小区</td>
-			<td class="tablecontent">利州区和苑东路111号</td>
-			<td class="tablecontent">20栋</td>
-			<td class="tablecontent">200户</td>
-			<td class="tablecontent">查看</td>
-		  </tr> 
-		  <tr class="tablerow">
-			<td class="tablecontent">2</td>
-			<td class="tablecontent">和苑小区</td>
-			<td class="tablecontent">利州区和苑东路111号</td>
-			<td class="tablecontent">20栋</td>
-			<td class="tablecontent">200户</td>
-			<td class="tablecontent">查看</td>
-		  </tr> 
-		  <tr class="tablerow">
-			<td class="tablecontent">3</td>
-			<td class="tablecontent">和苑小区</td>
-			<td class="tablecontent">利州区和苑东路111号</td>
-			<td class="tablecontent">20栋</td>
-			<td class="tablecontent">200户</td>
-			<td class="tablecontent">查看</td>
-		  </tr> 
-		  <tr class="tablerow">
-			<td class="tablecontent">4</td>
-			<td class="tablecontent">和苑小区</td>
-			<td class="tablecontent">利州区和苑东路111号</td>
-			<td class="tablecontent">20栋</td>
-			<td class="tablecontent">200户</td>
-			<td class="tablecontent">查看</td>
-		  </tr> 
 		 </table>	
-		<br>
+		<br/>
 	</div>
 	<p>&nbsp;</p>
 	<p>&nbsp;</p>
