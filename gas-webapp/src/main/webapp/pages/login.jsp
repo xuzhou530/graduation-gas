@@ -1,43 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <head>
+<title>登陆页面</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>广元市燃气远程监控系统登录界面</title>
-<link rel="stylesheet" type="text/css" href="/gas/css/login.css"/>
-<script type="text/javascript" src="/gas/js/login.js"></script>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link href="/gas/css/loging.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div id="bgk">
-<div id="header">
-	<div id="headerleft">广元市燃气远程监控系统&nbsp;&nbsp;&nbsp;</div>
-	<div id="headerright"></div>
-</div>
-<div id="content">
-	<div>
-		<span>欢迎进入系统</span>
-		<form id="login" method="post" action="/gas/login" onsubmit="checkForm()">
-			<table>
-				<tr>
-					<td class="label">用户名：</td>
-					<td><input type="text" name="name"/></td>
-				</tr>
-				<tr>
-					<td class="label">密码：</td>
-					<td><input type="password" name="password"/></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>
-						<input id="submit" type="submit" value="登录"/>
-						<input id="reset" type="reset" value="重置"/>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-</div>
+<div id="header"></div>
+<div id="main">
+
+	<form id="login" method="post" action="/gas/login" onsubmit="checkForm()">
+		<div class="rows">
+			<span class="input-title-user"></span>
+			<input class="inp" tabindex="1" type="text" value="" name="name" placeholder="手机、邮箱、用户名"/>
+		</div>
+		<div class="rows">
+			<span class="input-title-password"></span>
+			<input class="inp" tabindex="2" type="password" value="" name="password" placeholder="请输入您的密码"/>
+		</div>
+		<div class="remember">
+			<label class="checkbox">
+				<input type="checkbox" name="rememberMe"/>
+				<span class="week-login">一周内自动登录</span>
+            </label>
+            <a class="forget-link" href="/forgetInit">忘记密码?</a>
+		</div>
+		<div>
+			<button type="submit" class="submit-btn">立即登录</button>
+		</div>
+		<div>
+			<a href="/gas/register" class="reg-btn">注册账号</a>
+		</div>
+    </form>
 </div>
 </body>
 </html>

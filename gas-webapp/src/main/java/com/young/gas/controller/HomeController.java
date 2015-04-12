@@ -58,6 +58,13 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping ("register") 
+	public ModelAndView register(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("register");
+		return mav;
+	}
+			
 	@RequestMapping ("index") 
 	public ModelAndView index(){
 		ModelAndView mav = new ModelAndView();
