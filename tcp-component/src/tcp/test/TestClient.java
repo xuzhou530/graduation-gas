@@ -89,29 +89,47 @@ public class TestClient implements TcpClientDataHandler {
 		}
 		
 		Random rd = new Random();
-		int iCount = 0;//发送了多少户人家
 		int iSend = 0;
-		send[iSend++] = (byte)127;//开始标志位
-		send[iSend++] = 1;//1号区县
-		send[iSend++] = 1;//1号小区
-		for(int building = 1; building <= buildingcount; building++){
-			for(int layer = 1; layer <= layercount; layer++ ){
-				for(int room = 1; room <= roomcount;room++){
-					send[iSend++] = (byte)building;//栋数
-					send[iSend++] = (byte)layer;//层数
-					send[iSend++] = (byte)room;//房号
-					gas[building - 1][layer - 1][room - 1] += rd.nextInt(100);
-					send[iSend++] = (byte)((gas[building - 1][layer - 1][room - 1] >> 16) & 0xff); //高字节
-					send[iSend++] = (byte)((gas[building - 1][layer - 1][room - 1] >> 8) & 0xff); //中字节
-					send[iSend++] = (byte)(gas[building -1 ][layer -1 ][room - 1] & 0xff); //低字节
-					iCount++;
-				}
-			}
-		}
-		iCount *= 6;
-		send[iSend++] = (byte)((iCount >> 8) & 0xff); //高字节
-		send[iSend] = (byte)(iCount & 0xff); //低字节
 		
+		send[iSend++] = (byte)239;//开始标志位
+		send[iSend++] = (byte)1;//帧序号
+		send[iSend++] = (byte)1;//地址1
+		send[iSend++] = (byte)2;//地址2
+		send[iSend++] = (byte)3;//地址3
+		send[iSend++] = (byte)4;//地址4
+		send[iSend++] = (byte)5;//地址5
+		send[iSend++] = (byte)1;//控制码01
+		send[iSend++] = (byte)1;//M-Bus数量
+		send[iSend++] = (byte)19;//长度
+		
+		send[iSend++] = (byte)254;//前导字节
+		send[iSend++] = (byte)254;//前导字节
+		send[iSend++] = (byte)104;//帧其实
+		send[iSend++] = (byte)48;//30H 燃气表	
+		send[iSend++] = (byte)1;//地址1
+		send[iSend++] = (byte)2;//地址2
+		send[iSend++] = (byte)3;//地址3
+		send[iSend++] = (byte)4;//地址4
+		send[iSend++] = (byte)5;//地址5
+		send[iSend++] = (byte)6;//地址4
+		send[iSend++] = (byte)10;//地址5	
+		send[iSend++] = (byte)04;//控制码：写数据
+		send[iSend++] = (byte)04;//长度
+		send[iSend++] = (byte)160;//DI	
+		send[iSend++] = (byte)23;//DI
+		send[iSend++] = (byte)1;//1	
+		send[iSend++] = (byte)1;//关闭阀门
+		send[iSend++] = (byte)255;//校验
+		send[iSend++] = (byte)22;//结束符	
+		
+		send[iSend++] = (byte)15;//时间
+		send[iSend++] = (byte)4;//时间
+		send[iSend++] = (byte)14;//时间
+		send[iSend++] = (byte)10;//时间	
+		send[iSend++] = (byte)32;//时间
+		send[iSend++] = (byte)0;//时间	
+		send[iSend++] = (byte)255;//校验
+		send[iSend] = (byte)38;//结束
 		//发送
 		tcpClient.send(send, 0, iSend+1);
 		

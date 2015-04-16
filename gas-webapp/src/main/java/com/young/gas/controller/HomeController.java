@@ -57,7 +57,7 @@ public class HomeController {
 		mav.setViewName("login");
 		return mav;
 	}
-	
+	//静态页面的跳转
 	@RequestMapping ("register") 
 	public ModelAndView register(){
 		ModelAndView mav = new ModelAndView();
@@ -70,5 +70,28 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
 		return mav;
+	}
+	
+	@RequestMapping ("setting") 
+	public ModelAndView setting(){
+		return new ModelAndView("setting");
+	}
+	@RequestMapping ("payaly") 
+	public ModelAndView payaly(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("payaly");
+		return mav;
+	}
+			
+	@RequestMapping ("usealy") 
+	public ModelAndView usealy(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usealy");
+		return mav;
+	}
+	
+	@RequestMapping ("status") 
+	public ModelAndView status(){
+		return new ModelAndView("status");
 	}
 }

@@ -13,14 +13,14 @@
 	 
 	<mvc:default-servlet-handler/>
 	
-	
+	<!-- 定义跳转的文件的前后缀 
 	<bean id="viewResolver"  
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="prefix" value="/pages/" />   
         <property name="suffix" value=".jsp" />   
     </bean> 
+    -->
     
-    <!-- 定义跳转的文件的前后缀 
    	<bean id="tilesviewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
@@ -29,5 +29,5 @@
 			</list>
 		</property>
 	</bean>
-	-->
+	
 </beans>

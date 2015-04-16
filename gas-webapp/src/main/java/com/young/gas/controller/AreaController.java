@@ -49,4 +49,9 @@ public class AreaController {
 		mav.addObject("addresses", addressService.searchAddresssByDistrict(DISTRICTS[districtId]));
 		return mav;
 	}
+	
+	@RequestMapping ("addArea") 
+	public ModelAndView addArea(){
+		return new ModelAndView("addArea");
+	}	
 }

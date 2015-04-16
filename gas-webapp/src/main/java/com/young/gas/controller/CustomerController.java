@@ -25,7 +25,7 @@ import com.young.gas.tool.EncodingTool;
 @Controller
 public class CustomerController {
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
-	private static int PERPAGE = 20;
+	private static int PERPAGE = 15;
 	
 	/**
 	 * 通过导航栏下拉菜单查看，唯一的参数是区县名
@@ -150,4 +150,9 @@ public class CustomerController {
 		mav.setViewName("customers");
 		return mav;
 	}
+	
+	@RequestMapping ("addCustomer") 
+	public ModelAndView addcustomer(){
+		return new ModelAndView("addCustomer");
+	}	
 }

@@ -141,9 +141,7 @@ text-indent:4px;
 #status span{
 color:#0066CC;
 }
-#content{
-margin-left:220px;
-}
+
 #data{
 height:auto;
 width:1000px;
@@ -156,6 +154,7 @@ height:auto;
 width:1000px;
 border-radius:0 0 5px 5px;
 border:1px solid #dedede;
+margin-left:40px;
 }
 
 #datalist>span{
@@ -208,19 +207,23 @@ padding-top:4px;
 padding-left:0;
 }
 #maintable{
-margin-top:10px;
-border-collapse:collapse;
+margin:10px auto 0 auto;
 margin-bottom:10px;
+width:980px;
+border:1px solid #cccccc;
+align:center;
+bordercolor:#dddddd;
+border-collapse:collapse;
 }
-
+#maintable td{border:1px solid #cccccc;}
 #maintable tr.t1 td {background-color:#fff;}
 #maintable tr.t2 td {background-color:#eee;}
 #maintable tr.t3 td {background-color:#ccc;}
 
 #map{
 width:100%;
-margin-left: 200px;
 height:747px;
+margin-left:-10px;
 }
 
 /****************************/
@@ -299,7 +302,17 @@ font-size:13px;
 font-family:"����";
 color:#000000;
 }
-
+.movetable{
+width:980px;
+align:center;
+border:0; 
+cellspacing:0; 
+cellpadding:0;
+}
+.movetable td{
+border:0;
+height:20px;
+}
 /*****���ס��*******/
 .title{
 width:260px;
@@ -377,12 +390,6 @@ position:absolute;
 left:0 ;
 z-index:1
 }
-.rightcontent {
-width:100%;
-position:absolute;
-left:0
-}
- 
 .div1{text-align:center;width:200px;padding-top:10px;}
 .div2{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;}
 .div0{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;}

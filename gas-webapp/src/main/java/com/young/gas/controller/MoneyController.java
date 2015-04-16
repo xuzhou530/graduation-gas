@@ -151,4 +151,9 @@ public class MoneyController {
 		mav.setViewName("paymentDetails");
 		return mav;
 	}
+	
+	@RequestMapping ("addPay") 
+	public ModelAndView addPay(){
+		return new ModelAndView("addPay");
+	}
 }
