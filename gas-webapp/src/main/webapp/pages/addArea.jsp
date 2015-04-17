@@ -189,6 +189,3 @@ background-color:#669900;
 </div>
 </body>
 </html>
-<script type="text/javascript">
-setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString();",5);
-</script>

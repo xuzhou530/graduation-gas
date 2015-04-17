@@ -49,6 +49,9 @@
     <definition name="paymentDetails" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/paymentDetails.jsp" /> 
     </definition>
+    <definition name="meters" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/meters.jsp" /> 
+    </definition>
  	<definition name="login" template="/tiles/login.jsp">  
 	</definition>    
     

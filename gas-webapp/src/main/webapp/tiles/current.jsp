@@ -52,7 +52,7 @@
 			<td class="tablecontent">${item.customer.money}.00</td>		
 			<td class="tablecontent">${item.customer.customerPhone}</td>
 			<td class="tablecontent">${item.collectTime}</td>
-			<td class="tablecontent"><a href="/gas/viewdetailgas/${item.customer.customerId}">查看</a></td>
+			<td class="tablecontent"><a href="/gas/viewdetailgas/${item.customer.customerId}"><span style="color:#3A5FCD;">查看</span></a></td>
 		  </tr> 
 	 </c:forEach>
 	 </table>

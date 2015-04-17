@@ -1,0 +1,78 @@
+body{font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;}
+.house{
+width:250px;
+border:1px solid #4a4a4a;
+box-shadow:0 0 30px #333; 
+}
+.meter{
+float:left;
+width:110px;
+height:150px;
+background:url("/gas/images/meter.jpg");
+}
+.info{
+float:left;
+width:140px;
+height:150px;
+}
+.control{
+float:left;
+width:250px;
+height:80px;
+border-top:1px solid #CCCCCC;
+}
+.info ul{
+list-style:none;
+margin:20px 0 0 10px;
+padding:0;
+color: #393939;
+font-size: 14px;
+}
+ 
+.info ul li{margin:0 0 9px 0;}
+.green-dot{margin-left:10px;width:19px; height:19px;border-radius:10px;background-color:green;float:left;}
+.red-dot{margin-left:10px;width:19px; height:19px;border-radius:10px;background-color:red;float:left;}
+a{text-decoration:none;}
+.btn{  
+width: 80px;
+height: 35px;
+display: inline-block;
+line-height: 38px;
+font-size: 16px;
+vertical-align: middle;
+text-align: center;
+border: 1px solid #ccc;
+border-radius: 3px;
+}
+.open-btn{background-color: #428ee2;}
+.close-btn{background-color: green;}
+.buttons{
+margin:20px 0 0 30px ;}
+.buttons a{
+color: #ffffff;
+}
+
+ul.header,ul.condition {list-style:none;margin:0px;}
+ul.header,ul.condition li{float:left;color:#393939;margin-right:10px;}
+
+input.text-box{
+width:75px; 
+height:25px;
+border-right:0;
+padding:0;
+display: table-cell;
+border-radius: 0!important;
+border: 1px solid #d5d5d5;
+box-shadow: none!important;
+}
+input.query-btn{
+  box-shadow: none!important;
+  width:55px; 
+  height:26px;
+  border-left:-2px; 
+  margin:-1;
+  background-color: #428bca!important;
+  border-color: #428bca;
+  display: inline-block;
+  color: #FFF!important;
+} 

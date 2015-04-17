@@ -42,7 +42,7 @@ public class HomeController {
 		if(user != null && password.equals(user.getUserPwd())){ 
 			((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
 				.getRequest().getSession().setAttribute("user", user);  
-			mav.setViewName("index");
+			mav.setViewName("meters");
 			return mav;
 		}
 		else{

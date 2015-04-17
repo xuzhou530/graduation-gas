@@ -4,6 +4,7 @@ margin:0;
 height:100%;
 width:100%;
 overflow-x:hidden;
+font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 }
 .wp{
 width:1100px;
@@ -217,7 +218,6 @@ border-collapse:collapse;
 
 color: #393939;
 font-size: 14px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 }
 #maintable tr{height:35px;}
 #maintable td{border:1px solid #cccccc;}
@@ -246,13 +246,11 @@ font-size: 12;
 }
 a:link,a:visited {
 font-size: 14px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 color: #06482a;
 text-decoration: none;
 }
 a:hover,a:active {
 font-size: 14px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 color: #06482a;
 text-decoration: none;
 }
@@ -264,7 +262,7 @@ font-weight:bold;
 height:26px;
 }
 td.tablecontent{
-font-size: 13px;
+font-size: 14px;
 text-align:center;
 height:28px;
 background-color:#ffffff;
@@ -299,14 +297,7 @@ background-color:#ffffff;
 color:#333333;
 }
 
-.tablerow{
-height:25px;
-}
-.tablerow td{
-font-size:13px;
-font-family:"����";
-color:#000000;
-}
+
 .movetable{
 width:980px;
 align:center;
@@ -323,7 +314,6 @@ height:20px;
 width:260px;
 height:60px;
 text-indent:5px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 text-align:right;
 color: #393939;
 font-weight: normal;
@@ -331,7 +321,6 @@ font-size: 16px;
 }
 .selectfont{
 font-size:18px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 text-align:left;
 font-weight:700;
 color:#ff0000;
@@ -356,26 +345,22 @@ input{
 width:275px;
 height:20px;
 font-size:16px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 color: #393939;
 }
 select{
 width:275px;
 height:20px;
 font-size:16px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 color: #393939;
 }
 .describe{
 width:475px;
 font-size:15px;
-font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 color: #393939;	
 }
 
 /***********/
 #footer{
-font-family:"Times New Roman", Times, serif;
 color:#666666;
 font-size:14px;
 margin-bottom:40px;
@@ -396,8 +381,8 @@ left:0 ;
 z-index:1
 }
 .div1{text-align:center;width:200px;padding-top:10px;}
-.div2{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;}
-.div0{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;}
+.div2{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;}
+.div0{height:40px;line-height:40px;cursor:pointer;font-size:14px;position:relative;border-bottom:#ccc 1px dotted;}
 .home {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/home.png);}
 .warning {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/1.png);}
 .current {position:absolute;height:20px;width:20px;left:40px;top:10px;background:url(../images/2.png);}
@@ -418,13 +403,18 @@ z-index:1
 
 
 .addtitle{
-  line-height: 34px;
-  margin-bottom: 16px;
-  margin-top: 12px;
-  margin-right:20px;
-  padding-bottom: 2px;
+  margin: 12px 20px 16px 0;
   border-bottom: 1px solid #CCC;
-  font-family: 微软雅黑, sans-serif, Arial, 宋体, sans-serif;
+}
+.status-title{
+  line-height: 34px;
+  padding-bottom: 2px;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: bold;	
+  float:left
+}
+.words{
+font-size: 18px;	
+color: #333333;
+text-align:center;
 }

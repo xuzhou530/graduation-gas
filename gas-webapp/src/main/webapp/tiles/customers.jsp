@@ -8,6 +8,67 @@
 	String[] districts={"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	int userGrade=user.getUserGrade();
 %>
+<!-- 弹窗的css与js  -->
+<style>
+#layout 
+{ 
+background:#000; 
+position:absolute; 
+top:0; 
+left:0; 
+width:100%;
+opacity:0.5; 
+filter:alpha(opacity=50); 
+cursor:pointer; 
+display:none; 
+z-index:555; 
+}
+#box { 
+width:350px; 
+height:200px; 
+position:absolute;
+top:50%; 
+left:50%; 
+margin:-100px auto 0 -150px; 
+background:#fafafa; 
+z-index:999; 
+border:2px solid #eee; 
+border-radius:5px; 
+box-shadow:0 0 40px #333; 
+display:none; 
+padding-top:10px;
+}
+.btn{
+width:80px;
+height:30px;
+font-family: "Arial","Tahoma","微软雅黑","雅黑";
+border: 0px;
+border-radius:3px;
+vertical-align: middle;
+margin: 8px;
+line-height: 18px;
+font-size: 18px;
+backgroud:blue;
+}
+.del-btn{
+cursor:pointer;
+}
+</style>
+<script>
+window.onload = function() {
+    var layout = document.getElementById("layout");    
+    var box = document.getElementById("box");
+    var closedbuttons = document.getElementsByClassName("closed-btn");
+    for (var i=0; i<closedbuttons.length; i++) {
+    	closedbuttons[i].onclick = function() { 
+            layout.style.display = "none"; 
+            box.style.display = "none"; 
+            return false;
+        }
+    }      
+}
+	
+</script>
 
 <div>
 	<div class="addtitle">住户管理——所有住户</div>	
@@ -30,15 +91,15 @@
 				</form>
 			</div>
 		</span>
-		<table id="maintable" width=980px border="1" align="center" bordercolor="#dddddd" cellpadding="0" cellspacing="0">
+		<table id="maintable">
 		  <tr>
 			<td width="3%"  class="tablehead">序号</td>
 			<td width="7%" class="tablehead">用户名</td>
 			<td width="10%" class="tablehead">联系方式</td>
 			<td width="7%" class="tablehead">房号</td>
 			<td width="7%" class="tablehead">账户余额(元)</td>
-			<td width="6%" class="tablehead">燃气表状态</td>					
-			<td width="7%" class="tablehead">燃气表控制</td>
+			<td width="6%" class="tablehead">状态</td>					
+			<td width="7%" class="tablehead">操作</td>
 		  </tr>
 		  <c:forEach items="${customers}" var="item" varStatus="status"> 
 		  <tr class="tablerow">
@@ -48,11 +109,20 @@
 			<td class="tablecontent">${item.addressLayer}0${item.addressRoom}室</td>
 			<td class="tablecontent">${item.money}</td>
 			<td class="tablecontent">正常</td>						
-			<td class="tablecontent"><input type="button" value="关闭" onclick="if(this.value=='打开') this.value='关闭'; else this.value='打开'"  style="width:40px;font-size:12px;"/></td>
+			<td class="tablecontent"><a class="del-btn" onclick="return clickDel('${item.customerId}')">
+				<img src="/gas/images/remove.png">&nbsp;&nbsp;删除</a></td>
 		  </tr> 
 		  </c:forEach>		  	  
 		 </table>	
 		 
+		<div id="box">
+	    	<p class="words">是否要删除?</p>
+	    	<div style="text-align:center;margin-top:50px;">
+		    	<input type="button" id="ok-btn" class="btn" value="确定" />
+		    	<input type="button" class="closed-btn btn" value="取消"/>
+	    	</div> 
+    	</div>
+    	
 		<table class="movetable">
 		  <tr>
 			<td style="width:25%;" >
@@ -128,61 +198,20 @@
 		</table>
 	</div>
 </div>
+</div>
 
-<script type="text/javascript">
-setInterval("document.getElementById('time').innerHTML=new Date().toLocaleString();",5);
-
-var newSelect=document.getElementById("areaName"); 
-newSelect.options.length=0; 
-var op=document.createElement("option");
-op.value=0;
-op.innerHTML="-请选择-";
-newSelect.appendChild(op);
-//得到完成请求后返回的字串符
-var str = "${areaStr}";
-//根据返回的字符串为新创建的select节点添加option节点
-var arr1=str.split(",");
-//alert(arr1);
-for(var i=0;i<arr1.length;i++){
-    var child=document.createElement("option");
-    child.innerHTML=arr1[i];
-    child.value=arr1[i];
-    newSelect.appendChild(child);
-}
-
-function checkform(){
-	var areaName=document.forms["searchform"]["areaName"];
-	var buildingName=document.forms["searchform"]["buildingName"];
-	if(areaName.value=="0")
-	{
-		alert("请选择小区");
-		return false;
-	}
-	if(buildingName.value=="")
-	{
-		alert("请输入楼号");
-		return false;
-	}
-	return true;	
-}
-var grade = "<%=userGrade%>";
-if(grade != 0){
-	var cls1 = 'd' + grade;
-	var cls2 = 'dd' + grade;
-	document.getElementById(cls1).onclick="return true";
-	document.getElementById(cls2).onclick="return true";	
-}
-else{
-	for(var i = 1; i <= 7; i++){
-		var cls1 = 'd' + i;
-		var cls2 = 'dd' + i;
-		document.getElementById(cls1).onclick="return true";
-		document.getElementById(cls2).onclick="return true";
-	}
-}
-
-function forbid(){
-	alert("您无操作权限");
-	return false;
+<script>
+function clickDel(id){
+    layout.style.display = "block"; 
+    box.style.display = "block"; 
+    
+    var mybutton = document.getElementById("ok-btn");
+    mybutton.onclick = function(){
+    	window.location.href="/gas/deleteAddress/"+id;
+        layout.style.display = "none"; 
+        box.style.display = "none"; 
+        return true;
+    }
+    return false;
 }
 </script>
