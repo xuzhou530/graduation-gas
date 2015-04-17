@@ -133,8 +133,8 @@ public class AddressDao {
 		pst.setString(1, district);
 		pst.setString(2, area);
 		ResultSet rs=pst.executeQuery();	
-		rs.next();
-		return rs.getInt(1);
+		
+		return rs.next()?rs.getInt(1):-1;
 	}
 
 	/**

@@ -10,7 +10,7 @@
 			</div>
 			小区列表&nbsp;
 		</span>
-		<table id="maintable" width="980px" border="1" align="center" bordercolor="#dddddd" cellpadding="0" cellspacing="0">
+		<table id="maintable">
 		<tr>
 			<td width="3%"  class="tablehead">序号</td>
 			<td width="8%" class="tablehead">区县名</td>
@@ -28,7 +28,7 @@
 			<td class="tablecontent">${item.addressLocation}</td>
 			<td class="tablecontent">${item.addressBuildings}栋</td>
 			<td class="tablecontent">${item.addressCustomers}户</td>
-			<td class="tablecontent">查看</td>
+			<td class="tablecontent"><img src="/gas/images/remove.png">&nbsp;<a href="/gas/deleteAddress/${item.addressId}">删除</a></td>
 		  </tr>
 		 </c:forEach>
 		 </table>	

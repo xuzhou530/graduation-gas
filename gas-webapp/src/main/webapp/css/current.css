@@ -214,11 +214,16 @@ border:1px solid #cccccc;
 align:center;
 bordercolor:#dddddd;
 border-collapse:collapse;
+
+color: #393939;
+font-size: 14px;
+font-family: "\5FAE\8F6F\96C5\9ED1",sans-serif,Arial,"\5b8b\4f53",sans-serif;
 }
+#maintable tr{height:35px;}
 #maintable td{border:1px solid #cccccc;}
 #maintable tr.t1 td {background-color:#fff;}
-#maintable tr.t2 td {background-color:#eee;}
-#maintable tr.t3 td {background-color:#ccc;}
+#maintable tr.t2 td {background-color:#f9f9f9;}
+#maintable tr.t3 td {background-color:#eaeaea;}
 
 #map{
 width:100%;
@@ -416,6 +421,7 @@ z-index:1
   line-height: 34px;
   margin-bottom: 16px;
   margin-top: 12px;
+  margin-right:20px;
   padding-bottom: 2px;
   border-bottom: 1px solid #CCC;
   font-family: 微软雅黑, sans-serif, Arial, 宋体, sans-serif;
