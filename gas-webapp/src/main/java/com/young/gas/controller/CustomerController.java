@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,22 @@ import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class CustomerController {
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	CustomerService customerService;
+	@Autowired
+	MoneyService moneyService;
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;
 	
+	//判断用户是否已登录
+	private boolean isLogged(){
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");	
+		return loginUser == null?false:true;
+	}
+		
 	/**
 	 * 通过导航栏下拉菜单查看，唯一的参数是区县名
 	 * @param districtId
@@ -34,21 +48,17 @@ public class CustomerController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "viewcustomers/{districtId}") 
+	@RequestMapping("viewcustomers/{districtId}") 
 	public ModelAndView viewCustomers(
 			@PathVariable("districtId") int districtId,
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");
-		if(loginUser == null){
+		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
-		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
-		List<Address> addresses = addressService.searchAddresssByDistrict(district);
+		List<Address> addresses = addressService.searchAddresssByDistrict(DISTRICTS[districtId]);
 		List<String> areas = new ArrayList<String>();//小区集合
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
@@ -56,7 +66,7 @@ public class CustomerController {
 			areaStr += address.getAddressArea()+",";
 		}
 		if(areas.size() > 0){
-			return viewCustomerData(district, areas.get(0), 1, 0, areaStr);
+			return viewCustomerData(DISTRICTS[districtId], areas.get(0), 1, 0, areaStr);
 		}
 		else{
 			return null;
@@ -70,7 +80,7 @@ public class CustomerController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "viewcustomers/{districtId}/{areaName}/{building}/{page}") 
+	@RequestMapping ("viewcustomers/{districtId}/{areaName}/{building}/{page}") 
 	public ModelAndView viewCustomersByBuilding(
 			@PathVariable("districtId") int districtId,
 			@PathVariable("areaName") String areaName,
@@ -78,15 +88,19 @@ public class CustomerController {
 			@PathVariable("page") int page,
 			HttpServletRequest request,
 			HttpServletResponse response){
-		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
-		List<Address> addresses = addressService.searchAddresssByDistrict(district);
+		
+		
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
+		List<Address> addresses = addressService.searchAddresssByDistrict(DISTRICTS[districtId]);
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
 			areaStr += address.getAddressArea()+",";
 		}
 		areaName = EncodingTool.encodeStr(areaName);
-		return viewCustomerData(district, areaName, building, page, areaStr);
+		return viewCustomerData(DISTRICTS[districtId], areaName, building, page, areaStr);
 	}	
 	
 	/**
@@ -98,7 +112,7 @@ public class CustomerController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping ( "searchcustomers/{districtId}") 
+	@RequestMapping ("searchcustomers/{districtId}") 
 	public ModelAndView viewCustomersWithSearch(
 			@PathVariable("districtId") int districtId,
 			@RequestParam("areaName") String areaName,
@@ -106,14 +120,16 @@ public class CustomerController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
-		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
-		List<Address> addresses = addressService.searchAddresssByDistrict(district);
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
+		List<Address> addresses = addressService.searchAddresssByDistrict(DISTRICTS[districtId]);
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
 			areaStr += address.getAddressArea()+",";
 		}
-		return viewCustomerData(district, areaName, Integer.parseInt(buildingName), 0, areaStr);
+		return viewCustomerData(DISTRICTS[districtId], areaName, Integer.parseInt(buildingName), 0, areaStr);
 	}	
 	
 	/**
@@ -124,11 +140,12 @@ public class CustomerController {
 	 * @param page
 	 * @return
 	 */
-	public ModelAndView viewCustomerData(String district, String areaName, int building, int page, String areaStr){
+	public ModelAndView viewCustomerData(
+			String district, String areaName, int building, int page, String areaStr){
 	
-		//获取燃气表数据
-		CustomerService customerService = new CustomerService();
-		MoneyService moneyService = new MoneyService();
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
 		
 		//某区某小区某栋楼的住户数
 		int countCustomers = customerService.getCountWithSearchBuilding(district, areaName, building);
@@ -151,8 +168,12 @@ public class CustomerController {
 		return mav;
 	}
 	
-	@RequestMapping ("addCustomer") 
+	@RequestMapping("addCustomer") 
 	public ModelAndView addcustomer(){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		return new ModelAndView("addCustomer");
 	}	
 }

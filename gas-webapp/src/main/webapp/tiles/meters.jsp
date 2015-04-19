@@ -1,7 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <link href="/gas/css/meters.css" type="text/css" rel="stylesheet" />
+<link href="/gas/css/pages.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript">
+window.onload=function(){
+	var pages = 10;
+	var current = 5;
+	var currentNode;
+	
+	var left = document.createElement('a');
+	left.text = "<上一页";
+	document.getElementById("digg").appendChild(left);
+	
+	for(var i = 1; i <= pages; i++){
+		var child = document.createElement('a');
+		child.text = i;
+		child.href = "#";
+		child.onclick = function(){
+			currentNode.className = "";
+		}
+		if(i==current){
+			child.className = "currentclick";
+			currentNode = child;
+		}
+		document.getElementById("digg").appendChild(child);	
+	}
+	
+	var right = document.createElement('a');
+	right.text = "下一页>";
+	document.getElementById("digg").appendChild(right);
+}
 
+</script>
 <div>
 	<div class="addtitle">
 		<div class="status-title">状态监测</div>
@@ -17,7 +47,7 @@
 		</div>
 		<div style="clear:both;"></div>
 	</div>	
-
+	
 	<table style="width:1025px; height:490px;margin:0 auto 0 auto;">
 	<tr>
 		<td>
@@ -184,4 +214,5 @@
 		</td>
 	</tr>
 	</table>
+	<div id="digg"></div>
 </div>

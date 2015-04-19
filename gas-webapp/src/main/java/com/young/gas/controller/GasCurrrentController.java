@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,24 @@ import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class GasCurrrentController {
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	CustomerService customerService;
+	@Autowired
+	MoneyService moneyService;
+	@Autowired
+	GasService gasService;
+	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;
+
+	//判断用户是否已登录
+	private boolean isLogged(){
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");	
+		return loginUser == null?false:true;
+	}
 	
 	/**
 	 * 通过导航栏下拉菜单查看，唯一的参数是区县名
@@ -42,14 +59,11 @@ public class GasCurrrentController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");
-		if(loginUser == null){
+		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
 		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
 		List<String> areas = new ArrayList<String>();//小区集合
 	 	String areaStr="";//用于生成动态下拉菜单
@@ -60,15 +74,13 @@ public class GasCurrrentController {
 	
 		//获取燃气表数据
 		if(areas.size() > 0){
-			CustomerService customerService = new CustomerService();
-			MoneyService moneyService = new MoneyService();
 			//第一页住户
 			List<Customer> customers = customerService.searchCustomersByBuilding(district, areas.get(0), 1, 0, PERPAGE);
 			//某区某小区某栋楼的住户数
 			int countCustomers = customerService.getCountWithSearchBuilding(district, areas.get(0), 1);
 			//某区某小区某栋楼的燃气值
 			List<Gas> gases = new ArrayList<Gas>();
-			GasService gasService = new GasService();
+			
 			for(Customer customer : customers){
 				customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
 				Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());
@@ -108,18 +120,12 @@ public class GasCurrrentController {
 			@PathVariable("page") int page,
 			HttpServletRequest request,
 			HttpServletResponse response){
-		
-		areaName = EncodingTool.encodeStr(areaName);
-		
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");
-		if(loginUser == null){
+		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
-		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
-		List<Address> addresses = addressService.searchAddresssByDistrict(district);
+		areaName = EncodingTool.encodeStr(areaName);
+		List<Address> addresses = addressService.searchAddresssByDistrict(DISTRICTS[districtId]);
 		List<String> areas = new ArrayList<String>();//小区集合
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
@@ -127,17 +133,12 @@ public class GasCurrrentController {
 			areaStr += address.getAddressArea()+",";
 		}
 	
-		//获取燃气表数据
-
-		CustomerService customerService = new CustomerService();
 		//查询页面的住户
-		List<Customer> customers = customerService.searchCustomersByBuilding(district, areaName, building, page, PERPAGE);
+		List<Customer> customers = customerService.searchCustomersByBuilding(DISTRICTS[districtId], areaName, building, page, PERPAGE);
 		//某区某小区某栋楼的住户数
-		int countCustomers = customerService.getCountWithSearchBuilding(district, areaName, building);
+		int countCustomers = customerService.getCountWithSearchBuilding(DISTRICTS[districtId], areaName, building);
 		//某区某小区某栋楼的燃气值
 		List<Gas> gases = new ArrayList<Gas>();
-		GasService gasService = new GasService();
-		MoneyService moneyService = new MoneyService();
 		for(Customer customer : customers){
 			customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
 			Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());
@@ -148,7 +149,7 @@ public class GasCurrrentController {
 		}
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("currentDistrict", district);
+		mav.addObject("currentDistrict", DISTRICTS[districtId]);
 		mav.addObject("currentArea", areas.get(0));
 		mav.addObject("currentBuilding", building);
 		mav.addObject("areaStr", areaStr);
@@ -173,18 +174,12 @@ public class GasCurrrentController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");
-		if(loginUser == null){
+		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
-		CustomerService customerService = new CustomerService();
-		MoneyService moneyService = new MoneyService();
 		Customer customer = customerService.searchCustomerById(customerId);
 		customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
-		
-		GasService gasService = new GasService();
 		List<Gas> gases = gasService.searchAllGasByCustomerId(customerId);	
 		
 		ModelAndView mav=new ModelAndView();
@@ -214,22 +209,17 @@ public class GasCurrrentController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");
-		if(loginUser == null){
+		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
 		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
 			areaStr += address.getAddressArea()+",";
 		}
 	
-		CustomerService customerService = new CustomerService();
-		MoneyService moneyService = new MoneyService();
 		//第一页住户
 		List<Customer> customers = customerService.searchCustomersByBuilding(district, areaName, Integer.parseInt(buildingName), 0, PERPAGE);
 		//某区某小区某栋楼的住户数

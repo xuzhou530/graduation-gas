@@ -1,5 +1,6 @@
 package com.young.gas.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,9 @@ import com.young.gas.service.UserService;
 
 @Controller
 public class HomeController {
+	@Autowired
+	UserService userService;
+	
 	
 	/**
 	 * 隐藏主页面
@@ -36,7 +40,6 @@ public class HomeController {
 			@RequestParam("password") String password
 			){
 		ModelAndView mav = new ModelAndView();
-		UserService userService = new UserService();
 		User user = userService.listUser(name);	
 		
 		if(user != null && password.equals(user.getUserPwd())){ 

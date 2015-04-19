@@ -3,10 +3,14 @@ package com.young.gas.service;
 import java.sql.Connection;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.young.gas.beans.Money;
 import com.young.gas.dao.MoneyDao;
+
 import young.database.ConnectionPool;
 
+@Service("moneyService")
 public class MoneyService {
 	private MoneyDao moneyDao = new MoneyDao();	
 

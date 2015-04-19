@@ -3,6 +3,7 @@ package com.young.gas.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,11 @@ import com.young.gas.beans.Address;
 import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 
-
 @Controller
 public class AreaController {
+	@Autowired
+	AddressService addressService;
+
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	
 	//判断用户是否已登录
@@ -36,7 +39,6 @@ public class AreaController {
 			return new ModelAndView("redirect:/home");
 		}
 		
-		AddressService addressService = new AddressService();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("addresses", addressService.searchAddresssByDistrict(DISTRICTS[districtId]));
 		mav.setViewName("areas");
@@ -66,7 +68,6 @@ public class AreaController {
 			return new ModelAndView("redirect:/home");
 		}
 		
-		AddressService addressService = new AddressService();
 		Address address = new Address();
 		address.setAddressDistrict(DISTRICTS[districtId]);
 		address.setAddressArea(areaName);
@@ -91,7 +92,6 @@ public class AreaController {
 			return new ModelAndView("redirect:/home");
 		}
 		
-		AddressService addressService = new AddressService();
 		addressService.deleteAddress(addressId);
 		return new ModelAndView("redirect:/viewaddress/1");
 	}
@@ -100,7 +100,6 @@ public class AreaController {
 	public int existAddress(
 			@RequestParam("districtName") int districtId,
 			@RequestParam("areaName") String areaName){	
-		AddressService addressService = new AddressService();
 		if(addressService.getAddressId(DISTRICTS[districtId], areaName) != -1){
 			return 1;
 		}

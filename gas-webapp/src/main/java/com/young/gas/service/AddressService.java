@@ -3,11 +3,14 @@ package com.young.gas.service;
 import java.sql.Connection;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import young.database.ConnectionPool;
 
 import com.young.gas.dao.AddressDao;
 import com.young.gas.beans.Address;
 
+@Service("addressService")
 public class AddressService {
 	private AddressDao dao=new AddressDao();	
 	

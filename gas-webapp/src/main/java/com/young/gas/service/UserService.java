@@ -3,11 +3,14 @@ package com.young.gas.service;
 import java.sql.Connection;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import young.database.ConnectionPool;
 
 import com.young.gas.beans.User;
 import com.young.gas.dao.UserDao;
 
+@Service("userService")
 public class UserService {
 	private UserDao dao = new UserDao();	
 	

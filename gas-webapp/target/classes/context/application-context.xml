@@ -8,5 +8,10 @@
       http://www.springframework.org/schema/context/spring-context-3.1.xsd
       http://www.springframework.org/schema/aop  
       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
-   
+      
+    <context:component-scan base-package="com.young.gas.service">
+    </context:component-scan>
+    
+   <!-- 该 BeanPostProcessor 将自动对标注 @Autowired 的 Bean 进行注入 -->  
+   <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
 </beans>

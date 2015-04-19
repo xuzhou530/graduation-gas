@@ -2,11 +2,15 @@ package com.young.gas.service;
 
 import java.sql.Connection;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.young.gas.dao.GasDao;
 import com.young.gas.beans.Gas;
 
 import young.database.ConnectionPool;
 
+@Service("gasService")
 public class GasService {
 	private GasDao gasDao=new GasDao();	
 

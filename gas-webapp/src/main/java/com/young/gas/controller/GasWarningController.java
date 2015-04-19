@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +21,27 @@ import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.GasService;
+import com.young.gas.service.MoneyService;
 
 @Controller
 public class GasWarningController {
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	CustomerService customerService;
+	@Autowired
+	GasService gasService;
+	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;
+	
+	//判断用户是否已登录
+	private boolean isLogged(){
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");	
+		return loginUser == null?false:true;
+	}
+	
 	/**
 	 * 通过导航栏下拉菜单查看，唯一的参数是区县名
 	 * @param districtId
@@ -38,14 +55,11 @@ public class GasWarningController {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");
-		if(loginUser == null){
+		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
 		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
 		List<String> areas = new ArrayList<String>();//小区集合
 	 	String areaStr="";//用于生成动态下拉菜单
@@ -76,8 +90,11 @@ public class GasWarningController {
 			@PathVariable("page") int page,
 			HttpServletRequest request,
 			HttpServletResponse response){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
@@ -102,15 +119,16 @@ public class GasWarningController {
 			@RequestParam("buildingName") String buildingName,
 			HttpServletRequest request,
 			HttpServletResponse response){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
 		
-		String district = DISTRICTS[districtId];
-		AddressService addressService = new AddressService();
-		List<Address> addresses = addressService.searchAddresssByDistrict(district);
+		List<Address> addresses = addressService.searchAddresssByDistrict(DISTRICTS[districtId]);
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
 			areaStr += address.getAddressArea()+",";
 		}
-		return viewWarningData(district, areaName, Integer.parseInt(buildingName), 0, areaStr);
+		return viewWarningData(DISTRICTS[districtId], areaName, Integer.parseInt(buildingName), 0, areaStr);
 	}	
 	
 	/**
@@ -121,11 +139,11 @@ public class GasWarningController {
 	 * @param page
 	 * @return
 	 */
-	public ModelAndView viewWarningData(String district, String areaName, int building, int page, String areaStr){
-	
-		//获取燃气表数据
-		CustomerService customerService = new CustomerService();
-		GasService gasService = new GasService();
+	public ModelAndView viewWarningData(
+			String district, String areaName, int building, int page, String areaStr){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
 		
 		//某区某小区某栋楼的住户数
 		int countCustomers = gasService.getCountWithWarningSearchBuilding(district, areaName, building);

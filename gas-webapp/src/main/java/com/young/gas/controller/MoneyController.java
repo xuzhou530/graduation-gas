@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,20 @@ import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class MoneyController {
+	@Autowired
+	CustomerService customerService;
+	@Autowired
+	MoneyService moneyService;
+	@Autowired
+	AddressService addressService;
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
+
+	//判断用户是否已登录
+	private boolean isLogged(){
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+		.getRequest().getSession().getAttribute("user");	
+		return loginUser == null?false:true;
+	}
 	
 	/**
 	 * @param districtId
@@ -43,19 +57,14 @@ public class MoneyController {
 			@RequestParam("pay") String pay,
 			HttpServletRequest request,
 			HttpServletResponse response){
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");
-		if(loginUser == null){
+		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
 		areaName = EncodingTool.encodeStr(areaName);
-		String district = DISTRICTS[districtId];
-		CustomerService customerService = new CustomerService();
-		Customer customer = customerService.searchCustomerByRoom(district, areaName, 
+		Customer customer = customerService.searchCustomerByRoom(DISTRICTS[districtId], areaName, 
 				Integer.parseInt(addressBuilding), Integer.parseInt(addressLayer), Integer.parseInt(addressRoom));
 		if(customer !=null && name.equals(customer.getCustomerName())){//输入的用户名匹配正确
-			MoneyService moneyService = new MoneyService();
 			Money previous = moneyService.listCurrentByCusomerId(customer.getCustomerId());
 			if(previous != null){
 				Money money = new Money();
@@ -95,18 +104,24 @@ public class MoneyController {
 			@RequestParam("roomName") String roomName,
 			HttpServletRequest request,
 			HttpServletResponse response){
-		CustomerService customerService = new CustomerService();
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		Customer customer = customerService.searchCustomerByRoom(DISTRICTS[districtId], areaName, 
 				Integer.parseInt(buildingName), Integer.parseInt(layerName), Integer.parseInt(roomName));
 		return viewPayData(districtId, customer.getCustomerId());
 	}
 	
-	@RequestMapping ( "viewpay/{districtId}") 
+	@RequestMapping ("viewpay/{districtId}") 
 	public ModelAndView viewPay(
 			@PathVariable("districtId") int districtId,
 			HttpServletRequest request,
 			HttpServletResponse response){
-		CustomerService customerService = new CustomerService();
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
 		List<Customer> customers = customerService.searchSingleCustomerByDistrict(DISTRICTS[districtId]);
 		if(customers != null && customers.size() > 0){
 			return viewPayData(districtId, customers.get(0).getCustomerId());
@@ -124,10 +139,10 @@ public class MoneyController {
 	 * @param page
 	 * @return
 	 */
-	public ModelAndView viewPayData(int districtId, int customerId){
-		MoneyService moneyService = new MoneyService();
-		CustomerService customerService = new CustomerService();
-		AddressService addressService = new AddressService();
+	public ModelAndView viewPayData(int districtId, int customerId){	
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
 		
 		Customer customer = customerService.searchCustomerById(customerId);
 		List<Money> moneys = moneyService.listMoneysByCusomerId(customerId);
@@ -154,6 +169,9 @@ public class MoneyController {
 	
 	@RequestMapping ("addPay") 
 	public ModelAndView addPay(){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
 		return new ModelAndView("addPay");
 	}
 }
