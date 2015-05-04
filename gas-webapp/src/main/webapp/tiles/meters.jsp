@@ -57,14 +57,14 @@ window.onload=function(){
 					<ul>
 						<li>房号：101室</li>
 						<li>气量：42232.23</li>
-						<li>余额：322元</li>
+						<li>余额：<span style="color:red">-10元</span></li>
 						<li><div style="float:left;">状态：</div><div class="red-dot"></div></li>
 					</ul>
 				</div>
 				<div class="control">
 					<div class="buttons">
 						<a href="" class="open-btn btn">打开阀门</a>
-						<a href="" class="close-btn btn">关闭阀门</a>
+						<a href="" class="close-btn btn ">关闭阀门</a>
 					</div>
 				</div>
 				<div style="clear:both"></div>
@@ -75,7 +75,7 @@ window.onload=function(){
 				<div class="meter"></div>
 				<div class="info">
 					<ul>
-						<li>房号：101室</li>
+						<li>房号：102室</li>
 						<li>气量：42232.23</li>
 						<li>余额：322元</li>
 						<li><div style="float:left;">状态：</div><div class="green-dot"></div></li>
@@ -95,7 +95,7 @@ window.onload=function(){
 				<div class="meter"></div>
 				<div class="info">
 					<ul>
-						<li>房号：101室</li>
+						<li>房号：103室</li>
 						<li>气量：42232.23</li>
 						<li>余额：322元</li>
 						<li><div style="float:left;">状态：</div><div class="green-dot"></div></li>
@@ -115,7 +115,7 @@ window.onload=function(){
 				<div class="meter"></div>
 				<div class="info">
 					<ul>
-						<li>房号：101室</li>
+						<li>房号：104室</li>
 						<li>气量：42232.23</li>
 						<li>余额：322元</li>
 						<li><div style="float:left;">状态：</div><div class="green-dot"></div></li>
@@ -137,7 +137,7 @@ window.onload=function(){
 				<div class="meter"></div>
 				<div class="info">
 					<ul>
-						<li>房号：101室</li>
+						<li>房号：201室</li>
 						<li>气量：42232.23</li>
 						<li>余额：322元</li>
 						<li><div style="float:left;">状态：</div><div class="red-dot"></div></li>
@@ -157,7 +157,7 @@ window.onload=function(){
 				<div class="meter"></div>
 				<div class="info">
 					<ul>
-						<li>房号：101室</li>
+						<li>房号：202室</li>
 						<li>气量：42232.23</li>
 						<li>余额：322元</li>
 						<li><div style="float:left;">状态：</div><div class="red-dot"></div></li>
@@ -177,7 +177,7 @@ window.onload=function(){
 				<div class="meter"></div>
 				<div class="info">
 					<ul>
-						<li>房号：101室</li>
+						<li>房号：203室</li>
 						<li>气量：42232.23</li>
 						<li>余额：322元</li>
 						<li><div style="float:left;">状态：</div><div class="green-dot"></div></li>
@@ -185,7 +185,7 @@ window.onload=function(){
 				</div>
 				<div class="control">
 					<div class="buttons">
-						<a href="" class="open-btn btn">打开阀门</a>
+						<a href="" class="open-btn btn" >打开阀门</a>
 						<a href="" class="close-btn btn">关闭阀门</a>
 					</div>
 				</div>
@@ -197,7 +197,7 @@ window.onload=function(){
 				<div class="meter"></div>
 				<div class="info">
 					<ul>
-						<li>房号：101室</li>
+						<li>房号：204室</li>
 						<li>气量：42232.23</li>
 						<li>余额：322元</li>
 						<li><div style="float:left;">状态：</div><div class="green-dot"></div></li>

@@ -46,12 +46,15 @@
 	<definition name="usealy" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/usealy.jsp" /> 
     </definition>   
-    <definition name="paymentDetails" extends="base.homepage"> 
-        <put-attribute name="body" value="/tiles/paymentDetails.jsp" /> 
-    </definition>
     <definition name="meters" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/meters.jsp" /> 
     </definition>
+ 	<definition name="users" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/users.jsp" /> 
+    </definition>   
+    <definition name="logger" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/logger.jsp" /> 
+    </definition>   
  	<definition name="login" template="/tiles/login.jsp">  
 	</definition>    
     

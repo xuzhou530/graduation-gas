@@ -10,11 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.young.gas.beans.User;
 import com.young.gas.service.UserService;
+import com.young.gas.service.impl.UserServiceImpl;
 
 @Controller
 public class HomeController {
 	@Autowired
-	UserService userService;
+	UserServiceImpl userService;
 	
 	
 	/**
@@ -45,7 +46,7 @@ public class HomeController {
 		if(user != null && password.equals(user.getUserPwd())){ 
 			((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
 				.getRequest().getSession().setAttribute("user", user);  
-			mav.setViewName("meters");
+			mav.setViewName("index");
 			return mav;
 		}
 		else{
@@ -96,5 +97,22 @@ public class HomeController {
 	@RequestMapping ("status") 
 	public ModelAndView status(){
 		return new ModelAndView("status");
+	}
+	
+	@RequestMapping ("logger") 
+	public ModelAndView logger(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("logger");
+		return mav;
+	}
+	
+	@RequestMapping ("users") 
+	public ModelAndView users(){
+		return new ModelAndView("users");
+	}
+	
+	@RequestMapping ("meters") 
+	public ModelAndView meters(){
+		return new ModelAndView("meters");
 	}
 }

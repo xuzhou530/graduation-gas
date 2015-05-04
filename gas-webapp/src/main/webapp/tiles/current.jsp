@@ -9,7 +9,10 @@
 %>
 
 <div>
-	<div class="addtitle">最新数据</div>	
+	<div class="addtitle">
+		<div class="status-title">最新数据</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<div id="datalist">
 	<span>
 		<div id="image">

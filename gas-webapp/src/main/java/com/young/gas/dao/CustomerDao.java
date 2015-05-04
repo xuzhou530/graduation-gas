@@ -24,16 +24,15 @@ public class CustomerDao {
 	 * @throws Exception
 	 */
 	public void addCustomer(Customer customer) throws Exception{
-		String sql="insert into customer values(?,?,?,?,?,?,?,?)";
+		String sql="insert into customer values(null,?,?,?,?,?,?,?,0)";
 		PreparedStatement pst=connection.prepareStatement(sql);
-		pst.setInt(1, customer.getCustomerId());
-		pst.setString(2,customer.getCustomerName());
-		pst.setString(3,customer.getCustomerPhone());
-		pst.setString(4,customer.getAddressDistrict());
-		pst.setString(5, customer.getAddressArea());
-		pst.setInt(6, customer.getAddressBuilding());
-		pst.setInt(7, customer.getAddressLayer());
-		pst.setInt(8, customer.getAddressRoom());
+		pst.setString(1,customer.getCustomerName());
+		pst.setString(2,customer.getCustomerPhone());
+		pst.setString(3,customer.getAddressDistrict());
+		pst.setString(4, customer.getAddressArea());
+		pst.setInt(5, customer.getAddressBuilding());
+		pst.setInt(6, customer.getAddressLayer());
+		pst.setInt(7, customer.getAddressRoom());
 		pst.executeUpdate();
 	}
 	/**

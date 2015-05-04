@@ -25,7 +25,11 @@
 %>
 
 <div id="content" class="rightcontent">	
-	<div class="addtitle">运营管理——用气量统计</div>
+
+	<div class="addtitle">
+		<div class="status-title">运营管理——抄表统计</div>
+		<div style="clear:both;"></div>
+	</div>
 	<div id="datalist">
 	<span>
 		<div id="image">

@@ -19,7 +19,7 @@
 <div class="leftmenu">
 	<div class="div1">
 		<div class="div0"><div class="home"></div><a class="shine" href="/gas/index">首页</a></div>
-		<div class="div2"><div class="warning"></div>告警数据</div>
+		<div class="div2"><div class="warning"></div>异常提醒</div>
 		<div class="div3">
 			<ul>
 				<li><a id="dd1" href="/gas/viewwarning/1" onclick="return forbid()">利州区</a></li>
@@ -46,19 +46,17 @@
 		<div class="div2"><div class="datamanagement"></div>运营管理</div>
 		<div class="div3">
 			<ul>
+				<li><a href="/gas/meters">状态监测</a></li>
 				<li><a href="/gas/status">抄表统计</a></li>
 				<li><a href="/gas/payaly">缴费统计</a></li>
 				<li><a href="/gas/usealy">用气量统计</a></li>
-				<li><a href="/gas/pages/print.jsp">报表打印</a></li>
 			</ul>
 		</div>
-		<div class="div2"><div class="customermanagement"></div>住户管理</div>
+		<div class="div2"><div class="customermanagement"></div>系统管理</div>
 		<div class="div3">
 			<ul>
 				<li><a href="/gas/viewaddress/<%=menuUserGrade%>">所有小区</a></li>
-				<li><a href="/gas/addArea">添加小区</a></li>
 				<li><a href="/gas/viewcustomers/<%=menuUserGrade%>">所有住户</a></li>					
-				<li><a href="/gas/addCustomer">添加住户</a></li>
 			</ul>
 		</div>
 		<div class="div2"><div class="payment"></div>费用管理</div>

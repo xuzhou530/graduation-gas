@@ -23,18 +23,22 @@ import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.GasService;
 import com.young.gas.service.MoneyService;
+import com.young.gas.service.impl.AddressServiceImpl;
+import com.young.gas.service.impl.CustomerServiceImpl;
+import com.young.gas.service.impl.GasServiceImpl;
+import com.young.gas.service.impl.MoneyServiceImpl;
 import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class GasCurrrentController {
 	@Autowired
-	AddressService addressService;
+	AddressServiceImpl addressService;
 	@Autowired
-	CustomerService customerService;
+	CustomerServiceImpl customerService;
 	@Autowired
-	MoneyService moneyService;
+	MoneyServiceImpl moneyService;
 	@Autowired
-	GasService gasService;
+	GasServiceImpl gasService;
 	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;
@@ -53,7 +57,7 @@ public class GasCurrrentController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "viewgas/{districtId}") 
+	@RequestMapping ("viewgas/{districtId}") 
 	public ModelAndView viewGas(
 			@PathVariable("districtId") int districtId,
 			HttpServletRequest request,
@@ -112,7 +116,7 @@ public class GasCurrrentController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "viewgas/{districtId}/{areaName}/{building}/{page}") 
+	@RequestMapping ("viewgas/{districtId}/{areaName}/{building}/{page}") 
 	public ModelAndView viewGasByBuilding(
 			@PathVariable("districtId") int districtId,
 			@PathVariable("areaName") String areaName,
@@ -168,7 +172,7 @@ public class GasCurrrentController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "viewdetailgas/{customerId}") 
+	@RequestMapping ("viewdetailgas/{customerId}") 
 	public ModelAndView viewAllGasByCustomerId(
 			@PathVariable("customerId") int customerId,
 			HttpServletRequest request,
@@ -201,7 +205,7 @@ public class GasCurrrentController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping ( "searchgas/{districtId}") 
+	@RequestMapping ("searchgas/{districtId}") 
 	public ModelAndView viewGasWithSearch(
 			@PathVariable("districtId") int districtId,
 			@RequestParam("areaName") String areaName,
@@ -226,7 +230,6 @@ public class GasCurrrentController {
 		int countCustomers = customerService.getCountWithSearchBuilding(district, areaName, Integer.parseInt(buildingName));
 		//某区某小区某栋楼的燃气值
 		List<Gas> gases = new ArrayList<Gas>();
-		GasService gasService = new GasService();
 		for(Customer customer : customers){
 			customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
 			Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());

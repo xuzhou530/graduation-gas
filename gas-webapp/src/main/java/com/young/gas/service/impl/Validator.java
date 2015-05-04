@@ -1,11 +1,11 @@
-package com.young.gas.service;
+package com.young.gas.service.impl;
 
 import java.util.List;
 import com.young.gas.beans.Address;
 
 public class Validator {
 	public static boolean validateAddress(String district,String area){
-		AddressService service=new AddressService();
+		AddressServiceImpl service=new AddressServiceImpl();
 		List<Address> addresses=service.searchAddresssByDistrict(district);
 		for(Address compareAddress : addresses){
 			String compareArea=compareAddress.getAddressArea();
@@ -15,9 +15,5 @@ public class Validator {
 		}
 		return false;
 	}
-//	public static void main(String[] args){
-//		String district="利州区";
-//		String area="龙城华府";
-//		System.out.print(validateAddress(district,area));
-//	}
+
 }

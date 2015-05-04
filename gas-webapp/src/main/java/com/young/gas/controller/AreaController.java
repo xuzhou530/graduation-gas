@@ -15,11 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.young.gas.beans.Address;
 import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
+import com.young.gas.service.impl.AddressServiceImpl;
 
 @Controller
 public class AreaController {
 	@Autowired
-	AddressService addressService;
+	AddressServiceImpl addressService;
 
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	
@@ -30,7 +31,7 @@ public class AreaController {
 		return loginUser == null?false:true;
 	}
 	
-	@RequestMapping ( "viewaddress/{districtId}") 
+	@RequestMapping("viewaddress/{districtId}") 
 	public ModelAndView listAreas(
 			@PathVariable("districtId") int districtId,
 			HttpServletRequest request,
@@ -53,39 +54,52 @@ public class AreaController {
 	 * @param buildingNumbers
 	 * @param customerNumbers
 	 * @param areaDescribe
+	 * @param addressId
 	 * @return
 	 */
-	@RequestMapping ("addAddress") 
+	@RequestMapping("addAddress") 
 	public ModelAndView addAddress(
 			@RequestParam("districtName") int districtId,
 			@RequestParam("areaName") String areaName,
 			@RequestParam("areaLocation") String areaLocation,
 			@RequestParam("buildingNumbers") int buildingNumbers,
 			@RequestParam("customerNumbers") int customerNumbers,
-			@RequestParam("areaDescribe") String areaDescribe
+			@RequestParam("areaDescribe") String areaDescribe,
+			@RequestParam("addressId") String addressId
 			){
 		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
 		
 		Address address = new Address();
-		address.setAddressDistrict(DISTRICTS[districtId]);
-		address.setAddressArea(areaName);
-		address.setAddressLocation(areaLocation);
-		address.setAddressBuildings(buildingNumbers);
-		address.setAddressCustomers(customerNumbers);
-		address.setAddressDesicribe(areaDescribe);
-		addressService.addAddress(address);
-		
+		if("".equals(addressId)){//if addressid is empty ,then add a address
+			address.setAddressDistrict(DISTRICTS[districtId]);
+			address.setAddressArea(areaName);
+			address.setAddressLocation(areaLocation);
+			address.setAddressBuildings(buildingNumbers);
+			address.setAddressCustomers(customerNumbers);
+			address.setAddressDesicribe(areaDescribe);
+			addressService.addAddress(address);	
+		}
+		else{//this type is modify an exist address
+			address.setAddressId(Integer.parseInt(addressId));
+			address.setAddressDistrict(DISTRICTS[districtId]);
+			address.setAddressArea(areaName);
+			address.setAddressLocation(areaLocation);
+			address.setAddressBuildings(buildingNumbers);
+			address.setAddressCustomers(customerNumbers);
+			address.setAddressDesicribe(areaDescribe);
+			addressService.modifyAddress(address);
+		}
 		return new ModelAndView("redirect:/viewaddress/" + districtId);
 	}
-	
+
 	/**
 	 * 
 	 * @param addressId
 	 * @return
 	 */
-	@RequestMapping ("deleteAddress/{addressId}") 
+	@RequestMapping("deleteAddress/{addressId}") 
 	public ModelAndView deleteAddress(
 			@PathVariable("addressId") int addressId){	
 		if(!isLogged()){
@@ -96,7 +110,7 @@ public class AreaController {
 		return new ModelAndView("redirect:/viewaddress/1");
 	}
 	
-	@RequestMapping ("existAddress") 
+	@RequestMapping("existAddress") 
 	public int existAddress(
 			@RequestParam("districtName") int districtId,
 			@RequestParam("areaName") String areaName){	
@@ -108,8 +122,22 @@ public class AreaController {
 		}	
 	}
 	
-	@RequestMapping ("addArea") 
+	@RequestMapping("addArea") 
 	public ModelAndView addArea(){
 		return new ModelAndView("addArea");
 	}	
+	
+	/**
+	 * 小区列表中，修改按钮请求响应
+	 * @return
+	 */
+	@RequestMapping("jumpModifyArea/{addressId}") 
+	public ModelAndView jumpModifyArea(
+			@PathVariable("addressId") int addressId){
+		Address address = addressService.searchAddressById(addressId);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("address", address);
+		mav.setViewName("addArea");
+		return mav;
+	}
 }

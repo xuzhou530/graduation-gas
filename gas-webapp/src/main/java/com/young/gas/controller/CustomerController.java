@@ -17,20 +17,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.young.gas.beans.Address;
 import com.young.gas.beans.Customer;
+import com.young.gas.beans.Money;
 import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.MoneyService;
+import com.young.gas.service.impl.AddressServiceImpl;
+import com.young.gas.service.impl.CustomerServiceImpl;
+import com.young.gas.service.impl.MoneyServiceImpl;
 import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class CustomerController {
 	@Autowired
-	AddressService addressService;
+	AddressServiceImpl addressService;
 	@Autowired
-	CustomerService customerService;
+	CustomerServiceImpl customerService;
 	@Autowired
-	MoneyService moneyService;
+	MoneyServiceImpl moneyService;
+	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;
 	
@@ -168,6 +173,79 @@ public class CustomerController {
 		return mav;
 	}
 	
+	/**
+	 * 添加住户信息
+	 * @return
+	 */
+	@RequestMapping("addCustomerData") 
+	public ModelAndView addcustomerData(
+			@RequestParam("customerName") String customerName,
+			@RequestParam("customerPhone") String customerPhone,
+			@RequestParam("districtName") int districtId,
+			@RequestParam("areaName") String areaName,
+			@RequestParam("addressBuilding") int addressBuilding,
+			@RequestParam("addressLayer") int addressLayer,
+			@RequestParam("addressRoom") int addressRoom){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		Customer customer = new Customer();
+		customer.setCustomerName(customerName);
+		customer.setCustomerPhone(customerPhone);
+		customer.setAddressDistrict(DISTRICTS[districtId]);
+		customer.setAddressArea(areaName);
+		customer.setAddressBuilding(addressBuilding);
+		customer.setAddressLayer(addressLayer);
+		customer.setAddressRoom(addressRoom);	
+		customerService.addCustomer(customer);
+		
+		Customer cus = customerService.searchCustomerByRoom(DISTRICTS[districtId], areaName, 
+				addressBuilding, addressLayer, addressRoom);
+		if(cus != null){
+			Money money = new Money();
+			money.setCustomerId(cus.getCustomerId());
+			money.setResult(0);
+			money.setOperate(0);
+			money.setPrevious(0);
+			money.setFlag(0);
+			moneyService.addMoney(money);
+		}
+		return new ModelAndView("redirect:/viewcustomers/"+districtId);
+	}
+	
+	/**
+	 * 删除指定的住户
+	 * @return
+	 */
+	@RequestMapping("deleteCustomer/{customerId}") 
+	public ModelAndView deleteCustomer(
+			@PathVariable("customerId") int customerId){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
+		customerService.deleteCustomer(customerId);
+		moneyService.deleteMoneyByCusomerId(customerId);//同时删除住户的账户信息
+		return new ModelAndView("redirect:/viewcustomers/"+1);
+	}
+	
+	/**
+	 * 修改页面的跳转
+	 * @param customerId
+	 * @return
+	 */
+	@RequestMapping("jumpModifyCustomer/{customerId}") 
+	public ModelAndView jumpModifyCustomer(
+			@PathVariable("customerId") int customerId){
+		
+		Customer customer = customerService.searchCustomerById(customerId);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("customer", customer);
+		mav.setViewName("addCustomer");
+		return mav;
+	}
+	
+	//页面跳转
 	@RequestMapping("addCustomer") 
 	public ModelAndView addcustomer(){
 		if(!isLogged()){
@@ -175,5 +253,5 @@ public class CustomerController {
 		}
 		
 		return new ModelAndView("addCustomer");
-	}	
+	}
 }

@@ -6,8 +6,11 @@
 	int userGrade=user.getUserGrade();
 %>
 
-<div>
-	<h4 class="addtitle">用户缴费</h4>		
+<div>	
+	<div class="addtitle">
+		<div class="status-title">费用管理——用户缴费</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<form action="/gas/addpay/<%=userGrade%>" method="get">
 		<table class="addpaytable" >
 			<tr><td class="title">区县:&nbsp;&nbsp;</td>

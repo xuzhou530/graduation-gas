@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%> 
 <div>
-	<div class="addtitle">设置</div>	
+	<div class="addtitle">
+		<div class="status-title">系统设置</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<div style="margin:10px 0 0 50px;">
 		<table class="tabTitlesContainer">
 			<tr id="tabTitles">

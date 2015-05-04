@@ -14,4 +14,17 @@
     
    <!-- 该 BeanPostProcessor 将自动对标注 @Autowired 的 Bean 进行注入 -->  
    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
+   
+    <bean id="moneyService" class="com.young.gas.service.impl.MoneyServiceImpl" />  
+   	<!-- 开启moneyService RMI服务 -->
+    <bean id="baseServiceExporter" class="org.springframework.remoting.rmi.RmiServiceExporter">  
+        <!-- 调用Service -->  
+        <property name="service" ref="moneyService" />
+        <!-- value值是提供给客户端调用 -->  
+        <property name="serviceName" value="moneyService" />
+        <!-- service接口 -->  
+        <property name="serviceInterface" value="com.young.gas.service.MoneyService" />
+        <!-- 注册端口 -->  
+        <property name="registryPort" value="1200" />
+    </bean>  
 </beans>

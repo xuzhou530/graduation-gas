@@ -10,7 +10,10 @@
 %>
 
 <div>
-	<div class="addtitle">告警数据</div>	
+	<div class="addtitle">
+		<div class="status-title">告警数据</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<div id="datalist">
 	<span>
 		<div id="image"><image src="/gas/images/warning.png"/></div>
@@ -38,20 +41,20 @@
 		<td width="8%" class="tablehead">账户余额(元)</td>
 		<td width="7%" class="tablehead">联系方式</td>
 		<td width="12%" class="tablehead">采集时间</td>
-		<td width="6%" class="tablehead">燃气表状态</td>	
-		<td width="7%" class="tablehead">燃气表控制</td>
+		<td width="6%" class="tablehead">状态</td>	
+		<td width="7%" class="tablehead">操作</td>
 	  </tr>
   	  <c:forEach items="${gases}" var="item" varStatus="status">  
 		  <tr class="tablerow">
 			<td class="tablecontent">${status.count}</td>
 			<td class="tablecontent">${item.customer.customerName}</td>
-			<td class="tablecontent">${item.customer.addressLayer}0${item.customer.addressLayer}室</td>
+			<td class="tablecontent">${item.customer.addressLayer}0${item.customer.addressRoom}室</td>
 			<td class="tablecontent">${item.gasValue}</td>
 			<td class="tablecontent"><font color="red">${item.gasMoney}</font></td>
 			<td class="tablecontent">${item.customer.customerPhone}</td>
  			<td class="tablecontent">${item.collectTime}</td>
- 			<td class="tablecontent">阀门断开</td>	
-			<td class="tablecontent"><input type="button" value="关闭" onclick="if(this.value=='打开') this.value='关闭'; else this.value='打开'"  style="width:40px;font-size:12px;"/></td>
+ 			<td class="tablecontent">已提醒住户</td>	
+			<td class="tablecontent" style="valign:middle"><a class="reminder-btn" href="#">已提醒</a></td>
 		  </tr> 
 	  </c:forEach>
 	  </table>

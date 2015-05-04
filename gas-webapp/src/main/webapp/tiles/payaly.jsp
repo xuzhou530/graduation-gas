@@ -25,7 +25,10 @@
 %>
 
 <div id="content" class="rightcontent">
-	<div class="addtitle">运营管理——缴费统计</div>
+	<div class="addtitle">
+		<div class="status-title">运营管理——缴费统计</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<div id="datalist">
 	<span>
 		<div id="image">
@@ -50,6 +53,15 @@
 		</div>
 	</span>
 	<div class="describe"></div>
+	<div style="height:50px;margin-top:20px;font-size:17px">
+		<ul class="condition" style="margin-left:300px;">
+			<li>起止时间：<input type="text" class="text-box"/>&nbsp;至</li>
+			<li>截至时间：
+				<input type="text" class="text-box"/>
+				<span style="margin-left:-5px;"><input type="submit" class="query-btn" value="查询"/></span>
+			</li>
+		</ul>
+	</div>
 	<table style="display:none">
 	  <caption>
 	  住户缴费统计(单位：元)
@@ -57,31 +69,31 @@
 	  <thead>
 	    <tr>
 	      <td></td>
+	       <th scope="col">2014.1.3</th>
+	      <th scope="col">2014.3.19</th>
+	      <th scope="col">2014.5.2</th>
+	      <th scope="col">2014.6.30</th>
+	      <th scope="col">2014.8.1</th>
+	      <th scope="col">2014.9.3</th>
 	      <th scope="col">2014.11.1</th>
-	      <th scope="col">2014.11.10</th>
-	      <th scope="col">2014.12.1</th>
-	      <th scope="col">2014.12.10</th>
 	      <th scope="col">2015.1.1</th>
-	      <th scope="col">2015.1.10</th>
-	      <th scope="col">2015.2.1</th>
 	      <th scope="col">2015.2.10</th>
-	      <th scope="col">2015.3.10</th>
 	      <th scope="col">2015.4.1</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr>
 	      <th scope="row">余扬</th>
+	      <td>200</td>
 	      <td>100</td>
 	      <td>100</td>
+	      <td>200</td>
 	      <td>150</td>
 	      <td>200</td>
 	      <td>100</td>
+	      <td>100</td>
 	      <td>200</td>
 	      <td>100</td>
-	      <td>100</td>
-	      <td>150</td>
-	      <td>200</td>
 	    </tr>
 	  </tbody>
 	</table>

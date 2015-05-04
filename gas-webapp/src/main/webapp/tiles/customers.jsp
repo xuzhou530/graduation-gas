@@ -3,75 +3,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ page import="com.young.gas.beans.User" %>
 
+<!-- 弹窗的css与js-->
+<link href="/gas/css/popup.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gas/js/popup.js"></script>
+
 <%
 	User user=(User)session.getAttribute("user");
 	String[] districts={"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	int userGrade=user.getUserGrade();
 %>
-<!-- 弹窗的css与js  -->
-<style>
-#layout 
-{ 
-background:#000; 
-position:absolute; 
-top:0; 
-left:0; 
-width:100%;
-opacity:0.5; 
-filter:alpha(opacity=50); 
-cursor:pointer; 
-display:none; 
-z-index:555; 
-}
-#box { 
-width:350px; 
-height:200px; 
-position:absolute;
-top:50%; 
-left:50%; 
-margin:-100px auto 0 -150px; 
-background:#fafafa; 
-z-index:999; 
-border:2px solid #eee; 
-border-radius:5px; 
-box-shadow:0 0 40px #333; 
-display:none; 
-padding-top:10px;
-}
-.btn{
-width:80px;
-height:30px;
-font-family: "Arial","Tahoma","微软雅黑","雅黑";
-border: 0px;
-border-radius:3px;
-vertical-align: middle;
-margin: 8px;
-line-height: 18px;
-font-size: 18px;
-backgroud:blue;
-}
-.del-btn{
-cursor:pointer;
-}
-</style>
-<script>
-window.onload = function() {
-    var layout = document.getElementById("layout");    
-    var box = document.getElementById("box");
-    var closedbuttons = document.getElementsByClassName("closed-btn");
-    for (var i=0; i<closedbuttons.length; i++) {
-    	closedbuttons[i].onclick = function() { 
-            layout.style.display = "none"; 
-            box.style.display = "none"; 
-            return false;
-        }
-    }      
-}
-	
-</script>
 
 <div>
-	<div class="addtitle">住户管理——所有住户</div>	
+	<div class="addtitle">
+		<div class="status-title">系统管理——所有住户</div>
+		<div style="float:right;margin:5px 90px 0 0;">			
+			<a class="add-btn" href="/gas/addCustomer"><strong>+</strong> 新建住户</a>
+		</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<div id="datalist">
 		<span>
 			<div id="image">
@@ -98,8 +47,8 @@ window.onload = function() {
 			<td width="10%" class="tablehead">联系方式</td>
 			<td width="7%" class="tablehead">房号</td>
 			<td width="7%" class="tablehead">账户余额(元)</td>
-			<td width="6%" class="tablehead">状态</td>					
-			<td width="7%" class="tablehead">操作</td>
+			<td width="5%" class="tablehead">状态</td>					
+			<td width="8%" class="tablehead">操作</td>
 		  </tr>
 		  <c:forEach items="${customers}" var="item" varStatus="status"> 
 		  <tr class="tablerow">
@@ -109,19 +58,14 @@ window.onload = function() {
 			<td class="tablecontent">${item.addressLayer}0${item.addressRoom}室</td>
 			<td class="tablecontent">${item.money}</td>
 			<td class="tablecontent">正常</td>						
-			<td class="tablecontent"><a class="del-btn" onclick="return clickDel('${item.customerId}')">
-				<img src="/gas/images/remove.png">&nbsp;&nbsp;删除</a></td>
+			<td class="tablecontent">
+				<span style="cursor:pointer"><a class="del-btn" href="/gas/jumpModifyCustomer/${item.customerId}">
+					<img src="/gas/images/pencil.png">&nbsp;修改&nbsp;&nbsp;&nbsp;</a></span>
+				<span style="cursor:pointer"><a class="del-btn" onclick="return clickDel('${item.customerId}')">
+				<img src="/gas/images/remove.png">&nbsp;&nbsp;删除</a></span></td>
 		  </tr> 
 		  </c:forEach>		  	  
 		 </table>	
-		 
-		<div id="box">
-	    	<p class="words">是否要删除?</p>
-	    	<div style="text-align:center;margin-top:50px;">
-		    	<input type="button" id="ok-btn" class="btn" value="确定" />
-		    	<input type="button" class="closed-btn btn" value="取消"/>
-	    	</div> 
-    	</div>
     	
 		<table class="movetable">
 		  <tr>
@@ -130,7 +74,7 @@ window.onload = function() {
 			</td>
 			<td style="width:75%;" class="STYLE1">
 				<div align="right">
-				  <table width="200" height="20" border="0" cellpadding="0" cellspacing="0">
+				  <table width="200px" height="20px" border="0px" cellpadding="0" cellspacing="0">
 					<tr>
 				  	 <c:choose>
 					    <c:when test="${currentPage == 1 && currentPage == pages}">
@@ -196,8 +140,18 @@ window.onload = function() {
 			</td>
 		  </tr>
 		</table>
+		
+		<div id="layout"></div>  <!--实现灰色透明层效果-->
+	    <div id="box">
+	    <div id="title">提示</div>
+		<div id="closed">×</div>
+		<div id="boxcontent">
+			<div id="content">
+				<img src="/gas/images/check.png" width="32px" height="32px"/>
+				<span class="tips">&nbsp;&nbsp;&nbsp;是否删除住户?</span></div>
+			<div id="buttons"><input type="button" class="closed-btn btn" value="取消"/><input type="button" id="ok-btn" class="btn" value="确定" /></div>
+		</div>
 	</div>
-</div>
 </div>
 
 <script>
@@ -207,7 +161,7 @@ function clickDel(id){
     
     var mybutton = document.getElementById("ok-btn");
     mybutton.onclick = function(){
-    	window.location.href="/gas/deleteAddress/"+id;
+    	window.location.href="/gas/deleteCustomer/"+id;
         layout.style.display = "none"; 
         box.style.display = "none"; 
         return true;

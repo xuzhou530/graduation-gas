@@ -9,7 +9,10 @@
 %>
 
 <div>
-	<div class="addtitle">费用变动</div>	
+	<div class="addtitle">
+		<div class="status-title">费用管理——费用变动</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<div id="datalist">
 	<span>
 		<div id="image">

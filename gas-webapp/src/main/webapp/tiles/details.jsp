@@ -2,7 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
 <div>
-	<div class="addtitle">用量详情</div>	
+	<div class="addtitle">
+		<div class="status-title">住户历史用气量</div>
+		<div style="clear:both;"></div>
+	</div>	
 	<div id="datalist">
 		<span>
 			<div id="image">

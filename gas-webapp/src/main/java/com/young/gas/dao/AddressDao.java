@@ -57,12 +57,12 @@ public class AddressDao {
 	
 	/**
 	 * 
-	 * @param customer
+	 * @param address的id的是待修改的address，其他字段则是待修改的内容
 	 * @throws Exception
 	 */
 	public void modifyAddress(Address address) throws Exception{
 		String sql="update address set address_district=?,address_area=?,address_location=?,"
-				+ "address_buildings=?,address_customers=?,address_describe=? where address_id=?";
+				+ "address_buildings=?,address_customers=?,address_desicribe=? where address_id=?";
 		PreparedStatement pst=connection.prepareStatement(sql);
 		pst.setString(1,address.getAddressDistrict());
 		pst.setString(2,address.getAddressArea());

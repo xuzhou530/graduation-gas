@@ -57,6 +57,18 @@ public class MoneyDao {
 	}
 	
 	/**
+	 * 
+	 * @return 返回所有用户
+	 * @throws Exception
+	 */
+	public void deleteMoneyByCusomerId(int customerId) throws Exception{
+		String sql="delete from money where customer_id=?";
+		PreparedStatement pst=connection.prepareStatement(sql);
+		pst.setInt(1, customerId);
+		pst.executeUpdate();
+	}
+	
+	/**
 	 * 返回最新数据
 	 * @return 返回所有用户
 	 * @throws Exception

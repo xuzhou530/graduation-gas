@@ -18,6 +18,7 @@ function complete(){
 	for(var i=0; i<texts.length; i++){
 		if(texts[i].value.length == 0){
 			flag = 1;
+			alert(i);
 			break;
 		}
 	}

@@ -51,28 +51,3 @@ margin:20px 0 0 30px ;}
 .buttons a{
 color: #ffffff;
 }
-
-ul.header,ul.condition {list-style:none;margin:0px;}
-ul.header,ul.condition li{float:left;color:#393939;margin-right:10px;}
-
-input.text-box{
-width:75px; 
-height:25px;
-border-right:0;
-padding:0;
-display: table-cell;
-border-radius: 0!important;
-border: 1px solid #d5d5d5;
-box-shadow: none!important;
-}
-input.query-btn{
-  box-shadow: none!important;
-  width:55px; 
-  height:26px;
-  border-left:-2px; 
-  margin:-1;
-  background-color: #428bca!important;
-  border-color: #428bca;
-  display: inline-block;
-  color: #FFF!important;
-} 

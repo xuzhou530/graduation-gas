@@ -22,15 +22,18 @@ import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.GasService;
 import com.young.gas.service.MoneyService;
+import com.young.gas.service.impl.AddressServiceImpl;
+import com.young.gas.service.impl.CustomerServiceImpl;
+import com.young.gas.service.impl.GasServiceImpl;
 
 @Controller
 public class GasWarningController {
 	@Autowired
-	AddressService addressService;
+	AddressServiceImpl addressService;
 	@Autowired
-	CustomerService customerService;
+	CustomerServiceImpl customerService;
 	@Autowired
-	GasService gasService;
+	GasServiceImpl gasService;
 	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;

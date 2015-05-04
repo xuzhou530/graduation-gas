@@ -15,10 +15,25 @@ import tcp.server.impl.TcpServerImpl;
 public class TestServer implements TcpServerDataHandler {
 	
 	private TcpServer server;
+	
 	public void setServer(TcpServer server) {
 		this.server = server;
 	}
+	
+	public static void main(String[] args) {
+		TcpServer server = new TcpServerImpl();
+		server.setServerIp("127.0.0.1");
+		server.setServerPort(9902);
 		
+		TestServer testServer = new TestServer();
+		server.setDataHandler(testServer);
+		testServer.setServer(server);
+		
+		server.start();
+		System.out.println("server is started!");
+	}
+	
+	
 	public void onConnect(int connectId, String ip, int port) {
 		String str = String.format("s: client connect, id=%d, ip=%s, port=%d", 
 				connectId, ip, port);
@@ -48,8 +63,8 @@ public class TestServer implements TcpServerDataHandler {
 
 	// 接收到一个完整的数据包
 	public void onReceiveMsg(int connectId, byte[] bytes, int byteCount) {
-//		String str = new String(bytes, 0, byteCount-1);
-//		System.out.println("s: recv: " + str);
+	  //String str = new String(bytes, 0, byteCount-1);
+	  //System.out.println("s: recv: " + str);
 		System.out.println(bytes.length);
 		handleData(bytes, bytes.length);
 	}
@@ -60,8 +75,7 @@ public class TestServer implements TcpServerDataHandler {
 		System.out.println("s: send: " + str);
 	}
 	
-	public void handleData(byte[] recv, int len){
-		
+	public void handleData(byte[] recv, int len){	
 		if(len < 4096){		
 			int iCount = (recv[len-2]<<8) | (recv[len-1]&0xff);
 			if(recv[0] == (byte)127 && len-5 == iCount){//完整的一帧起始
@@ -82,7 +96,6 @@ public class TestServer implements TcpServerDataHandler {
 					gasMap.put(key, value);		
 				}
 				write2File(gasMap);
-
 			}
 		}
 		else{//出现了不完整的一帧		
@@ -118,18 +131,5 @@ public class TestServer implements TcpServerDataHandler {
 		catch (IOException e) {
 			e.printStackTrace();
 		}	
-	}
-	
-	public static void main(String[] args) {
-		TcpServer server = new TcpServerImpl();
-		server.setServerIp("192.168.1.119");
-		server.setServerPort(9902);
-		
-		TestServer testServer = new TestServer();
-		server.setDataHandler(testServer);
-		testServer.setServer(server);
-		
-		server.start();
-		System.out.println("server is started!");
 	}
 }
