@@ -53,8 +53,9 @@
 			<td class="tablecontent"><font color="red">${item.gasMoney}</font></td>
 			<td class="tablecontent">${item.customer.customerPhone}</td>
  			<td class="tablecontent">${item.collectTime}</td>
- 			<td class="tablecontent">已提醒住户</td>	
-			<td class="tablecontent" style="valign:middle"><a class="reminder-btn" href="#">已提醒</a></td>
+ 			<td class="tablecontent"><span id='${status.count}'>异常</span></td>	
+			<td class="tablecontent" style="valign:middle">
+				<a class="reminder-btn" onclick="reminderCustomer(${status.count})">提醒</a></td>
 		  </tr> 
 	  </c:forEach>
 	  </table>
@@ -134,3 +135,28 @@
 	</table>			
 	</div>
 </div>
+
+ <script type="text/javascript">
+function reminderCustomer(id) {
+	document.getElementById(id).innerHTML = '已提醒住户';
+	
+	var url = "/gas/reminder/1000"; 
+	if (window.XMLHttpRequest) { 
+		req = new XMLHttpRequest(); 
+	}else if (window.ActiveXObject) { 
+		req = new ActiveXObject("Microsoft.XMLHTTP"); 
+	} 
+	if(req){ 
+	    req.open("GET",url, true); 
+	    req.onreadystatechange = complete; 
+	    req.send(null); 
+	} 
+} 
+function complete(){
+	if (req.readyState == 4) { 
+	    if (req.status == 200) { 
+	        alert("已发送提醒指令！！！");
+	    }
+	}
+}
+ </script>

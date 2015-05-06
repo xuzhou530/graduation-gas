@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.young.gas.beans.Gas;
 
 public class GasDao {
@@ -115,6 +116,23 @@ public class GasDao {
 		return convertResult(rs);
 	}
 	
+	//注意需要更改前一个gas的状态
+	public void addGas(Gas gas) throws Exception {
+		//增加新纪录
+		String cmd = "update gas set flag=1 where flag=0 and customer_id=?";
+		PreparedStatement pst0 = connection.prepareStatement(cmd);
+		pst0.setInt(1, gas.getCustomerId());
+		pst0.executeUpdate();
+		
+		String sql = "insert into gas values(null,null,?,?,?,0,?)";
+		PreparedStatement pst = connection.prepareStatement(sql);
+		pst.setLong(1, gas.getGasValue());
+		pst.setLong(2, gas.getPreviousValue());
+		pst.setInt(3, gas.getGasMoney());
+		pst.setInt(4, gas.getCustomerId());
+		pst.executeUpdate();	
+	}
+	
 	
 	/**
 	 * @param rs
@@ -127,8 +145,8 @@ public class GasDao {
 			Gas gas=new Gas();
 			gas.setGasId(rs.getInt(1));
 			gas.setCollectTime(rs.getTimestamp(2));
-			gas.setGasValue(rs.getInt(3));
-			gas.setPreviousValue(rs.getInt(4));			
+			gas.setGasValue(rs.getLong(3));
+			gas.setPreviousValue(rs.getLong(4));			
 			gas.setGasMoney(rs.getInt(5));
 			gas.setFlag(rs.getInt(6));
 			gas.setCustomerId(rs.getInt(7));

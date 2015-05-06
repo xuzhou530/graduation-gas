@@ -22,19 +22,16 @@ import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.MoneyService;
-import com.young.gas.service.impl.AddressServiceImpl;
-import com.young.gas.service.impl.CustomerServiceImpl;
-import com.young.gas.service.impl.MoneyServiceImpl;
 import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class CustomerController {
 	@Autowired
-	AddressServiceImpl addressService;
+	AddressService addressService;
 	@Autowired
-	CustomerServiceImpl customerService;
+	CustomerService customerService;
 	@Autowired
-	MoneyServiceImpl moneyService;
+	MoneyService moneyService;
 	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;

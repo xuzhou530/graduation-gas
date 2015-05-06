@@ -10,12 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.young.gas.beans.User;
 import com.young.gas.service.UserService;
-import com.young.gas.service.impl.UserServiceImpl;
 
 @Controller
 public class HomeController {
 	@Autowired
-	UserServiceImpl userService;
+	UserService userService;
 	
 	
 	/**

@@ -14,17 +14,36 @@
     <bean id="testServer" class="tcp.test.TestServer">
     	<property name="server" ref="tcpServer" />
     </bean>
-    
-    <!-- bean id="baseRmiService" class="com.my.service.impl.BaseServiceImpl"   -->
     <!-- 开启RMI服务 -->
     <bean id="baseServiceExporter" class="org.springframework.remoting.rmi.RmiServiceExporter">  
         <!-- 调用Service -->  
         <property name="service" ref="testServer" />
         <!-- value值是提供给客户端调用 -->  
-        <property name="serviceName" value="baseService" />
+        <property name="serviceName" value="testServer" />
         <!-- service接口 -->  
         <property name="serviceInterface" value="tcp.server.TcpServerDataHandler" />
         <!-- 注册端口 -->  
         <property name="registryPort" value="1200" />
     </bean>  
+    
+    <bean id="moneyService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">  
+        <!-- baseService是调用服务端serviceName的value，1200是服务端注册的端口 -->  
+        <property name="serviceUrl" value="rmi://localhost:1200/moneyService" />
+        <!-- service接口 -->  
+        <property name="serviceInterface" value="com.young.gas.service.MoneyService" />
+    </bean>  
+    
+     <bean id="customerService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">  
+        <!-- baseService是调用服务端serviceName的value，1200是服务端注册的端口 -->  
+        <property name="serviceUrl" value="rmi://localhost:1200/customerService" />
+        <!-- service接口 -->  
+        <property name="serviceInterface" value="com.young.gas.service.CustomerService" />
+     </bean> 
+     
+     <bean id="gasService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">  
+        <!-- baseService是调用服务端serviceName的value，1200是服务端注册的端口 -->  
+        <property name="serviceUrl" value="rmi://localhost:1200/gasService" />
+        <!-- service接口 -->  
+        <property name="serviceInterface" value="com.young.gas.service.GasService" />
+    </bean> 
 </beans>  

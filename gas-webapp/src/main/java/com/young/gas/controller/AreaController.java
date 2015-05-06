@@ -15,12 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.young.gas.beans.Address;
 import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
-import com.young.gas.service.impl.AddressServiceImpl;
 
 @Controller
 public class AreaController {
 	@Autowired
-	AddressServiceImpl addressService;
+	AddressService addressService;
 
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	

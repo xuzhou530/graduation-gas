@@ -3,8 +3,12 @@ package com.young.gas.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import com.young.gas.beans.Money;
 
 public class MoneyDao {
@@ -33,13 +37,13 @@ public class MoneyDao {
 		pst0.setInt(1, money.getCustomerId());
 		pst0.executeUpdate();
 		
-		String sql = "insert into money values(null,?,?,?,?,?,null)";
+		String sql = "insert into money values(null,?,?,?,0,?,?)";
 		PreparedStatement pst = connection.prepareStatement(sql);
 		pst.setInt(1, money.getResult());
 		pst.setInt(2, money.getPrevious());
 		pst.setInt(3, money.getOperate());
-		pst.setInt(4, money.getFlag());
-		pst.setInt(5, money.getCustomerId());
+		pst.setInt(4, money.getCustomerId());
+		pst.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 		pst.executeUpdate();		
 	}
 

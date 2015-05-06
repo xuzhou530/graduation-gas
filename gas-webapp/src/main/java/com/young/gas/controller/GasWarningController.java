@@ -1,5 +1,7 @@
 package com.young.gas.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,25 +17,25 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import tcp.server.TcpServerDataHandler;
+
 import com.young.gas.beans.Address;
 import com.young.gas.beans.Gas;
 import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.GasService;
-import com.young.gas.service.MoneyService;
-import com.young.gas.service.impl.AddressServiceImpl;
-import com.young.gas.service.impl.CustomerServiceImpl;
-import com.young.gas.service.impl.GasServiceImpl;
 
 @Controller
 public class GasWarningController {
 	@Autowired
-	AddressServiceImpl addressService;
+	AddressService addressService;
 	@Autowired
-	CustomerServiceImpl customerService;
+	CustomerService customerService;
 	@Autowired
-	GasServiceImpl gasService;
+	GasService gasService;
+	@Autowired
+	TcpServerDataHandler testServer;
 	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;
@@ -52,7 +54,7 @@ public class GasWarningController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "viewwarning/{districtId}") 
+	@RequestMapping ("viewwarning/{districtId}") 
 	public ModelAndView viewwarning(
 			@PathVariable("districtId") int districtId,
 			HttpServletRequest request,
@@ -85,7 +87,7 @@ public class GasWarningController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "viewwarning/{districtId}/{areaName}/{building}/{page}") 
+	@RequestMapping ("viewwarning/{districtId}/{areaName}/{building}/{page}") 
 	public ModelAndView viewWarningByBuilding(
 			@PathVariable("districtId") int districtId,
 			@PathVariable("areaName") String areaName,
@@ -115,7 +117,7 @@ public class GasWarningController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping ( "searchwarning/{districtId}") 
+	@RequestMapping ("searchwarning/{districtId}") 
 	public ModelAndView viewWarningWithSearch(
 			@PathVariable("districtId") int districtId,
 			@RequestParam("areaName") String areaName,
@@ -168,4 +170,18 @@ public class GasWarningController {
 		mav.setViewName("warning");
 		return mav;
 	}
+	
+	//for ajax
+	@RequestMapping ("reminder/{customerId}") 
+	public ModelAndView reminderCustomer(
+			@PathVariable("customerId") int customerId,
+			HttpServletResponse response){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		
+		testServer.sendData(1, "hello from web".getBytes()); 
+	    return null;  
+	}	
+	
 }

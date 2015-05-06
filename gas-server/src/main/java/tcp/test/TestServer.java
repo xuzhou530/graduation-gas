@@ -3,8 +3,14 @@ package tcp.test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.young.gas.beans.Gas;
+import com.young.gas.beans.Money;
+import com.young.gas.service.GasService;
+import com.young.gas.service.MoneyService;
+
 import tcp.server.TcpServer;
 import tcp.server.TcpServerDataHandler;
+import tcp.util.GetBeanFactory;
 import tcp.util.HandleData;
 
 public class TestServer implements TcpServerDataHandler {
@@ -16,11 +22,8 @@ public class TestServer implements TcpServerDataHandler {
 	}
 	
 	public static void main(String[] args) {
-		
-	    BeanFactory factory = new ClassPathXmlApplicationContext("context/applicationContext.xml");
+	    BeanFactory factory = GetBeanFactory.getInstance();
 	    TcpServer tcpServer = (TcpServer)factory.getBean("tcpServer");//通信层实例
-	    TestServer testServer = (TestServer)factory.getBean("testServer");//应用层实例
-		
 	    tcpServer.start();
 		System.out.println("server is started!");
 	}
@@ -39,6 +42,7 @@ public class TestServer implements TcpServerDataHandler {
 		String str = String.format("s: client connect, id=%d, ip=%s, port=%d", 
 				connectId, ip, port);
 		System.out.println(str);
+		sendData(1,"hello world".getBytes());
 	}
 
 	/**
@@ -83,5 +87,4 @@ public class TestServer implements TcpServerDataHandler {
 	public void sayHello(){
 		System.out.println("hello world...");
 	}
-
 }

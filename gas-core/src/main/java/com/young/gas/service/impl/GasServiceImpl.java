@@ -142,6 +142,26 @@ public class GasServiceImpl implements GasService{
 		return null;
 	}	
 	
+	public void addGas(Gas gas){
+		//获取连接池实例
+		ConnectionPool pool=ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection=pool.getConnection();
+		try{			
+			//关闭事务自动提交，开启事务提交功能
+			connection.setAutoCommit(false);
+			gasDao.setConnection(connection);
+			gasDao.addGas(gas);
+			pool.commit(connection);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			pool.rollback(connection);
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+	}
 
 	public static void main(String[] args){
 		GasServiceImpl service=new GasServiceImpl();

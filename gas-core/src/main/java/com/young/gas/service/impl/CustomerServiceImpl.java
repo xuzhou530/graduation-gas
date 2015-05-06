@@ -189,4 +189,10 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 		return null;	
 	}
+	
+	public static void main(String[] args){
+		CustomerService cus = new CustomerServiceImpl();
+		Customer c = cus.searchCustomerById(1055);
+		System.out.println(c);
+	}
 }

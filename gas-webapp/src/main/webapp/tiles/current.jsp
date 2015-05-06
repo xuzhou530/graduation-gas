@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="com.young.gas.beans.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-
 <%
 	User user=(User)session.getAttribute("user");
 	String[] districts={"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	int userGrade=user.getUserGrade();
 %>
-
 <div>
 	<div class="addtitle">
 		<div class="status-title">最新数据</div>
@@ -32,16 +30,15 @@
 			</form>
 		</div>
 	</span>
-	
 	<table id="maintable">
 	  <tr>
 		<td width="4%"  class="tablehead">序号</td>
-		<td width="8%" class="tablehead">用户名</td>
+		<td width="8%" class="tablehead">住户名</td>
 		<td width="5%" class="tablehead">房号</td>
 		<td width="10%" class="tablehead">当前燃气值(m<SUP>3</SUP>)</td>
 		<td width="10%" class="tablehead">周期内用量(m<SUP>3</SUP>)</td>
 		<td width="8%" class="tablehead">账户余额(元)</td>		
-		<td width="7%" class="tablehead">联系方式</td>
+		<td width="7%" class="tablehead">住户编号</td>
 		<td width="12%" class="tablehead">采集时间</td>
 		<td width="7%" class="tablehead">历史记录</td>
 	  </tr>
@@ -53,13 +50,12 @@
 			<td class="tablecontent">${item.gasValue}.00</td>
 			<td class="tablecontent">${item.gasValue-item.previousValue}.00</td>
 			<td class="tablecontent">${item.customer.money}.00</td>		
-			<td class="tablecontent">${item.customer.customerPhone}</td>
+			<td class="tablecontent">${item.customer.customerId}</td>
 			<td class="tablecontent">${item.collectTime}</td>
 			<td class="tablecontent"><a href="/gas/viewdetailgas/${item.customer.customerId}"><span style="color:#3A5FCD;">查看</span></a></td>
 		  </tr> 
 	 </c:forEach>
 	 </table>
-	 
 	 <table class="movetable">
 	  <tr>
 		<td style="width:25%;">
