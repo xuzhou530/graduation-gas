@@ -190,6 +190,73 @@ public class CustomerServiceImpl implements CustomerService{
 		return null;	
 	}
 	
+	public boolean openMeter(int customerId){
+		//获取连接池实例
+		ConnectionPool pool=ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection=pool.getConnection();	
+		try{
+			//关闭事务自动提交，开启事务提交功能
+			connection.setAutoCommit(false);
+			customerDao.setConnection(connection);
+			customerDao.openMeter(customerId);
+
+			pool.commit(connection);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			pool.rollback(connection);
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+		return false;
+	}	
+	
+	public boolean closeMeter(int customerId){
+		//获取连接池实例
+		ConnectionPool pool=ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection=pool.getConnection();	
+		try{
+			//关闭事务自动提交，开启事务提交功能
+			connection.setAutoCommit(false);
+			customerDao.setConnection(connection);
+			customerDao.closeMeter(customerId);
+
+			pool.commit(connection);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			pool.rollback(connection);
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+		return false;
+	}
+	
+	public int getMeterStatus(int customerId){
+		//获取连接池实例
+		ConnectionPool pool=ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection=pool.getConnection();	
+		try{
+			customerDao.setConnection(connection);
+			return customerDao.getMeterStatus(customerId);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			pool.rollback(connection);
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+		return 0;
+	}
+	
 	public static void main(String[] args){
 		CustomerService cus = new CustomerServiceImpl();
 		Customer c = cus.searchCustomerById(1055);

@@ -37,16 +37,18 @@ window.onload=function(){
 </script>
 <div>
 	<div class="addtitle">
-		<div class="status-title">状态监测</div>
-		<div style="float:right;margin:5px 30px 0 0;">			
+		<div class="status-title">状态监测——${currentDistrict}>&nbsp;${currentArea}>&nbsp;${currentBuilding}栋</div>
+		<div style="float:right;margin:5px 30px 0 0;">	
+		<form id="searchform" action="/gas/searchMeter/${currentDistrict}" method="post" onsubmit="return checkform()">		
 			<ul class="condition">
 				<li>小区：<select id="areaName" name="areaName" style="width:95px; height:25px;">
 							<option value =0>-请选择-</option></select></li>
 				<li>楼号：
-					<input type="text" class="text-box"/>
+					<input name="buildingName" type="text" class="text-box"/>
 					<span style="margin-left:-5px;"><input type="submit" class="query-btn" value="查询"/></span>
 				</li>
 			</ul>
+		</form>
 		</div>
 		<div style="clear:both;"></div>
 	</div>	
@@ -81,8 +83,8 @@ window.onload=function(){
 				</div>
 				<div class="control">
 					<div class="buttons">
-						<a href="" class="open-btn btn">打开阀门</a>
-						<a href="" class="close-btn btn ">关闭阀门</a>
+						<a class="open-btn btn" onclick="openMeter(${item.customer.customerId})">打开阀门</a>
+						<a class="close-btn btn" onclick="closeMeter(${item.customer.customerId})">关闭阀门</a>
 					</div>
 				</div>
 				<div style="clear:both"></div>
@@ -119,8 +121,8 @@ window.onload=function(){
 				</div>
 				<div class="control">
 					<div class="buttons">
-						<a href="" class="open-btn btn">打开阀门</a>
-						<a href="" class="close-btn btn">关闭阀门</a>
+						<a class="open-btn btn" onclick="openMeter(${item.customer.customerId})">打开阀门</a>
+						<a class="close-btn btn" onclick="closeMeter(${item.customer.customerId})">关闭阀门</a>
 					</div>
 				</div>
 				<div style="clear:both"></div>
@@ -131,6 +133,66 @@ window.onload=function(){
 	</table>
 	<div id="digg"></div>
 </div>
+ <script type="text/javascript">
+function openMeter(id) {
+	var url = "/gas/openMeter/"+id; 
+	if (window.XMLHttpRequest) { 
+		req = new XMLHttpRequest(); 
+	}else if (window.ActiveXObject) { 
+		req = new ActiveXObject("Microsoft.XMLHTTP"); 
+	} 
+	if(req){ 
+	    req.open("GET",url, true); 
+	    req.onreadystatechange = completeOpen; 
+	    req.send(null); 
+	} 
+} 
+function closeMeter(id) {
+	var url = "/gas/closeMeter/"+id; 
+	if (window.XMLHttpRequest) { 
+		req = new XMLHttpRequest(); 
+	}else if (window.ActiveXObject) { 
+		req = new ActiveXObject("Microsoft.XMLHTTP"); 
+	} 
+	if(req){ 
+	    req.open("GET",url, true); 
+	    req.onreadystatechange = completeClose; 
+	    req.send(null); 
+	} 
+} 
+function completeOpen(){
+	if (req.readyState == 4) { 
+	    if (req.status == 200) { 
+	    	var str = req.responseText;
+	    	if(str == 'success'){
+	    		alert("已发送开启指令！！！");
+	    	}
+	    	else if(str == "meter_is_open"){
+	    		alert("燃气表已经开启");
+	    	}  
+	    	else{
+	    		alert("连接异常，无法发送开启指令！！！");
+	    	}
+	    }
+	}
+}
+function completeClose(){
+	if (req.readyState == 4) { 
+	    if (req.status == 200) { 
+	    	var str = req.responseText;
+	    	if(str == 'success'){
+	    		alert("已发送关断指令！！！");
+	    	}
+	    	else if(str == "meter_is_closed"){
+	    		alert("燃气表已经关闭");
+	    	}  
+	    	else{
+	    		alert("连接异常，无法发送关断指令！！！");
+	    	}      
+	    }
+	}
+}
+ </script>
 <script type="text/javascript">
 var select = document.getElementById('areaName');
 select.options.length=0;

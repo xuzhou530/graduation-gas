@@ -57,5 +57,6 @@
     </definition>   
  	<definition name="login" template="/tiles/login.jsp">  
 	</definition>    
-    
+    <definition name="register" template="/tiles/register.jsp">  
+	</definition>   
 </tiles-definitions>  

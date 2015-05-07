@@ -16,7 +16,6 @@ public class HomeController {
 	@Autowired
 	UserService userService;
 	
-	
 	/**
 	 * 隐藏主页面
 	 */
@@ -52,6 +51,17 @@ public class HomeController {
 			mav.setViewName("login");
 			return mav;
 		}
+	}
+	@RequestMapping ("registerUser") 
+	public ModelAndView registerUser(
+			@RequestParam("userName") String userName,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("grade") String grade
+			){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("register");
+		return mav;
 	}
 	
 	@RequestMapping ("logout") 

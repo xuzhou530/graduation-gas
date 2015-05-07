@@ -98,7 +98,6 @@ window.onload=function(){
 
  <script type="text/javascript">
 function reminderCustomer(id) {
-	document.getElementById(id).innerHTML = '已提醒住户';
 	
 	var url = "/gas/reminder/1000"; 
 	if (window.XMLHttpRequest) { 
@@ -115,7 +114,15 @@ function reminderCustomer(id) {
 function complete(){
 	if (req.readyState == 4) { 
 	    if (req.status == 200) { 
-	        alert("已发送提醒指令！！！");
+	    	var str = req.responseText;
+	    	if(str == 'success'){
+	    		document.getElementById(id).innerHTML = '已提醒住户';
+	    		alert("已发送提醒指令！！！");
+	    	}
+	    	else{
+	    		alert("连接异常，无法发送指令！！！");
+	    	}
+	        
 	    }
 	}
 }

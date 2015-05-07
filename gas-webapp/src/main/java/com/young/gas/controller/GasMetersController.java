@@ -1,5 +1,6 @@
 package com.young.gas.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import tcp.server.TcpServerDataHandler;
 
 import com.young.gas.beans.Address;
 import com.young.gas.beans.Customer;
@@ -35,6 +38,8 @@ public class GasMetersController {
 	MoneyService moneyService;
 	@Autowired
 	GasService gasService;
+	@Autowired
+	TcpServerDataHandler testServer;
 	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 8;
@@ -116,6 +121,32 @@ public class GasMetersController {
 		return null;
 	}
 	
+	@RequestMapping ("searchMeter/{district}") 
+	public ModelAndView searchMeter(
+			@PathVariable("district") String district,
+			@RequestParam("areaName") String areaName,
+			@RequestParam("buildingName") int buildingName){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		district = EncodingTool.encodeStr(district);
+		List<Address> addresses = addressService.searchAddresssByDistrict(district);
+		if(addresses.size() > 0){//小区存在
+			List<String> areas = new ArrayList<String>();//小区集合
+		 	String areaStr="";//用于生成动态下拉菜单
+			for(int i = 0; i < addresses.size()-1; i++){
+				areas.add(addresses.get(i).getAddressArea());
+				areaStr += addresses.get(i).getAddressArea()+",";
+			}
+			areas.add(addresses.get(addresses.size()-1).getAddressArea());
+			areaStr += addresses.get(addresses.size()-1).getAddressArea();
+			return viewMetersData(district,areaName,buildingName,0,areaStr);
+		}
+		return null;
+		
+	}
+	
+	
 	/**
 	 * 公共方法
 	 * @param district
@@ -160,4 +191,74 @@ public class GasMetersController {
 		mav.setViewName("meters");
 		return mav;
 	} 
+	
+	/**
+	 * for ajax 打开阀门
+	 */
+	@RequestMapping("openMeter/{customerId}") 
+	public ModelAndView openMeter(
+			@PathVariable("customerId") int customerId,
+			HttpServletResponse response){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		PrintWriter out = null;
+		try{
+			out=response.getWriter();
+			testServer.sendData(1, "open meter".getBytes());
+			if(customerService.getMeterStatus(customerId) == 1){//1代表关断
+				customerService.openMeter(customerId);
+				out.write("success");
+			}
+			else if(customerService.getMeterStatus(customerId) == 0){
+				out.write("meter_is_open");
+			}
+			
+		}
+		catch(Exception ex){
+			out.write("error");
+			//ex.printStackTrace();
+			System.out.println("connection error!");
+		}
+		finally{
+			out.close();
+		}
+		
+	    return null;  
+	}
+	
+	/**
+	 * for ajax 关闭阀门
+	 */
+	@RequestMapping("closeMeter/{customerId}") 
+	public ModelAndView closeMeter(
+			@PathVariable("customerId") int customerId,
+			HttpServletResponse response){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		PrintWriter out = null;
+		try{
+			out=response.getWriter();
+			int status = customerService.getMeterStatus(customerId);
+			if(status == 0){//0代表打开
+				testServer.sendData(1, "close meter".getBytes());
+				customerService.closeMeter(customerId);
+				out.write("success");
+			}
+			else if(status == 1){
+				out.write("meter_is_closed");
+			}	
+		}
+		catch(Exception ex){
+			out.write("error");
+			System.out.println("connection error!");
+		}
+		finally{
+			out.close();
+		}
+		
+	    return null;  
+		
+	}
 }

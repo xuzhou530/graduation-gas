@@ -44,8 +44,8 @@ text-align: center;
 border: 1px solid #ccc;
 border-radius: 3px;
 }
-.open-btn{background-color: #428ee2;}
-.close-btn{background-color: green;}
+.open-btn{background-color: #428ee2;cursor:pointer;}
+.close-btn{background-color: green;cursor:pointer;}
 .buttons{
 margin:20px 0 0 30px ;}
 .buttons a{

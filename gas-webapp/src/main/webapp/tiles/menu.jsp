@@ -49,7 +49,6 @@
 				<li><a href="/gas/viewMeters/<%=menuUserGrade%>">状态监测</a></li>
 				<li><a href="/gas/status">抄表统计</a></li>
 				<li><a href="/gas/payaly">缴费统计</a></li>
-				<li><a href="/gas/usealy">用气量统计</a></li>
 			</ul>
 		</div>
 		<div class="div2"><div class="customermanagement"></div>系统管理</div>

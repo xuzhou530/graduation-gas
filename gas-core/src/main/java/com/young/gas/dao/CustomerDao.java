@@ -198,6 +198,32 @@ public class CustomerDao {
 		}
 	}
 	
+	
+	public void closeMeter(int customerId) throws Exception {
+		String sql="update customer set meter = 1 where customer_id=?";//1代表关断阀门
+		PreparedStatement pst=connection.prepareStatement(sql);
+		pst.setInt(1, customerId);
+		pst.executeUpdate();
+	}
+	
+	public void openMeter(int customerId) throws Exception {
+		String sql="update customer set meter = 0 where customer_id=?";//0代表打开阀门
+		PreparedStatement pst=connection.prepareStatement(sql);
+		pst.setInt(1, customerId);
+		pst.executeUpdate();
+	}
+	
+	public int getMeterStatus(int customerId) throws Exception {
+		String sql="select meter from customer where customer_id=?";//0代表打开阀门
+		PreparedStatement pst=connection.prepareStatement(sql);
+		pst.setInt(1, customerId);
+		ResultSet rs = pst.executeQuery();
+		while(rs.next()){
+			return rs.getInt(1);
+		}
+		return 0;
+	}
+	
 	/**
 	 * 
 	 * @param rs

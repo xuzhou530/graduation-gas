@@ -1,5 +1,6 @@
 package com.young.gas.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,11 +67,13 @@ public class GasWarningController {
 		String district = DISTRICTS[districtId];
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
 		List<String> areas = new ArrayList<String>();//小区集合
-	 	String areaStr="";//用于生成动态下拉菜单
-		for(Address address : addresses){
-			areas.add(address.getAddressArea());
-			areaStr += address.getAddressArea()+",";
+		String areaStr="";//用于生成动态下拉菜单
+		for(int i = 0; i < addresses.size()-1; i++){
+			areas.add(addresses.get(i).getAddressArea());
+			areaStr += addresses.get(i).getAddressArea()+",";
 		}
+		areas.add(addresses.get(addresses.size()-1).getAddressArea());
+		areaStr += addresses.get(addresses.size()-1).getAddressArea();
 		if(areas.size() > 0){
 			return viewWarningData(district, areas.get(0), 1, 0, areaStr);
 		}
@@ -101,10 +104,11 @@ public class GasWarningController {
 		district = EncodingTool.encodeStr(district);
 		areaName = EncodingTool.encodeStr(areaName);
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
-	 	String areaStr="";//用于生成动态下拉菜单
-		for(Address address : addresses){
-			areaStr += address.getAddressArea()+",";
+		String areaStr="";//用于生成动态下拉菜单
+		for(int i = 0; i < addresses.size()-1; i++){
+			areaStr += addresses.get(i).getAddressArea()+",";
 		}
+		areaStr += addresses.get(addresses.size()-1).getAddressArea();
 		return viewWarningData(district, areaName, building, page, areaStr);
 	}	
 	
@@ -129,10 +133,11 @@ public class GasWarningController {
 		}
 		
 		List<Address> addresses = addressService.searchAddresssByDistrict(DISTRICTS[districtId]);
-	 	String areaStr="";//用于生成动态下拉菜单
-		for(Address address : addresses){
-			areaStr += address.getAddressArea()+",";
+		String areaStr="";//用于生成动态下拉菜单
+		for(int i = 0; i < addresses.size()-1; i++){
+			areaStr += addresses.get(i).getAddressArea()+",";
 		}
+		areaStr += addresses.get(addresses.size()-1).getAddressArea();
 		return viewWarningData(DISTRICTS[districtId], areaName, Integer.parseInt(buildingName), 0, areaStr);
 	}	
 	
@@ -179,11 +184,20 @@ public class GasWarningController {
 		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
+		PrintWriter out = null;
 		try{
+			out=response.getWriter();
 			testServer.sendData(1, "hello from web".getBytes()); 
+			out.write("success");
+			
 		}
 		catch(Exception ex){
-			ex.printStackTrace();
+			out.write("error");
+			//ex.printStackTrace();
+			System.out.println("connection error!");
+		}
+		finally{
+			out.close();
 		}
 		
 	    return null;  

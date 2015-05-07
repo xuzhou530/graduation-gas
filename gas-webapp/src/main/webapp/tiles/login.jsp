@@ -9,7 +9,6 @@
 <body>
 <div id="header"></div>
 <div id="main">
-
 	<form id="login" method="post" action="/gas/login" onsubmit="checkForm()">
 		<div class="rows">
 			<span class="input-title-user"></span>
@@ -33,6 +32,15 @@
 			<a href="/gas/register" class="reg-btn">注册账号</a>
 		</div>
     </form>
+</div>
+<div id="bottom">
+	<ul class="describe">
+		<li><a class="about">关于我们</a></li>
+		<li><a class="about">联系我们</a></li>
+		<li><a class="about">用户协议</a></li>
+		<li><a class="about">隐私条款</a></li>
+	</ul>
+	<span style="color:#666">Copyright ©2015燃气远程监控系统<br/>西南交通大学信息科学与技术学院自动化实验室</span>
 </div>
 </body>
 </html>
