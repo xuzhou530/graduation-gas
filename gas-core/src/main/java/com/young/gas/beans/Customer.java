@@ -18,6 +18,7 @@ public class Customer implements Serializable {
 	private int addressBuilding;//楼号
 	private int addressLayer;//楼层
 	private int addressRoom;//房号
+	private int status;
 	
 	public int getCustomerId() {
 		return customerId;
@@ -81,5 +82,11 @@ public class Customer implements Serializable {
 	}
 	public void setMoney(int money) {
 		this.money = money;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

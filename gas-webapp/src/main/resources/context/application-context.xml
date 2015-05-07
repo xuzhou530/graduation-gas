@@ -56,5 +56,5 @@
         <property name="serviceUrl" value="rmi://localhost:1200/testServer" />
         <property name="serviceInterface" value="tcp.server.TcpServerDataHandler" />
     </bean> 
-
+	
 </beans>

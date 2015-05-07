@@ -1,12 +1,6 @@
 package tcp.test;
 
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.young.gas.beans.Gas;
-import com.young.gas.beans.Money;
-import com.young.gas.service.GasService;
-import com.young.gas.service.MoneyService;
 
 import tcp.server.TcpServer;
 import tcp.server.TcpServerDataHandler;

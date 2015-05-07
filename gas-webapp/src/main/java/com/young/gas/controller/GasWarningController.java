@@ -1,7 +1,5 @@
 package com.young.gas.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +23,7 @@ import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
 import com.young.gas.service.GasService;
+import com.young.gas.tool.EncodingTool;
 
 @Controller
 public class GasWarningController {
@@ -87,9 +86,9 @@ public class GasWarningController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ("viewwarning/{districtId}/{areaName}/{building}/{page}") 
+	@RequestMapping ("viewwarning/{district}/{areaName}/{building}/{page}") 
 	public ModelAndView viewWarningByBuilding(
-			@PathVariable("districtId") int districtId,
+			@PathVariable("district") String district,
 			@PathVariable("areaName") String areaName,
 			@PathVariable("building") int building,
 			@PathVariable("page") int page,
@@ -99,7 +98,8 @@ public class GasWarningController {
 			return new ModelAndView("redirect:/home");
 		}
 		
-		String district = DISTRICTS[districtId];
+		district = EncodingTool.encodeStr(district);
+		areaName = EncodingTool.encodeStr(areaName);
 		List<Address> addresses = addressService.searchAddresssByDistrict(district);
 	 	String areaStr="";//用于生成动态下拉菜单
 		for(Address address : addresses){
@@ -179,8 +179,13 @@ public class GasWarningController {
 		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
+		try{
+			testServer.sendData(1, "hello from web".getBytes()); 
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
 		
-		testServer.sendData(1, "hello from web".getBytes()); 
 	    return null;  
 	}	
 	

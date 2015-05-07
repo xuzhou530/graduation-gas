@@ -216,6 +216,7 @@ public class CustomerDao {
 			customer.setAddressBuilding(rs.getInt(6));
 			customer.setAddressLayer(rs.getInt(7));
 			customer.setAddressRoom(rs.getInt(8));
+			customer.setStatus(rs.getInt(9));
 			customers.add(customer);
 		}		
 		return customers;

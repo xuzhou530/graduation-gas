@@ -6,7 +6,7 @@
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
     
     <bean id="tcpServer" class="tcp.server.impl.TcpServerImpl">
-    	<property name="serverIp" value="192.168.1.108" />
+    	<property name="serverIp" value="127.0.0.1" />
     	<property name="serverPort" value="9902" />	
     	<property name="dataHandler" ref="testServer" />	
     </bean>

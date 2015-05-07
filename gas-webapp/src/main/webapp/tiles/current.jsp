@@ -6,6 +6,39 @@
 	String[] districts={"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	int userGrade=user.getUserGrade();
 %>
+<link href="/gas/css/pages.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript">
+window.onload=function(){
+	var pages = ${pages};
+	var current = ${currentPage};
+	var currentNode;
+	
+	var left = document.createElement('a');
+	if( current> 1){
+		left.href = '/gas/viewgas/'+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(current-2);
+	}
+	left.text = "<上一页";
+	document.getElementById("digg").appendChild(left);
+	
+	for(var i = 1; i <= pages; i++){
+		var child = document.createElement('a');
+		child.text = i;
+		child.href = "/gas/viewgas/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(i-1);
+		if(i==current){
+			child.className = "currentclick";
+			currentNode = child;
+		}
+		document.getElementById("digg").appendChild(child);	
+	}
+	
+	var right = document.createElement('a');
+	if( current != pages){
+		right.href = "/gas/viewgas/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(current);
+	}
+	right.text = "下一页>";
+	document.getElementById("digg").appendChild(right);
+}
+</script>
 <div>
 	<div class="addtitle">
 		<div class="status-title">最新数据</div>
@@ -56,79 +89,18 @@
 		  </tr> 
 	 </c:forEach>
 	 </table>
-	 <table class="movetable">
-	  <tr>
-		<td style="width:25%;">
-			<span class="STYLE1">&nbsp;共<strong>&nbsp;${countCustomers}&nbsp;</strong>条纪录，
-				当前第<strong>&nbsp;${currentPage}/${pages}&nbsp;</strong>页</span>
-		</td>
-		<td style="width:75%;" class="STYLE1">
-			<div align="right">
-			  <table width="200" height="20" border="0" cellpadding="0" cellspacing="0">
-			  <tr>
-			  	 <c:choose>
-				    <c:when test="${currentPage == 1 && currentPage == pages}">
-					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/first.gif"width="37" height="15" /></div>
-					  </td>
-					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/back.gif" width="43" height="15" /></div>
-					  </td>
-					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/next.gif" width="43" height="15" /></div>
-					  </td>
-					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/last.gif" width="37" height="15" /></div>
-					  </td>
-				    </c:when>
-				    <c:when test="${currentPage == 1 && currentPage != pages}">
-					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/first.gif"width="37" height="15" /></div>
-					  </td>
-					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/back.gif" width="43" height="15" /></div>
-					  </td>
-					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage}"><img class="imagebutton" src="/gas//images/next.gif" width="43" height="15" /></a></div>
-					  </td>
-					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${pages-1}"><img class="imagebutton" src="/gas//images/last.gif" width="37" height="15" /></a></div>
-					  </td>
-				    </c:when>
-				    <c:when test="${currentPage > 1 && currentPage < pages}">
-					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/0"><img class="imagebutton" src="/gas//images/first.gif"width="37" height="15" /></a></div>
-					  </td>
-					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage-2}"><img class="imagebutton" src="/gas/images/back.gif" width="43" height="15" /></a></div>
-					  </td>
-					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage}"><img class="imagebutton" src="/gas//images/next.gif" width="43" height="15" /></a></div>
-					  </td>
-					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${pages-1}"><img class="imagebutton" src="/gas//images/last.gif" width="37" height="15" /></a></div>
-					  </td>
-				    </c:when>
-				    <c:otherwise>
-					  <td width="62" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/0"/><img class="imagebutton" src="/gas//images/first.gif" width="43" height="15" /></a></div>
-					  </td>
-					  <td width="50" height="28" valign="middle"><div align="right">
-					  		<a href="/gas/viewgas/<%=userGrade %>/${currentArea}/${currentBuilding}/${currentPage-2}"><img class="imagebutton" src="/gas//images/back.gif" width="43" height="15" /></a></div>
-					  </td>
-					  <td width="54" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/next.gif" width="43" height="15" /></div>
-					  </td>
-					  <td width="49" height="28" valign="middle"><div align="right">
-					  		<img class="imagebuttonhide" src="/gas//images/last.gif" width="37" height="15" /></div>
-					  </td>
-				    </c:otherwise>
-				 </c:choose>
-		      </tr>
-			  </table>
-			</div>
-		</td>
-	  </tr>
-	</table>					
+	<div id="digg"></div>					
 	</div>
 </div>
+<script type="text/javascript">
+var select = document.getElementById('areaName');
+select.options.length=0;
+select.options.add(new Option('-请选择-','0'));
+var areas = '${areaStr}';
+var strs= new Array(); //定义一数组 
+strs=areas.split(","); //字符分割 
+for (i = 0; i < strs.length; i++) 
+{ 
+	select.options.add(new Option(strs[i],strs[i]));
+}
+</script>
