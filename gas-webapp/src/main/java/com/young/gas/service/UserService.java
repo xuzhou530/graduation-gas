@@ -12,6 +12,14 @@ public interface UserService {
 	
 	public List<User> listAllUsers();
 	
+	public List<User> listAllRequestUsers();
+	
 	public User listUser(String name);
+	
+	public boolean existUser(String name);
+	
+	public boolean passUser(String name);
+	
+	public boolean rejectUser(String name);
 	
 }

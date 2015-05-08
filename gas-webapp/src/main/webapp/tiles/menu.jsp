@@ -22,25 +22,25 @@
 		<div class="div2"><div class="warning"></div>异常提醒</div>
 		<div class="div3">
 			<ul>
-				<li><a id="dd1" href="/gas/viewwarning/1" onclick="return forbid()">利州区</a></li>
-				<li><a id="dd2" href="/gas/viewwarning/2" onclick="return forbid()">昭化区</a></li>
-				<li><a id="dd3" href="/gas/viewwarning/3" onclick="return forbid()">朝天区</a></li>
-				<li><a id="dd4" href="/gas/viewwarning/4" onclick="return forbid()">旺苍县</a></li>
-				<li><a id="dd5" href="/gas/viewwarning/5" onclick="return forbid()">青川县</a></li>
-				<li><a id="dd6" href="/gas/viewwarning/6" onclick="return forbid()">剑阁县</a></li>
-				<li><a id="dd7" href="/gas/viewwarning/7" onclick="return forbid()">苍溪县</a></li>
+				<li><a id="dd1" href="/gas/viewwarning/1" onclick="return forbid(1)">利州区</a></li>
+				<li><a id="dd2" href="/gas/viewwarning/2" onclick="return forbid(2)">昭化区</a></li>
+				<li><a id="dd3" href="/gas/viewwarning/3" onclick="return forbid(3)">朝天区</a></li>
+				<li><a id="dd4" href="/gas/viewwarning/4" onclick="return forbid(4)">旺苍县</a></li>
+				<li><a id="dd5" href="/gas/viewwarning/5" onclick="return forbid(5)">青川县</a></li>
+				<li><a id="dd6" href="/gas/viewwarning/6" onclick="return forbid(6)">剑阁县</a></li>
+				<li><a id="dd7" href="/gas/viewwarning/7" onclick="return forbid(7)">苍溪县</a></li>
 			</ul>
 		</div>
 		<div class="div2"><div class="current"></div>最新数据</div>
 		<div class="div3">
 			<ul>
-				<li><a id="d1" href="/gas/viewgas/1" onclick="return forbid()">利州区</a></li>
-				<li><a id="d2" href="/gas/viewgas/2" onclick="return forbid()">昭化区</a></li>
-				<li><a id="d3" href="/gas/viewgas/3" onclick="return forbid()">朝天区</a></li>
-				<li><a id="d4" href="/gas/viewgas/4" onclick="return forbid()">旺苍县</a></li>
-				<li><a id="d5" href="/gas/viewgas/5" onclick="return forbid()">青川县</a></li>
-				<li><a id="d6" href="/gas/viewgas/6" onclick="return forbid()">剑阁县</a></li>
-				<li><a id="d7" href="/gas/viewgas/7" onclick="return forbid()">苍溪县</a></li>
+				<li><a id="d1" href="/gas/viewgas/1" onclick="return forbid(1)">利州区</a></li>
+				<li><a id="d2" href="/gas/viewgas/2" onclick="return forbid(2)">昭化区</a></li>
+				<li><a id="d3" href="/gas/viewgas/3" onclick="return forbid(3)">朝天区</a></li>
+				<li><a id="d4" href="/gas/viewgas/4" onclick="return forbid(4)">旺苍县</a></li>
+				<li><a id="d5" href="/gas/viewgas/5" onclick="return forbid(5)">青川县</a></li>
+				<li><a id="d6" href="/gas/viewgas/6" onclick="return forbid(6)">剑阁县</a></li>
+				<li><a id="d7" href="/gas/viewgas/7" onclick="return forbid(7)">苍溪县</a></li>
 			</ul>
 		</div>
 		<div class="div2"><div class="datamanagement"></div>运营管理</div>
@@ -73,3 +73,18 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+function forbid(id){
+	var grade = <%=menuUserGrade%>;
+	if(grade == 0){
+		return true;
+	}
+	else if(grade == id){
+		return true;
+	}
+	else{
+		alert("您不具备操作权限");
+		return false;
+	}
+}
+</script>

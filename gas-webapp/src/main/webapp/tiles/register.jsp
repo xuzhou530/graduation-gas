@@ -12,11 +12,16 @@
 	<form action="/gas/registerUser" method="post">
 		<div class="rows">
 			<span class="input-title-long">用户名:</span>
-			<input class="inp" tabindex="1" type="text" value="" name="userName"/>
+			<input id="userName" class="inp" tabindex="1" type="text" value="" name="userName" onchange="existUser()"/>
 		</div>
+		<span id="tips" style="display:block;margin-top:10px;color:red;display:none;">*用户名已存在</span>
 		<div class="rows">
 			<span class="input-title-short">邮箱:</span>
 			<input class="inp" tabindex="1" type="text" value="" name="email"/>
+		</div>
+		<div class="rows">
+			<span class="input-title-long">联系方式:</span>
+			<input class="inp" tabindex="1" type="text" value="" name="phone"/>
 		</div>
 		<div class="rows">
 			<span class="input-title-long">设置密码:</span>
@@ -61,3 +66,32 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+function existUser() {
+	var name = document.getElementById('userName').value;
+	var url = "/gas/userExist/"+name; 
+	if (window.XMLHttpRequest) { 
+		req = new XMLHttpRequest(); 
+	}else if (window.ActiveXObject) { 
+		req = new ActiveXObject("Microsoft.XMLHTTP"); 
+	} 
+	if(req){
+	    req.open("GET",url, true); 
+	    req.onreadystatechange = complete; 
+	    req.send(null); 
+	} 
+} 
+function complete(){
+	if (req.readyState == 4) { 
+	    if (req.status == 200) { 
+	    	var str = req.responseText;
+	    	if(str == 'y'){
+	    		document.getElementById('tips').style.display= "block";
+	    	}
+	    	else if(str == "n"){
+	    		document.getElementById('tips').style.display= "none";
+	    	}      
+	    }
+	}
+}
+ </script>

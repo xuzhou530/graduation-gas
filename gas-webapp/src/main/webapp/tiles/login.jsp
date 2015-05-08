@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <head>
 <title>登陆页面</title>
@@ -9,7 +10,7 @@
 <body>
 <div id="header"></div>
 <div id="main">
-	<form id="login" method="post" action="/gas/login" onsubmit="checkForm()">
+	<form id="login" name="loginForm" method="post" action="/gas/login" onsubmit="checkForm()">
 		<div class="rows">
 			<span class="input-title-user"></span>
 			<input class="inp" tabindex="1" type="text" value="" name="name" placeholder="手机、邮箱、用户名"/>
@@ -25,6 +26,7 @@
             </label>
             <a class="forget-link" href="/forgetInit">忘记密码?</a>
 		</div>
+		<span id="result" style="color:red">${result}</span>
 		<div>
 			<button type="submit" class="submit-btn">立即登录</button>
 		</div>

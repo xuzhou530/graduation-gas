@@ -95,6 +95,27 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
+	public List<User> listAllRequestUsers(){
+		//获取连接池实例
+		ConnectionPool pool=ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection=pool.getConnection();	
+		try{
+			//关闭事务自动提交，开启事务提交功能
+			connection.setAutoCommit(false);
+			dao.setConnection(connection);
+			return dao.listAllRequestUsers();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+		return null;
+	}
+	
+	
 	/**
 	 * 查询指定名字的用户，返回用户对象
 	 * @param name
@@ -120,25 +141,74 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 	
+	public boolean existUser(String name){
+		//获取连接池实例
+		ConnectionPool pool=ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection=pool.getConnection();	
+		try{
+			//关闭事务自动提交，开启事务提交功能
+			connection.setAutoCommit(false);
+			dao.setConnection(connection);
+			return dao.existUser(name);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+		return false;
+	}
+	
+	public boolean passUser(String name){
+		//获取连接池实例
+		ConnectionPool pool = ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection = pool.getConnection();	
+		try{
+			//关闭事务自动提交，开启事务提交功能
+			connection.setAutoCommit(false);
+			dao.setConnection(connection);
+			dao.passUser(name);
+			pool.commit(connection);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			pool.rollback(connection);
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+		return false;
+	}
+	
+	public boolean rejectUser(String name){
+		//获取连接池实例
+		ConnectionPool pool = ConnectionPool.getInstance();
+		//从池子中取出一个连接
+		Connection connection = pool.getConnection();	
+		try{
+			//关闭事务自动提交，开启事务提交功能
+			connection.setAutoCommit(false);
+			dao.setConnection(connection);
+			dao.rejectUser(name);
+			pool.commit(connection);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			pool.rollback(connection);
+		}
+		finally{
+			pool.releaseConnection(connection);
+		}
+		return false;
+	}
+	
 	public static void main(String[] args){
-		//UserService service=new UserService();
+		UserService service=new UserServiceImpl();
 		//System.out.println(service.listAllUsers());
-		
-		/*
-		User user=new User();
-		user.setName("jiang");
-		user.setPwd("anhui");
-		user.setEmail("anhui@163.com");
-		user.setGrade(2);
-		service.addUser(user);
-		*/		
-//		List<User> list=service.listAllUsers();
-//		Iterator<User> it=list.iterator();
-//		while(it.hasNext()){
-//			System.out.println(it.next());
-//		}
-//		
-//		User user=service.listUser("admin");
-//		System.out.println(user);
 	}
 }

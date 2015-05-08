@@ -1,5 +1,4 @@
 ﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
 <div id="map">
 	<img id="mappic" src="/gas/images/gy.jpg" onclick="clickme()"/>
 </div>

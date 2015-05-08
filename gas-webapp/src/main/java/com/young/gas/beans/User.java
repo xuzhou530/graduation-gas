@@ -3,6 +3,11 @@ package com.young.gas.beans;
 import java.io.Serializable;
 
 public class User implements Serializable {
+	
+	private String authority;
+	
+	private String currentSta;
+	
 	/**
 	 * 
 	 */
@@ -11,8 +16,10 @@ public class User implements Serializable {
 	public static final int NORMAL=1;
 	private String userName;
 	private String userPwd;
+	private String userPhone;
 	private String userEmail;
 	private int userGrade;
+	private int status;//0表示审核通过，1表示待审核，2表示审核被拒绝
 	
 	public String getUserName() {
 		return userName;
@@ -46,9 +53,42 @@ public class User implements Serializable {
 		this.userGrade = userGrade;
 	}
 	
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", userPwd=" + userPwd
 				+ ", userEmail=" + userEmail + ", userGrade=" + userGrade + "]";
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+	public String getCurrentSta() {
+		return currentSta;
+	}
+
+	public void setCurrentSta(String currentSta) {
+		this.currentSta = currentSta;
 	}
 }

@@ -2,39 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <link href="/gas/css/meters.css" type="text/css" rel="stylesheet" />
 <link href="/gas/css/pages.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript">
-window.onload=function(){
-	var pages = ${pages};
-	var current = ${currentPage};
-	var currentNode;
-	
-	var left = document.createElement('a');
-	if( current> 1){
-		left.href = "/gas/viewMeters/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(current-2);
-	}
-	left.text = "<上一页";
-	document.getElementById("digg").appendChild(left);
-	
-	for(var i = 1; i <= pages; i++){
-		var child = document.createElement('a');
-		child.text = i;
-		child.href = "/gas/viewMeters/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(i-1);
-		if(i==current){
-			child.className = "currentclick";
-			currentNode = child;
-		}
-		document.getElementById("digg").appendChild(child);	
-	}
-	
-	var right = document.createElement('a');
-	if( current != pages){
-		right.href = "/gas/viewMeters/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(current);
-	}
-	right.text = "下一页>";
-	document.getElementById("digg").appendChild(right);
-}
-
-</script>
 <div>
 	<div class="addtitle">
 		<div class="status-title">状态监测——${currentDistrict}>&nbsp;${currentArea}>&nbsp;${currentBuilding}栋</div>
@@ -204,4 +171,34 @@ for (i = 0; i < strs.length; i++)
 { 
 	select.options.add(new Option(strs[i],strs[i]));
 }
+</script>
+<script type="text/javascript">
+	var pages = ${pages};
+	var current = ${currentPage};
+	var currentNode;
+	
+	var left = document.createElement('a');
+	if( current> 1){
+		left.href = "/gas/viewMeters/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(current-2);
+	}
+	left.text = "<上一页";
+	document.getElementById("digg").appendChild(left);
+	
+	for(var i = 1; i <= pages; i++){
+		var child = document.createElement('a');
+		child.text = i;
+		child.href = "/gas/viewMeters/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(i-1);
+		if(i==current){
+			child.className = "currentclick";
+			currentNode = child;
+		}
+		document.getElementById("digg").appendChild(child);	
+	}
+	
+	var right = document.createElement('a');
+	if( current != pages){
+		right.href = "/gas/viewMeters/"+'${currentDistrict}/'+'${currentArea}/'+'${currentBuilding}/'+(current);
+	}
+	right.text = "下一页>";
+	document.getElementById("digg").appendChild(right);
 </script>

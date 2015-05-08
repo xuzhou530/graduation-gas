@@ -6,6 +6,7 @@
 		<put-attribute name="header" value="/tiles/header.jsp" />  
 		<put-attribute name="menu" value="/tiles/menu.jsp" /> 
 	</definition> 
+	
 	<definition name="index" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/index.jsp" /> 
     </definition>  
@@ -21,6 +22,13 @@
 	<definition name="customers" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/customers.jsp" /> 
     </definition> 
+    <definition name="details" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/details.jsp" /> 
+    </definition> 
+    <definition name="meters" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/meters.jsp" /> 
+    </definition>
+    
 	<definition name="addArea" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/addArea.jsp" /> 
     </definition> 
@@ -33,9 +41,7 @@
 	<definition name="setting" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/settingsys.jsp" /> 
     </definition> 
-	<definition name="details" extends="base.homepage"> 
-        <put-attribute name="body" value="/tiles/details.jsp" /> 
-    </definition> 
+
     
  	<definition name="status" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/status.jsp" /> 
@@ -46,15 +52,19 @@
 	<definition name="usealy" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/usealy.jsp" /> 
     </definition>   
-    <definition name="meters" extends="base.homepage"> 
-        <put-attribute name="body" value="/tiles/meters.jsp" /> 
-    </definition>
+   
+    
+    
  	<definition name="users" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/users.jsp" /> 
     </definition>   
     <definition name="logger" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/logger.jsp" /> 
     </definition>   
+    <definition name="auditUsers" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/auditUsers.jsp" /> 
+    </definition>  
+    
  	<definition name="login" template="/tiles/login.jsp">  
 	</definition>    
     <definition name="register" template="/tiles/register.jsp">  

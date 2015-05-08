@@ -28,13 +28,27 @@
 <div id="navigation">
 	<div id="menu" class="right">
 		<ul>
-			<li><font style="color:#dddddd;">用户中心</font>
+			<li><font style="color:#dddddd; cursor:pointer;">用户中心</font>
 				<ul>
-					<li><a href="/gas/pages/addPay.jsp">系统设置</a></li>
-					<li><a href="/gas/viewpay/<%=menuUserGrade%>">集中器设置</a></li>
+					<li><a href="/gas/audit" onclick="return forbid()">待审核用户</a></li>
+					<li><a href="/gas/users" onclick="return forbid()">所有用户</a></li>
+					<li><a href="/gas/logger" onclick="return forbid()">系统日志</a></li>
 				</ul>
 			</li>
 			<li><a href="/gas/logout">退出系统</a></li>
 		</ul>
 	</div>
 </div>
+
+<script type="text/javascript">
+function forbid(){
+	var grade = <%=menuUserGrade%>;
+	if(grade == 0){
+		return true;
+	}
+	else{
+		alert("您不具备操作权限");
+		return false;
+	}
+}
+</script>
