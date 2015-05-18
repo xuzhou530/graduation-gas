@@ -22,7 +22,7 @@ public class TestClient implements TcpClientDataHandler {
 		tcpClient.setDataHandler(testClient);
 		
 		tcpClient.connect();
-		//testClient.sendData();
+		testClient.sendData();
 	}
 	
 	/**
@@ -60,10 +60,12 @@ public class TestClient implements TcpClientDataHandler {
 		send[iSend++] = (byte)144;//DI	
 		send[iSend++] = (byte)31;//DI
 		send[iSend++] = (byte)1;//1	
-		send[iSend++] = (byte)64;//数据位1
-		send[iSend++] = (byte)13;//数据位2
-		send[iSend++] = (byte)4;//数据位3
-		send[iSend++] = (byte)0;//数据位4
+		
+		send[iSend++] = (byte)208;//数据位1低字节
+		send[iSend++] = (byte)177;//数据位2
+		send[iSend++] = (byte)55;//数据位3
+		send[iSend++] = (byte)0;//数据位4高字节
+		
 		send[iSend++] = (byte)255;//校验
 		send[iSend++] = (byte)22;//结束符	
 		
@@ -81,7 +83,7 @@ public class TestClient implements TcpClientDataHandler {
 	}	
 	
 	public void onConnect(String serverIp,  int serverPort) {
-		String str = String.format("c: connected, serverIp=%s, serverPort=%d", 
+		String str = String.format("集中器已成功连接到监控中心...", 
 				serverIp, serverPort);
 		System.out.println(str);
 	}
@@ -92,7 +94,7 @@ public class TestClient implements TcpClientDataHandler {
 	 * 都会导致onDisconnect 被回调。但反复尝试重连时，此方法不会被重复调用。
 	 */
 	public void onDisconnect() {
-		String str = "c: disconnected";
+		String str = "集中器连接断开...";
 		System.out.println(str);
 	}
 
@@ -119,7 +121,17 @@ public class TestClient implements TcpClientDataHandler {
 	 */
 	public void onReceiveMsg(byte[] bytes, int byteCount) {
 		String str = new String(bytes, 0, byteCount);
-		System.out.println("c: recv: " + str);
+		String[] arr = str.split(" ");
+		if("reminder".endsWith(arr[0])){
+			System.out.println("监控中心远程指令:\r\n提醒编号为" + arr[1] +"的住户余额已不足，尽快缴费...");
+		}
+		else if("open".endsWith(arr[0])){
+			System.out.println("监控中心远程指令:\r\n打开编号为" + arr[1] +"的住户燃气表阀门...");
+		}
+		else if("close".endsWith(arr[0])){
+			System.out.println("监控中心远程指令:\r\n关断编号为" + arr[1] +"的住户燃气表阀门...");
+		}
+		
 		//server.send(connectId, bytes);
 	}
 	
@@ -129,6 +141,6 @@ public class TestClient implements TcpClientDataHandler {
 	 */
 	public void onSendMsg(byte[] bytes, int byteCount) {
 		//String str = new String(bytes, 0, byteCount-1);
-		System.out.println("c: send: " + byteCount);
+		System.out.println("集中器已向监控中心发送燃气采集数据... ");
 	}
 }

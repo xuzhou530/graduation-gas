@@ -1,5 +1,6 @@
 package com.young.gas.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.young.gas.beans.Address;
 import com.young.gas.beans.Customer;
+import com.young.gas.beans.Log;
 import com.young.gas.beans.Money;
 import com.young.gas.beans.User;
 import com.young.gas.service.AddressService;
 import com.young.gas.service.CustomerService;
+import com.young.gas.service.LogService;
 import com.young.gas.service.MoneyService;
 import com.young.gas.tool.EncodingTool;
 
@@ -32,15 +35,22 @@ public class CustomerController {
 	CustomerService customerService;
 	@Autowired
 	MoneyService moneyService;
+	@Autowired
+	LogService logService;
 	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	private static int PERPAGE = 15;
 	
+	//获取当前登录用户
+	private User loginUser(){
+		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+				.getRequest().getSession().getAttribute("user");
+		return loginUser;
+	}
+		
 	//判断用户是否已登录
 	private boolean isLogged(){
-		User loginUser = (User)((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-		.getRequest().getSession().getAttribute("user");	
-		return loginUser == null?false:true;
+		return loginUser() == null ? false : true;
 	}
 		
 	/**
@@ -186,6 +196,8 @@ public class CustomerController {
 		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
+		
+		//先添加住户信息
 		Customer customer = new Customer();
 		customer.setCustomerName(customerName);
 		customer.setCustomerPhone(customerPhone);
@@ -196,6 +208,14 @@ public class CustomerController {
 		customer.setAddressRoom(addressRoom);	
 		customerService.addCustomer(customer);
 		
+		//添加日志
+		Log log = new Log();
+		log.setOperator(loginUser().getUserName());
+		log.setOperateAction("添加住户");
+		log.setOperateTime(new Timestamp(System.currentTimeMillis()));
+		logService.addLog(log);
+		
+		//取出新增住户，添加初始账户余额
 		Customer cus = customerService.searchCustomerByRoom(DISTRICTS[districtId], areaName, 
 				addressBuilding, addressLayer, addressRoom);
 		if(cus != null){

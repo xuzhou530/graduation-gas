@@ -187,13 +187,13 @@ public class GasWarningController {
 		PrintWriter out = null;
 		try{
 			out=response.getWriter();
-			testServer.sendData(1, "hello from web".getBytes()); 
+			String cmd = "reminder " + customerId;
+			testServer.sendData(1, cmd.getBytes()); 
 			out.write("success");
 			
 		}
 		catch(Exception ex){
 			out.write("error");
-			//ex.printStackTrace();
 			System.out.println("connection error!");
 		}
 		finally{

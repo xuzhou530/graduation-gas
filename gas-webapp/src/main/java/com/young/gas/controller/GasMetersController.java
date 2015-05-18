@@ -205,7 +205,8 @@ public class GasMetersController {
 		PrintWriter out = null;
 		try{
 			out=response.getWriter();
-			testServer.sendData(1, "open meter".getBytes());
+			String cmd = "open " + customerId;
+			testServer.sendData(1, cmd.getBytes());
 			if(customerService.getMeterStatus(customerId) == 1){//1代表关断
 				customerService.openMeter(customerId);
 				out.write("success");
@@ -242,7 +243,8 @@ public class GasMetersController {
 			out=response.getWriter();
 			int status = customerService.getMeterStatus(customerId);
 			if(status == 0){//0代表打开
-				testServer.sendData(1, "close meter".getBytes());
+				String cmd = "close " + customerId ;
+				testServer.sendData(1, cmd.getBytes());
 				customerService.closeMeter(customerId);
 				out.write("success");
 			}

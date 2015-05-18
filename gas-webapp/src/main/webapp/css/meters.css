@@ -33,7 +33,7 @@ font-size: 14px;
 .green-dot{margin-left:10px;width:19px; height:19px;border-radius:10px;background-color:green;float:left;}
 .red-dot{margin-left:10px;width:19px; height:19px;border-radius:10px;background-color:red;float:left;}
 a{text-decoration:none;}
-.btn{  
+.button{  
 width: 80px;
 height: 35px;
 display: inline-block;
@@ -44,8 +44,8 @@ text-align: center;
 border: 1px solid #ccc;
 border-radius: 3px;
 }
-.open-btn{background-color: #428ee2;cursor:pointer;}
-.close-btn{background-color: green;cursor:pointer;}
+.open-button{background-color: #428ee2;cursor:pointer;}
+.close-button{background-color: green;cursor:pointer;}
 .buttons{
 margin:20px 0 0 30px ;}
 .buttons a{

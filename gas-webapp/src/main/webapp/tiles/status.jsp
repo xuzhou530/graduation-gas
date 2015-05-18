@@ -100,7 +100,7 @@
 		<td class="tablecontent">198</td>
 		<td class="tablecontent">2</td>
 		<td class="tablecontent">99%</td>
-		<td class="tablecontent"><span style="color:red">查看详情</span></td>
+		<td class="tablecontent"><a href="/gas/statusDetails"><span style="color:red">查看详情</span></a></td>
 	  </tr> 	  
 	 </table>
 	<br/><br/>			

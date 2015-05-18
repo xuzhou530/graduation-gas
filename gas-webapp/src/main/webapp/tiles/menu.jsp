@@ -62,7 +62,7 @@
 		<div class="div3">
 			<ul>
 				<li><a href="/gas/addPay">用户缴费</a></li>
-				<li><a href="/gas/viewpay/<%=menuUserGrade%>">变动记录</a></li>
+				<li><a href="/gas/payHistory">变动记录</a></li>
 			</ul>
 		</div>
 		<div class="div2"><div class="system"></div>系统设置</div>

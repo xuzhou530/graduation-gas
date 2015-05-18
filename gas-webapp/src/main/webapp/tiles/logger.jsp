@@ -32,33 +32,20 @@
 	<table id="maintable">
 	  <tr>
 		<td width="10%"  class="tablehead">编号</td>
-		<td width="20%" class="tablehead">发生时间</td>
-		<td width="15%" class="tablehead">账号名称</td>
-		<td width="25%" class="tablehead">内容</td>
+		<td width="20%" class="tablehead">操作员</td>
+		<td width="15%" class="tablehead">操作员权限</td>
+		<td width="25%" class="tablehead">操作内容</td>
+		<td width="25%" class="tablehead">操作时间</td>
 	  </tr>
-
+	  <c:forEach items="${logs}" var="item" varStatus="status">  
 	  <tr class="tablerow">
-		<td class="tablecontent">1</td>
-		<td class="tablecontent">2015-3-1 12:00:00</td>
-		<td class="tablecontent">vyoung</td>
-		<td class="tablecontent">关断燃气阀门</td>
+		<td class="tablecontent">${status.count}</td>
+		<td class="tablecontent">${item.operator}</td>
+		<td class="tablecontent">${item.grade}</td>
+		<td class="tablecontent">${item.operateAction}</td>
+		<td class="tablecontent">${item.operateTime}</td>
 	  </tr> 
-	  
-	  <tr class="tablerow">
-		<td class="tablecontent">2</td>
-		<td class="tablecontent">2015-3-1 13:00:00</td>
-		<td class="tablecontent">vyoung</td>
-		<td class="tablecontent">下发采集指令</td>
-	  </tr> 
-	
-		  <tr class="tablerow">
-		<td class="tablecontent">3</td>
-		<td class="tablecontent">2015-3-1 14:00:00</td>
-		<td class="tablecontent">vyoung</td>
-		<td class="tablecontent">设定系统参数</td>
-	  </tr>   
+	  </c:forEach>
 	 </table>
-	 
-	 
 	</div>
 </div>

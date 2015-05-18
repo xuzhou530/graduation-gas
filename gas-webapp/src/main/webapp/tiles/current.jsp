@@ -48,9 +48,9 @@
 			<td class="tablecontent">${status.count}</td>
 			<td class="tablecontent">${item.customer.customerName}</td>
 			<td class="tablecontent">${item.customer.addressLayer}0${item.customer.addressRoom}室</td>
-			<td class="tablecontent">${item.gasValue}.00</td>
-			<td class="tablecontent">${item.gasValue-item.previousValue}.00</td>
-			<td class="tablecontent">${item.customer.money}.00</td>		
+			<td class="tablecontent">${item.gasValue}.0000</td>
+			<td class="tablecontent">${item.gasValue-item.previousValue}.0000</td>
+			<td class="tablecontent">${item.customer.money}.0</td>		
 			<td class="tablecontent">${item.customer.customerId}</td>
 			<td class="tablecontent">${item.collectTime}</td>
 			<td class="tablecontent"><a href="/gas/viewdetailgas/${item.customer.customerId}"><span style="color:#3A5FCD;">查看</span></a></td>

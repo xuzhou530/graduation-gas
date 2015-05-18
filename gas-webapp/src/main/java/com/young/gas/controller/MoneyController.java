@@ -46,7 +46,7 @@ public class MoneyController {
 	 * @param response
 	 * @return 
 	 */
-	@RequestMapping ( "addpay/{districtId}") 
+	@RequestMapping ("addpay/{districtId}") 
 	public ModelAndView addPay(
 			@PathVariable("districtId") int districtId,
 			@RequestParam("areaName") String areaName,
@@ -174,4 +174,13 @@ public class MoneyController {
 		}
 		return new ModelAndView("addPay");
 	}
+	
+	@RequestMapping ("addpayment") 
+	public ModelAndView addpayment(){
+		if(!isLogged()){
+			return new ModelAndView("redirect:/home");
+		}
+		return new ModelAndView("payHistory");
+	}
+	
 }

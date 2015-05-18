@@ -295,7 +295,6 @@ public class TcpServerImpl implements TcpServer, Runnable {
 				dataHandler.onSendMsg(ci.connectId, bytes, bytes.length);
 			}
 		}
-		
 		key.interestOps(SelectionKey.OP_READ);	// 恢复读
 	}
 	

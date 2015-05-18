@@ -4,6 +4,9 @@
 <%@ page import="java.util.List"%>
 <link href="/gas/css/pages.css" type="text/css" rel="stylesheet" />
 
+<!-- 弹窗的css与js-->
+<link href="/gas/css/popup.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gas/js/popup.js"></script>
 <%
 	User user=(User)session.getAttribute("user");
 	String[] districts={"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
@@ -50,24 +53,35 @@
 			<td class="tablecontent">${status.count}</td>
 			<td class="tablecontent">${item.customer.customerName}</td>
 			<td class="tablecontent">${item.customer.addressLayer}0${item.customer.addressRoom}室</td>
-			<td class="tablecontent">${item.gasValue}</td>
-			<td class="tablecontent"><font color="red">${item.gasMoney}</font></td>
+			<td class="tablecontent">${item.gasValue}.0000</td>
+			<td class="tablecontent"><font color="red">${item.gasMoney}.0</font></td>
 			<td class="tablecontent">${item.customer.customerPhone}</td>
  			<td class="tablecontent">${item.collectTime}</td>
  			<td class="tablecontent"><span id='${status.count}'>异常</span></td>	
 			<td class="tablecontent" style="valign:middle">
-				<a class="reminder-btn" onclick="reminderCustomer(${status.count})">提醒</a></td>
+				<a class="reminder-btn" onclick="reminderCustomer(${status.count},${item.customer.customerId})">提醒</a></td>
 		  </tr> 
 	  </c:forEach>
 	  </table>
 	<div id="digg" onload="load()"></div>		
 	</div>
+	<div id="layout"></div>  <!--实现灰色透明层效果-->
+	    <div id="box">
+	    <div id="title">提示</div>
+		<div id="closed">×</div>
+		<div id="boxcontent">
+			<div id="content">
+				<img src="/gas/images/check.png" width="32px" height="32px"/>
+				<span id="tips"></span></div>
+			<div id="buttons"><input type="button" class="closed-btn btn" value="取消"/>
+				<input type="button" id="ok-btn" class="closed-btn btn" value="确定" /></div>
+	</div>
 </div>
 
  <script type="text/javascript">
-function reminderCustomer(id) {
+function reminderCustomer(count,id) {
 	
-	var url = "/gas/reminder/1000"; 
+	var url = "/gas/reminder/"+id; 
 	if (window.XMLHttpRequest) { 
 		req = new XMLHttpRequest(); 
 	}else if (window.ActiveXObject) { 
@@ -84,13 +98,13 @@ function complete(){
 	    if (req.status == 200) { 
 	    	var str = req.responseText;
 	    	if(str == 'success'){
-	    		document.getElementById(id).innerHTML = '已提醒住户';
-	    		alert("已发送提醒指令！！！");
+	    		document.getElementById('tips').innerHTML='已提醒住户';
+	    		document.getElementById('box').style.display = "block";
 	    	}
 	    	else{
-	    		alert("连接异常，无法发送指令！！！");
-	    	}
-	        
+	    		document.getElementById('tips').innerHTML='无法连接集中器，提醒失败';
+	    		document.getElementById('box').style.display = "block";
+	    	}    
 	    }
 	}
 }

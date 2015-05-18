@@ -11,7 +11,7 @@
 		<div class="status-title">费用管理——用户缴费</div>
 		<div style="clear:both;"></div>
 	</div>	
-	<form action="/gas/addpay/<%=userGrade%>" method="get">
+	<form action="/gas/addpayment" method="get">
 		<table class="addpaytable" >
 			<tr><td class="title">区县:&nbsp;&nbsp;</td>
 				<td>
@@ -30,7 +30,11 @@
 			<tr><td class="title">小区:&nbsp;&nbsp;</td><td>	
 				<select id="areaName000" name="areaName000" style="width:203px; height:30px;">
 					<option value =0>-请选择-</option>
-					<option value =0>黄金小区</option>
+					<option value =1>黄金小区</option>
+					<option value =2>东风小区</option>
+					<option value =3>和苑小区</option>
+					<option value =4>智能小区</option>
+					<option value =5>西郡兰庭</option>
 				</select></td>
 			</tr>
 			<tr><td class="title">楼号:&nbsp;&nbsp;</td><td><input type="text" name="addressBuilding"/></td></tr>

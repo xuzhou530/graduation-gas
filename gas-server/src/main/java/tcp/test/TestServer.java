@@ -36,7 +36,6 @@ public class TestServer implements TcpServerDataHandler {
 		String str = String.format("s: client connect, id=%d, ip=%s, port=%d", 
 				connectId, ip, port);
 		System.out.println(str);
-		sendData(1,"hello world".getBytes());
 	}
 
 	/**
@@ -66,7 +65,7 @@ public class TestServer implements TcpServerDataHandler {
 	 * 当接收到数据
 	 */
 	public void onReceiveMsg(int connectId, byte[] bytes, int byteCount) {
-		System.out.println("s: recv: " + bytes.length);
+		//System.out.println("s: recv: " + bytes.length);
 		HandleData.handleRecvData(bytes, bytes.length);	
 	}
 

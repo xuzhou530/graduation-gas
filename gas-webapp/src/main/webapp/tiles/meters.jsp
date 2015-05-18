@@ -2,6 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <link href="/gas/css/meters.css" type="text/css" rel="stylesheet" />
 <link href="/gas/css/pages.css" type="text/css" rel="stylesheet" />
+
+<!-- 弹窗的css与js-->
+<link href="/gas/css/popup.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gas/js/popup.js"></script>
+
 <div>
 	<div class="addtitle">
 		<div class="status-title">状态监测——${currentDistrict}>&nbsp;${currentArea}>&nbsp;${currentBuilding}栋</div>
@@ -29,13 +34,13 @@
 				<div class="info">
 					<ul>
 						<li>房号：${item.customer.addressLayer}0${item.customer.addressRoom}室</li>
-						<li>气量：${item.gasValue}.000</li>
+						<li>气量：${item.gasValue}.0000</li>
 						<li>余额：
 							<c:if test="${item.customer.money < 0 }">
-								<span style="color:red">${item.customer.money}.00元</span>
+								<span style="color:red">${item.customer.money}.0元</span>
 							</c:if>
 							<c:if test="${item.customer.money >= 0 }">
-								<span>${item.customer.money}.00元</span>
+								<span>${item.customer.money}.0元</span>
 							</c:if>
 						</li>
 						<li><div style="float:left;">状态：</div>
@@ -50,8 +55,8 @@
 				</div>
 				<div class="control">
 					<div class="buttons">
-						<a class="open-btn btn" onclick="openMeter(${item.customer.customerId})">打开阀门</a>
-						<a class="close-btn btn" onclick="closeMeter(${item.customer.customerId})">关闭阀门</a>
+						<a class="open-button button" onclick="openMeter(${item.customer.customerId})">打开阀门</a>
+						<a class="close-button button" onclick="closeMeter(${item.customer.customerId})">关闭阀门</a>
 					</div>
 				</div>
 				<div style="clear:both"></div>
@@ -67,13 +72,13 @@
 				<div class="info">
 					<ul>
 						<li>房号：${item.customer.addressLayer}0${item.customer.addressRoom}室</li>
-						<li>气量：${item.gasValue}.000</li>
+						<li>气量：${item.gasValue}.0000</li>
 						<li>余额：
 							<c:if test="${item.customer.money < 0 }">
-								<span style="color:red">${item.customer.money}.00元</span>
+								<span style="color:red">${item.customer.money}.0元</span>
 							</c:if>
 							<c:if test="${item.customer.money >= 0 }">
-								<span>${item.customer.money}.00元</span>
+								<span>${item.customer.money}.0元</span>
 							</c:if>
 						</li>
 						<li><div style="float:left;">状态：</div>
@@ -88,8 +93,8 @@
 				</div>
 				<div class="control">
 					<div class="buttons">
-						<a class="open-btn btn" onclick="openMeter(${item.customer.customerId})">打开阀门</a>
-						<a class="close-btn btn" onclick="closeMeter(${item.customer.customerId})">关闭阀门</a>
+						<a class="open-button button" onclick="openMeter(${item.customer.customerId})">打开阀门</a>
+						<a class="close-button button" onclick="closeMeter(${item.customer.customerId})">关闭阀门</a>
 					</div>
 				</div>
 				<div style="clear:both"></div>
@@ -99,6 +104,17 @@
 	</tr>
 	</table>
 	<div id="digg"></div>
+	
+	<div id="layout"></div>  <!--实现灰色透明层效果-->
+	    <div id="box">
+	    <div id="title">提示</div>
+		<div id="closed">×</div>
+		<div id="boxcontent">
+			<div id="content">
+				<img src="/gas/images/check.png" width="32px" height="32px"/>
+				<span id="tips"></span></div>
+			<div id="buttons"><input type="button" class="closed-btn btn" value="取消"/><input type="button" id="ok-btn" class="closed-btn btn" value="确定" /></div>
+	</div>
 </div>
  <script type="text/javascript">
 function openMeter(id) {
@@ -132,13 +148,16 @@ function completeOpen(){
 	    if (req.status == 200) { 
 	    	var str = req.responseText;
 	    	if(str == 'success'){
-	    		alert("已发送开启指令！！！");
+	    		document.getElementById('tips').innerHTML='已发送开启指令！！！';
+	    		document.getElementById('box').style.display = "block";
 	    	}
 	    	else if(str == "meter_is_open"){
-	    		alert("燃气表已经开启");
+	    		document.getElementById('tips').innerHTML='燃气表已经开启，无需打开！';
+	    		document.getElementById('box').style.display = "block";
 	    	}  
 	    	else{
-	    		alert("连接异常，无法发送开启指令！！！");
+	    		document.getElementById('tips').innerHTML='连接异常，无法发送开启指令！！！';
+	    		document.getElementById('box').style.display = "block";
 	    	}
 	    }
 	}
@@ -148,13 +167,16 @@ function completeClose(){
 	    if (req.status == 200) { 
 	    	var str = req.responseText;
 	    	if(str == 'success'){
-	    		alert("已发送关断指令！！！");
+	    		document.getElementById('tips').innerHTML='已发送关断指令！！！';
+	    		document.getElementById('box').style.display = "block";
 	    	}
 	    	else if(str == "meter_is_closed"){
-	    		alert("燃气表已经关闭");
+	    		document.getElementById('tips').innerHTML='燃气表已经关闭，无需关闭！';
+	    		document.getElementById('box').style.display = "block";
 	    	}  
 	    	else{
-	    		alert("连接异常，无法发送关断指令！！！");
+	    		document.getElementById('tips').innerHTML='连接异常，无法发送关断指令！！！';
+	    		document.getElementById('box').style.display = "block";
 	    	}      
 	    }
 	}

@@ -30,59 +30,66 @@ public class HandleData {
 				int count = recv[8];
 				int customerId = recv[14] + 10 * recv[15] + 100 * recv[16] + 1000 * recv[17] +
 						10000 * recv[18] + 100000 * recv[19] + 1000000 * recv[20];
-				System.out.println(customerId);
+				System.out.println("住户编号: " + customerId);
 				
 				byte[] arr = new byte[4];
 				arr[0] = recv[26]; 
 				arr[1] = recv[27]; 
 				arr[2] = recv[28]; 
 				arr[3] = recv[29]; 
-				long gasValue = byte2Long(arr)/1000;
-				System.out.println(gasValue);
+				long gasValue = byte2Long(arr)/10000;
+				System.out.println("住户燃气值： " + gasValue);
 				
 				BeanFactory factory = GetBeanFactory.getInstance();
 				GasService gasService = (GasService)factory.getBean("gasService");//应用层实例
 				CustomerService customerService = (CustomerService)factory.getBean("customerService");//应用层实例
 				MoneyService moneyService = (MoneyService)factory.getBean("moneyService");//应用层实例
 						
-				Customer customer = customerService.searchCustomerById(customerId);
-				if(customer != null){//住户存在					
-					Money preMoney = moneyService.listCurrentByCusomerId(customerId);	
-					Gas gas = gasService.searchCurrentGasByCustomerId(customerId);
+				try{
+					Customer customer = customerService.searchCustomerById(1055);
 					
-					long gasPreValue;
-					if(gas == null){//住户还没有燃气信息
-						System.out.println("gas not exist");
-						gasPreValue = 0;
-					}
-					else{//住户存在燃气信息
-						System.out.println("gas exist");
-						gasPreValue = gas.getGasValue();
-					}
-					
-					long gasUse = gasValue - gasPreValue;//计算燃气用量
-					if(gasUse > 0){//燃气用量为正值
-						int moneyUse = (int)(gasUse/10);//计算费用消耗
+					if(customer != null){//住户存在					
+						Money preMoney = moneyService.listCurrentByCusomerId(customerId);	
+						Gas gas = gasService.searchCurrentGasByCustomerId(customerId);
 						
-						Money money = new Money();
-						money.setResult(preMoney.getResult() - moneyUse);
-						money.setPrevious(preMoney.getResult());
-						money.setOperate(-moneyUse);
-						money.setCustomerId(customerId);				
-						moneyService.addMoney(money);
+						long gasPreValue;
+						if(gas == null){//住户还没有燃气信息
+							System.out.println("住户还没有燃气值...");
+							gasPreValue = 0;
+						}
+						else{//住户存在燃气信息
+							System.out.println("住户存在燃气值...");
+							gasPreValue = gas.getGasValue();
+						}
 						
-						Gas newGas = new Gas();
-						newGas.setPreviousValue(gasPreValue);
-						newGas.setGasValue(gasValue);
-						newGas.setGasMoney(preMoney.getResult() - moneyUse);
-						newGas.setCustomerId(customerId);
-						gasService.addGas(newGas);
-					}		
+						long gasUse = gasValue - gasPreValue;//计算燃气用量
+						if(gasUse > 0){//燃气用量为正值
+							int moneyUse = (int)(gasUse/10);//计算费用消耗
+							
+							Money money = new Money();
+							money.setResult(preMoney.getResult() - moneyUse);
+							money.setPrevious(preMoney.getResult());
+							money.setOperate(-moneyUse);
+							money.setCustomerId(customerId);				
+							moneyService.addMoney(money);
+							
+							Gas newGas = new Gas();
+							newGas.setPreviousValue(gasPreValue);
+							newGas.setGasValue(gasValue);
+							newGas.setGasMoney(preMoney.getResult() - moneyUse);
+							newGas.setCustomerId(customerId);
+							gasService.addGas(newGas);
+						}		
+					}
+					else{//住户不存在
+						System.out.println("住户不存在...");					
+					}
+				
 				}
-				else{//住户不存在
-					System.out.println("customer is not exist");
-					
-				}
+				catch(Exception e){
+					System.out.println("远程方法未启动...");
+				}	
+				
 			}
 		}
 		else{//出现了不完整的一帧		

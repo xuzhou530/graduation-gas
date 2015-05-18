@@ -46,6 +46,10 @@
  	<definition name="status" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/status.jsp" /> 
     </definition> 
+    <definition name="statusDetails" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/statusDetails.jsp" /> 
+    </definition> 
+    
 	<definition name="payaly" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/payaly.jsp" /> 
     </definition> 
@@ -63,6 +67,9 @@
     </definition>   
     <definition name="auditUsers" extends="base.homepage"> 
         <put-attribute name="body" value="/tiles/auditUsers.jsp" /> 
+    </definition>  
+     <definition name="payHistory" extends="base.homepage"> 
+        <put-attribute name="body" value="/tiles/payHistory.jsp" /> 
     </definition>  
     
  	<definition name="login" template="/tiles/login.jsp">  

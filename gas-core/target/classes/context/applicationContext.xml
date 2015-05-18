@@ -69,4 +69,17 @@
         <!-- 注册端口 -->  
         <property name="registryPort" value="1200" />
     </bean> 
+    
+    <bean id="logService" class="com.young.gas.service.impl.LogServiceImpl" />  
+   	<!-- 开启customerService RMI服务 -->
+    <bean id="logServiceExporter" class="org.springframework.remoting.rmi.RmiServiceExporter">  
+        <!-- 调用Service -->  
+        <property name="service" ref="logService" />
+        <!-- value值是提供给客户端调用 -->  
+        <property name="serviceName" value="logService" />
+        <!-- service接口 -->  
+        <property name="serviceInterface" value="com.young.gas.service.LogService" />
+        <!-- 注册端口 -->  
+        <property name="registryPort" value="1200" />
+    </bean> 
 </beans>  

@@ -1,6 +1,7 @@
 package com.young.gas.controller;
 
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.young.gas.beans.Log;
 import com.young.gas.beans.User;
+import com.young.gas.service.LogService;
 import com.young.gas.service.UserService;
 import com.young.gas.tool.EncodingTool;
 
@@ -22,6 +25,8 @@ import com.young.gas.tool.EncodingTool;
 public class HomeController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	LogService logService;
 	
 	private static final String[] DISTRICTS = {"系统管理员","利州区","昭化区","朝天区","旺苍县","青川县","剑阁县","苍溪县"};	
 	
@@ -52,7 +57,15 @@ public class HomeController {
 		if(user != null && password.equals(user.getUserPwd())){ 
 			if(user.getStatus() == 0){
 				((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
-				.getRequest().getSession().setAttribute("user", user);  
+				.getRequest().getSession().setAttribute("user", user);
+				
+				//登录事件写日志
+				Log log = new Log();
+				log.setOperator(user.getUserName());
+				log.setOperateAction("登录系统");
+				log.setOperateTime(new Timestamp(System.currentTimeMillis()));
+				logService.addLog(log);
+				
 				mav.setViewName("index");
 				return mav;
 			}
@@ -159,6 +172,12 @@ public class HomeController {
 	public ModelAndView status(){
 		return new ModelAndView("status");
 	}
+	
+	@RequestMapping ("statusDetails") 
+	public ModelAndView statusDetails(){
+		return new ModelAndView("statusDetails");
+	}
+	
 	@RequestMapping ("meters") 
 	public ModelAndView meters(){
 		return new ModelAndView("meters");
@@ -166,11 +185,25 @@ public class HomeController {
 	
 	
 	/*
-	 * 超级用户的权限
+	 * 超级用户的权限,查看系统日志
 	 */
 	@RequestMapping ("logger") 
 	public ModelAndView logger(){
+		List<Log> logs = logService.listLogs();
+		if(logs != null && logs.size()>0){
+			for(Log log : logs){
+				User user = userService.listUser(log.getOperator());
+				if(user != null){
+					String authority = DISTRICTS[user.getUserGrade()];
+					user.setAuthority(authority);
+					log.setGrade(user.getAuthority());
+				}else{
+					log.setGrade("");
+				}
+			}
+		}
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("logs", logs);
 		mav.setViewName("logger");
 		return mav;
 	}
@@ -241,6 +274,10 @@ public class HomeController {
 		userName = EncodingTool.encodeStr(userName);
 		userService.rejectUser(userName);
 		return new ModelAndView("redirect:/audit");
-	}
+	}	
 	
+	@RequestMapping ("payHistory") 
+	public ModelAndView payHistory(){
+		return new ModelAndView("payHistory");
+	}
 } 
