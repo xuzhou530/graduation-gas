@@ -224,7 +224,7 @@ public class HomeController {
 					status = "审核未通过";
 				}
 				user.setCurrentSta(status);
-				user.setAuthority(DISTRICTS[user.getStatus()]);
+				user.setAuthority(DISTRICTS[user.getUserGrade()]);
 			}
 		}
 		ModelAndView mav = new ModelAndView();

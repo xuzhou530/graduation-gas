@@ -223,11 +223,16 @@ public class GasCurrrentController {
 				searchCustomersByBuilding(district, areaName, building, page, PERPAGE);
 		List<Gas> gases = new ArrayList<Gas>();//燃气表需要拥有的状态
 		for(Customer customer : customers){
-			customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
-			Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());
-			if(gas != null){
-				gas.setCustomer(customer);
-				gases.add(gas);
+			try{
+				customer.setMoney(moneyService.listCurrentByCusomerId(customer.getCustomerId()).getResult());
+				Gas gas = gasService.searchCurrentGasByCustomerId(customer.getCustomerId());
+				if(gas != null){
+					gas.setCustomer(customer);
+					gases.add(gas);
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 		

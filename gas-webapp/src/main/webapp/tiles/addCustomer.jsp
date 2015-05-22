@@ -41,8 +41,8 @@
 					<tr><td class="title">区县:&nbsp;&nbsp;</td>
 						<td>
 							<select id="opdis" name="districtName" class="txt">
-								<option value = "0" >-请选择-</option>
-								<option value = "1" selected="selected">利州区</option>
+								<option value = "-1">-请选择-</option>
+								<option value = "1">利州区</option>
 								<option value = "2">昭化区</option>
 								<option value = "3">朝天区</option>
 								<option value = "4">旺苍县</option>
@@ -54,8 +54,12 @@
 					</tr>
 					<tr><td class="title">小区:&nbsp;&nbsp;</td><td>	
 						<select id="oparea" id="areaName" name="areaName" class="txt">
-							<option value = "0" selected = "selected">-请选择-</option>
-							<option value = "1">黄金小区</option>
+							<option value = "-1">-请选择-</option>
+							<option value = "黄金小区">黄金小区</option>
+							<option value = "东风小区">东风小区</option>
+							<option value = "和苑小区">和苑小区</option>
+							<option value = "智能小区">智能小区</option>
+							<option value = "西郡兰庭">西郡兰庭</option>
 						</select></td>
 					</tr>
 					<tr><td class="title">楼号:&nbsp;&nbsp;</td>
@@ -76,5 +80,4 @@
 </div>
 
 <script type="text/javascript">
-	document.getElementById("opdis").value = '${customer.addressDistrict}';
 </script>

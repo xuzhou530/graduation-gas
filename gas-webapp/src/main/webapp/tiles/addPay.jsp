@@ -11,7 +11,7 @@
 		<div class="status-title">费用管理——用户缴费</div>
 		<div style="clear:both;"></div>
 	</div>	
-	<form action="/gas/addpayment" method="get">
+	<form action="/gas/addpayment" method="post">
 		<table class="addpaytable" >
 			<tr><td class="title">区县:&nbsp;&nbsp;</td>
 				<td>

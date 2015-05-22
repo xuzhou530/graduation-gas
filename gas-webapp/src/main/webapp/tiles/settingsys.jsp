@@ -37,7 +37,7 @@
 						</tr>
 						<tr><td class="title">当前燃气单价:&nbsp;&nbsp;</td>
 							<td class="content">
-								<input type="text" name="gasGuard" value="100.00"/><span class="describe">元/立方</span>
+								<input type="text" name="gasGuard" value="0.10"/><span class="describe">元/立方</span>
 							</td>
 						</tr>
 						

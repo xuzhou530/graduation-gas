@@ -188,7 +188,7 @@ public class CustomerController {
 	public ModelAndView addcustomerData(
 			@RequestParam("customerName") String customerName,
 			@RequestParam("customerPhone") String customerPhone,
-			@RequestParam("districtName") int districtId,
+			@RequestParam("districtName") int  districtId,
 			@RequestParam("areaName") String areaName,
 			@RequestParam("addressBuilding") int addressBuilding,
 			@RequestParam("addressLayer") int addressLayer,
@@ -196,7 +196,7 @@ public class CustomerController {
 		if(!isLogged()){
 			return new ModelAndView("redirect:/home");
 		}
-		
+		System.out.println(areaName);
 		//先添加住户信息
 		Customer customer = new Customer();
 		customer.setCustomerName(customerName);
